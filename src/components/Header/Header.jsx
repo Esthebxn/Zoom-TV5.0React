@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import './Header.css';
 import logo from '../../assets/images/logo-zoomtv.png';
 

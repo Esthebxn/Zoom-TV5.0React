@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Inicio from './pages/Inicio/Inicio';
-import Nosotros from './pages/Nosotros/Nosotros';
-import RedesSociales from './pages/RedesSociales/RedesSociales';
-import ZoomTVCanal10 from './pages/ZoomTVCanal10/ZoomTVCanal10';
+import Header from './Header/Header';
+import Inicio from '../pages/Inicio/Inicio';
+import Nosotros from '../pages/Nosotros/Nosotros';
+import RedesSociales from '../pages/RedesSociales/RedesSociales';
+import ZoomTVCanal10 from '../pages/ZoomTVCanal10/ZoomTVCanal10';
 
 function App() {
   return (

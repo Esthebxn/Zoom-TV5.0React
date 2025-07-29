@@ -1,6 +1,6 @@
 import React from 'react';
 import './Nosotros.css';
-import equipoImg from '../../assets/images/equipo-zoomtv.jpg';
+import equipoImg from '../../assets/images/profesional1.jpg';
 
 const Nosotros = () => {
   return (
