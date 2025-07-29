@@ -3,12 +3,12 @@ import './ZoomTVCanal10.css';
 import { FaPlay, FaSearch, FaStar, FaUserTie } from 'react-icons/fa';
 
 // Importa tus imágenes profesionales (reemplaza con tus propias imágenes)
-import img1 from '../../assets/images/profesional1.jpg';
-import img2 from '../../assets/images/profesional2.jpg';
-import img3 from '../../assets/images/profesional3.jpg';
-import img4 from '../../assets/images/profesional4.jpg';
-import img5 from '../../assets/images/profesional5.jpg';
-import img6 from '../../assets/images/profesional6.jpg';
+import img1 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
+import img2 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
+import img3 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
+import img4 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
+import img5 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
+import img6 from '../../assets/images/bigwp-AlFondoHaySitioTemporada11.jpg';
 
 const ZoomTVCanal10 = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
