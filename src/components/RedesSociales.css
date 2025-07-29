@@ -1,0 +1,229 @@
+.redes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.redes-hero {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+}
+
+.redes-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #e94560;
+}
+
+.redes-hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.redes-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.redes-info {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.redes-info h2 {
+  color: #16213e;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.redes-info p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.redes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.redes-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.redes-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  z-index: 2;
+}
+
+.redes-card.facebook::before {
+  background: #1877f2;
+}
+
+.redes-card.instagram::before {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.redes-card.tiktok::before {
+  background: #000000;
+}
+
+.redes-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.redes-icon {
+  margin-bottom: 1.5rem;
+}
+
+.redes-card.facebook .redes-icon {
+  color: #1877f2;
+}
+
+.redes-card.instagram .redes-icon {
+  color: #e4405f;
+}
+
+.redes-card.tiktok .redes-icon {
+  color: #000000;
+}
+
+.redes-card h3 {
+  color: #16213e;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.redes-card p {
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.redes-btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.redes-card.facebook .redes-btn {
+  background: #1877f2;
+  color: white;
+}
+
+.redes-card.instagram .redes-btn {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+}
+
+.redes-card.tiktok .redes-btn {
+  background: #000000;
+  color: white;
+}
+
+.redes-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Social Media Icons */
+.floating-socials {
+  position: fixed;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: right 0.5s ease;
+  z-index: 1000;
+}
+
+.floating-socials.visible {
+  right: 20px;
+}
+
+.floating-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.floating-icon:hover {
+  transform: scale(1.1) translateX(-5px);
+}
+
+.floating-icon.facebook {
+  background: #1877f2;
+}
+
+.floating-icon.instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.floating-icon.tiktok {
+  background: #000000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .redes-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .redes-hero p {
+    font-size: 1rem;
+  }
+  
+  .floating-socials {
+    bottom: 20px;
+    top: auto;
+    right: 20px;
+    flex-direction: row;
+    transform: none;
+  }
+  
+  .floating-socials.visible {
+    right: 20px;
+  }
+  
+  .floating-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}

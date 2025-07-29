@@ -1,0 +1,26 @@
+.navbar {
+  background-color: #e05600; /* naranja fuerte */
+  height: 80px; /* <-- aquí puedes agrandar la barra */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  color: white;
+  font-family: sans-serif;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-links a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
