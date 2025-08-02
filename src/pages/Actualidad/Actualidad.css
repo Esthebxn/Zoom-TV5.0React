@@ -1,0 +1,38 @@
+.actualidad-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.submenu-actualidad {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.submenu-link {   
+  padding: 8px 15px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.submenu-link:hover {
+  background-color: #e0e0e0;
+}
+
+.subcontenido-actualidad {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.mensaje-default {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}

@@ -1,20 +1,43 @@
-// Navbar.js
 import React from 'react';
-import './navar.css.';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <div className="navbar">
-      <div className="navbar-logo">Zoom Tv</div>
-      <div className="navbar-links">
-        <a href="#">Inicio</a>
-        <a href="#">Conócenos</a>
-        <a href="#">Contacto</a>
-        <a href="#">Nuestras Redes Sociales</a>
-        <a href="#">Zoom Tv canal 10</a>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <Link to="/" className="navbar-logo">
+          Zoom TV
+        </Link>
+        
+        <ul className="navbar-menu">
+          <li className="navbar-item">
+            <Link to="/inicio" className="navbar-link">Inicio</Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/nosotros" className="navbar-link">Nosotros</Link>
+          </li>
+          <li className="navbar-item dropdown">
+            <Link to="/actualidad" className="navbar-link">Actualidad</Link>
+            <div className="dropdown-content">
+              <Link to="/actualidad/deportes" className="dropdown-link">Deportes</Link>
+              <Link to="/actualidad/nacionales" className="dropdown-link">Nacionales</Link>
+              <Link to="/actualidad/regionales" className="dropdown-link">Regionales</Link>
+            </div>
+          </li>
+          <li className="navbar-item">
+            <Link to="/programacion" className="navbar-link">Programación</Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/anunciantes" className="navbar-link">Anunciantes</Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/redes-sociales" className="navbar-link">Redes Sociales</Link>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 
-export default Navbar;
+export default Navbar; 

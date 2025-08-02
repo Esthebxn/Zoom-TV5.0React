@@ -1,128 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaTiktok } from 'react-icons/fa';
 import './RedesSociales.css';
-import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa';
 
 const RedesSociales = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const socialNetworks = [
+    {
+      id: 1,
+      name: 'Facebook',
+      icon: <FaFacebook className="red-icon" />,
+      description: 'Síguenos para noticias en tiempo real y transmisiones en vivo',
+      url: 'https://facebook.com/zoomtvcanal10'
+    },
+    {
+      id: 2,
+      name: 'Twitter',
+      icon: <FaTwitter className="red-icon" />,
+      description: 'Últimas noticias y actualizaciones al instante',
+      url: 'https://twitter.com/zoomtvcanal10'
+    },
+    {
+      id: 3,
+      name: 'Instagram',
+      icon: <FaInstagram className="red-icon" />,
+      description: 'Contenido exclusivo y detrás de cámaras',
+      url: 'https://instagram.com/zoomtvcanal10'
+    },
+    {
+      id: 4,
+      name: 'YouTube',
+      icon: <FaYoutube className="red-icon" />,
+      description: 'Programas completos y contenido especial',
+      url: 'https://youtube.com/zoomtvcanal10'
+    },
+    {
+      id: 5,
+      name: 'TikTok',
+      icon: <FaTiktok className="red-icon" />,
+      description: 'Contenido viral y momentos destacados',
+      url: 'https://tiktok.com/@zoomtvcanal10'
+    }
+  ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const feedImages = [
+    { id: 1, url: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+    { id: 2, url: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+    { id: 3, url: 'https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+    { id: 4, url: 'https://images.unsplash.com/photo-1611162617263-4ec3060a058e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+  ];
 
   return (
-    <main className="redes-container">
-      <section className="redes-hero">
-        <h1>Conéctate con Zoom TV Canal 10</h1>
-        <p>Síguenos en nuestras redes sociales y no te pierdas ningún contenido</p>
-      </section>
-
-      <section className="redes-content">
-        <div className="redes-info">
-          <h2>Nuestras Redes Sociales</h2>
-          <p>
-            Mantente actualizado con nuestro contenido exclusivo, transmisiones en vivo, noticias de último momento
-            y mucho más a través de nuestras plataformas digitales.
-          </p>
-          <p>
-            Interactúa con nosotros usando los hashtags <strong>#ZoomTV10</strong> y <strong>#Canal10Contigo</strong>
-          </p>
-        </div>
-
-        <div className="redes-grid">
-          {/* Facebook Card */}
-          <div className="redes-card facebook">
-            <div className="redes-icon">
-              <FaFacebook size={40} />
-            </div>
-            <h3>Facebook</h3>
-            <p>Noticias en vivo, videos y transmisiones exclusivas</p>
-            <a 
-              href="https://facebook.com/ZoomTVCanal10" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="redes-btn"
-            >
-              Seguir
-            </a>
-          </div>
-
-          {/* Instagram Card */}
-          <div className="redes-card instagram">
-            <div className="redes-icon">
-              <FaInstagram size={40} />
-            </div>
-            <h3>Instagram</h3>
-            <p>Fotos detrás de cámaras, stories y reels exclusivos</p>
-            <a 
-              href="https://instagram.com/ZoomTVCanal10" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="redes-btn"
-            >
-              Seguir
-            </a>
-          </div>
-
-          {/* TikTok Card */}
-          <div className="redes-card tiktok">
-            <div className="redes-icon">
-              <FaTiktok size={40} />
-            </div>
-            <h3>TikTok</h3>
-            <p>Contenido viral, challenges y momentos destacados</p>
-            <a 
-              href="https://tiktok.com/@ZoomTVCanal10" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="redes-btn"
-            >
-              Seguir
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Floating Social Media Icons */}
-      <div className={`floating-socials ${isScrolled ? 'visible' : ''}`}>
-        <a 
-          href="https://facebook.com/ZoomTVCanal10" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="floating-icon facebook"
-          title="Facebook"
-        >
-          <FaFacebook size={24} />
-        </a>
-        <a 
-          href="https://instagram.com/ZoomTVCanal10" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="floating-icon instagram"
-          title="Instagram"
-        >
-          <FaInstagram size={24} />
-        </a>
-        <a 
-          href="https://tiktok.com/@ZoomTVCanal10" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="floating-icon tiktok"
-          title="TikTok"
-        >
-          <FaTiktok size={24} />
-        </a>
+    <div className="redes-container">
+      <div className="redes-header">
+        <h1>Redes Sociales</h1>
+        <p>Conéctate con nosotros a través de nuestras redes sociales y no te pierdas ningún contenido</p>
       </div>
-    </main>
+
+      <div className="redes-grid">
+        {socialNetworks.map(network => (
+          <div key={network.id} className="red-card">
+            {network.icon}
+            <h3>{network.name}</h3>
+            <p>{network.description}</p>
+            <a href={network.url} target="_blank" rel="noopener noreferrer" className="red-link">
+              Seguir
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div className="social-feed">
+        <h2>Lo último en nuestras redes</h2>
+        <div className="feed-grid">
+          {feedImages.map(image => (
+            <div key={image.id} className="feed-item">
+              <img src={image.url} alt={`Publicación ${image.id}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default RedesSociales;
+export default RedesSociales; 

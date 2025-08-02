@@ -1,195 +1,84 @@
+/* Nosotros.css */
 .nosotros-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nosotros-hero {
+.nosotros-header {
   text-align: center;
-  padding: 3rem 0;
-  background-color: #f8f9fa;
-  border-radius: 8px;
   margin-bottom: 3rem;
 }
 
-.nosotros-hero h1 {
-  color: #e94560;
-  font-size: 2.5rem;
+.nosotros-header h1 {
+  font-size: 2.8rem;
+  color: #2c3e50;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
-.nosotros-hero p {
-  color: #16213e;
+.nosotros-header p {
   font-size: 1.2rem;
+  color: #7f8c8d;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.historia-section {
-  display: flex;
+.nosotros-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
-  margin-bottom: 4rem;
 }
 
-.historia-content {
-  flex: 1;
-}
-
-.historia-content h2 {
-  color: #16213e;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-}
-
-.historia-content p {
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.historia-img {
-  flex: 1;
-}
-
-.historia-img img {
+.nosotros-image {
   width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.mision-vision {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 4rem;
+.nosotros-text h2 {
+  color: #3498db;
+  margin-top: 0;
 }
 
-.mision, .vision {
-  flex: 1;
-  background-color: #f8f9fa;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.nosotros-text p {
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 1.5rem;
 }
 
-.mision h3, .vision h3 {
-  color: #e94560;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+.nosotros-team {
+  margin-top: 4rem;
 }
 
-.mision p, .vision p {
-  color: #333;
-  line-height: 1.6;
-}
-
-.valores-section {
-  margin-bottom: 4rem;
-}
-
-.valores-section h2 {
-  text-align: center;
-  color: #16213e;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-}
-
-.valores-grid {
+.team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
+  margin-top: 2rem;
 }
 
-.valor-card {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #e94560;
-}
-
-.valor-card h4 {
-  color: #16213e;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-}
-
-.valor-card p {
-  color: #666;
-  line-height: 1.5;
-}
-
-.equipo-section {
-  margin-bottom: 2rem;
-}
-
-.equipo-section h2 {
+.team-member {
   text-align: center;
-  color: #16213e;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
 }
 
-.equipo-desc {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.equipo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-}
-
-.miembro-card {
-  text-align: center;
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.miembro-card:hover {
-  transform: translateY(-5px);
-}
-
-.miembro-avatar {
-  width: 100px;
-  height: 100px;
-  background-color: #f0f0f0;
+.team-member img {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #3498db;
 }
 
-.miembro-card h4 {
-  color: #16213e;
-  margin-bottom: 0.5rem;
-}
-
-.miembro-card p {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-  .historia-section {
-    flex-direction: column;
+  .nosotros-content {
+    grid-template-columns: 1fr;
   }
   
-  .mision-vision {
-    flex-direction: column;
+  .nosotros-header h1 {
+    font-size: 2.2rem;
   }
-  
-  .historia-content, .historia-img {
-    flex: none;
-    width: 100%;
-  }
-}
+} 
