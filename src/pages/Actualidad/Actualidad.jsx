@@ -1,5 +1,5 @@
 import { Routes, Route, Link, Outlet } from 'react-router-dom';
-import Deportes from './Deportes.jsx ';
+import Deportes from './Deportes.jsx';
 import Nacionales from './Nacionales.jsx';
 import Regionales from './Regionales.jsx'; 
 
@@ -14,11 +14,6 @@ function Actualidad() {
         <Link to="deportes" className="submenu-link">Deportes</Link>
         <Link to="nacionales" className="submenu-link">Nacionales</Link>
         <Link to="regionales" className="submenu-link">Regionales</Link>
-        <Link to="regionales" className="submenu-link">Regionales</Link>
-        <Link to="regionales" className="submenu-link">Regionales</Link>
-         
-      
-      
       </nav>
       
       <div className="subcontenido-actualidad">

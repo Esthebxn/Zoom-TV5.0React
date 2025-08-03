@@ -8,7 +8,7 @@ import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
 import Programacion from '../pages/Programacion/Programacion';
-import Anunciantes from '../pages/Anunciantes/Anunciantes';
+import Anunciantes from '../pages/Anuciantes/Anunciantes';
 
 function App() {
   return (
