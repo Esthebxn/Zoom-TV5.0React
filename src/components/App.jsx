@@ -7,9 +7,9 @@ import Deportes from '../pages/Actualidad/Deportes';
 import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
-import Programacion from '../pages/Programacion/Programacion';
+import Programacion from "../pages/Programacion12/Programacion12";
 import Anunciantes from '../pages/Anunciantes/Anunciantes';
-import Live from '../pages/Live/Live';
+import Live from '../pages/Live9/Live9';
 
 function App() {
   return (

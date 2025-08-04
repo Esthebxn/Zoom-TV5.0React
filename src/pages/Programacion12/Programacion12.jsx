@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Programacion.css';
+import './Programacion12.css';
     
 const Programacion = () => {
   const [activeDay, setActiveDay] = useState('LUNES');
@@ -96,4 +96,5 @@ const Programacion = () => {
   );
 };
 
+// Debe contener al final:
 export default Programacion; 
