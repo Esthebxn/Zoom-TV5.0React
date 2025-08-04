@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaExpand } from 'react-icons/fa';
-import './LiveStream.css';
+import './Live9.css';
 
 const LiveStream = () => {
   const [isPlaying, setIsPlaying] = useState(true);
