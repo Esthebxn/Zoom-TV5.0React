@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Programacion.css';
+import React from 'react';
 
 const Programacion = () => {
   const [activeDay, setActiveDay] = useState('Lunes');

@@ -8,7 +8,8 @@ import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
 import Programacion from '../pages/Programacion/Programacion';
-import Anunciantes from '../pages/Anuciantes/Anunciantes';
+import Anunciantes from '../pages/Anunciantes/Anunciantes';
+import Live from '../pages/Live/Live';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/redes-sociales" element={<RedesSociales />} />
           <Route path="/programacion" element={<Programacion />} />
           <Route path="/anunciantes" element={<Anunciantes />} />
+          <Route path="/live" element={<Live />} />
         </Routes>
       </div>
     </Router>
