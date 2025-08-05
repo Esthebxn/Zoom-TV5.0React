@@ -1,25 +1,65 @@
-/* Anunciantes.css - Enhanced Version */
+/* Anunciantes.css - Professional Enhanced Version */
 .anunciantes-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 3rem 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .anunciantes-header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
+}
+
+.anunciantes-header::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2c3e50);
+  margin: 1.5rem auto 0;
+  border-radius: 2px;
+  animation: expandLine 1.2s ease-out forwards;
+}
+
+@keyframes expandLine {
+  from { width: 0; opacity: 0; }
+  to { width: 80px; opacity: 1; }
 }
 
 .anunciantes-header h1 {
   font-size: 2.8rem;
-  color: #2c3e50;
   margin-bottom: 1rem;
   font-weight: 700;
   background: linear-gradient(90deg, #3498db, #2c3e50);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.anunciantes-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3498db, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.anunciantes-header:hover h1::after {
+  opacity: 1;
 }
 
 .anunciantes-header p {
@@ -28,6 +68,12 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .anunciantes-grid {
@@ -41,13 +87,45 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   border: 1px solid #e0e0e0;
+  position: relative;
+  opacity: 0;
+  animation: cardEntrance 0.6s ease-out forwards;
+  animation-delay: calc(var(--order) * 0.1s);
+}
+
+@keyframes cardEntrance {
+  from { 
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.anunciante-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(44, 62, 80, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.anunciante-card:hover::before {
+  opacity: 1;
 }
 
 .anunciante-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .anunciante-image-container {
@@ -61,15 +139,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
 }
 
 .anunciante-card:hover .anunciante-image {
-  transform: scale(1.05);
+  transform: scale(1.08) rotate(0.5deg);
 }
 
 .anunciante-info {
   padding: 1.8rem;
+  position: relative;
+  z-index: 1;
+  background: white;
 }
 
 .anunciante-info h3 {
@@ -77,6 +159,11 @@
   color: #2c3e50;
   font-size: 1.4rem;
   font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.anunciante-card:hover .anunciante-info h3 {
+  color: #3498db;
 }
 
 .anunciante-info p {
@@ -84,6 +171,11 @@
   line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.anunciante-card:hover .anunciante-info p {
+  color: #5d6d7e;
 }
 
 .anunciante-docs {
@@ -102,45 +194,100 @@
   font-size: 0.85rem;
   color: #3498db;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   border: 1px solid #e0e0e0;
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
 .doc-badge:hover {
   background: #3498db;
   color: white;
   cursor: pointer;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(52, 152, 219, 0.25);
+}
+
+.doc-badge:hover::before {
+  left: 100%;
 }
 
 .news-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: 1.5rem;
   color: #3498db;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.news-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3498db;
+  transition: width 0.3s ease;
 }
 
 .news-link:hover {
   color: #2980b9;
-  text-decoration: underline;
+}
+
+.news-link:hover::after {
+  width: 100%;
 }
 
 .news-link svg {
   margin-left: 0.5rem;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .news-link:hover svg {
-  transform: translateX(3px);
+  transform: translateX(5px);
+}
+
+/* Image Aspect Ratio Control */
+.aspect-ratio-box {
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* 16:10 Aspect Ratio */
+  overflow: hidden;
+}
+
+.aspect-ratio-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .anunciantes-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .anunciantes-header h1 {
+    font-size: 2.5rem;
   }
 }
 
@@ -151,6 +298,10 @@
   
   .anunciantes-header p {
     font-size: 1.1rem;
+  }
+  
+  .anunciante-image-container {
+    height: 200px;
   }
 }
 
@@ -165,9 +316,65 @@
   
   .anunciantes-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .anunciante-info {
     padding: 1.2rem;
   }
+  
+  .anunciante-image-container {
+    height: 180px;
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.skeleton-loading {
+  animation: pulse 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Ripple Effect */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple-effect:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
 } 

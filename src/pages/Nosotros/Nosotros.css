@@ -1,14 +1,24 @@
-/* Nosotros.css */
+/* Nosotros.css - Professional Animation Enhanced */
 .nosotros-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 3rem 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.3s forwards;
 }
 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Header with typewriter effect */
 .nosotros-header {
   text-align: center;
   margin-bottom: 3rem;
+  overflow: hidden;
 }
 
 .nosotros-header h1 {
@@ -16,6 +26,31 @@
   color: #2c3e50;
   margin-bottom: 1rem;
   font-weight: 700;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  animation: typewriter 1s steps(20) 0.5s forwards, 
+             blinkCursor 0.7s steps(20) 5, 
+             fadeInUp 0.5s ease-out 1.5s forwards;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes blinkCursor {
+  from, to {
+    border-right: 3px solid #3498db;
+  }
+  50% {
+    border-right: transparent;
+  }
 }
 
 .nosotros-header p {
@@ -23,34 +58,107 @@
   color: #7f8c8d;
   max-width: 800px;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Content section with parallax effect */
 .nosotros-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
+  perspective: 1000px;
 }
 
 .nosotros-image {
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  transform-style: preserve-3d;
+  opacity: 0;
+  transform: rotateY(15deg) translateX(-50px);
+  animation: slideInLeft 1s ease-out 0.8s forwards;
+  transition: all 0.5s ease;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: rotateY(0) translateX(0);
+  }
+}
+
+.nosotros-image:hover {
+  transform: translateY(-5px) rotateY(5deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.nosotros-text {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease-out 1s forwards;
 }
 
 .nosotros-text h2 {
   color: #3498db;
   margin-top: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.nosotros-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: #3498db;
+  animation: expandLine 0.8s ease-out 1.5s forwards;
+}
+
+@keyframes expandLine {
+  to {
+    width: 100%;
+  }
 }
 
 .nosotros-text p {
   line-height: 1.8;
   color: #555;
   margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
+.nosotros-text p:nth-child(2) {
+  animation-delay: 1.2s;
+}
+.nosotros-text p:nth-child(3) {
+  animation-delay: 1.4s;
+}
+.nosotros-text p:nth-child(4) {
+  animation-delay: 1.6s;
+}
+
+/* Team section with staggered animations */
 .nosotros-team {
   margin-top: 4rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.8s forwards;
 }
 
 .team-grid {
@@ -62,7 +170,15 @@
 
 .team-member {
   text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
 }
+
+.team-member:nth-child(1) { animation-delay: 2s; }
+.team-member:nth-child(2) { animation-delay: 2.2s; }
+.team-member:nth-child(3) { animation-delay: 2.4s; }
+.team-member:nth-child(4) { animation-delay: 2.6s; }
 
 .team-member img {
   width: 150px;
@@ -71,8 +187,62 @@
   object-fit: cover;
   margin-bottom: 1rem;
   border: 3px solid #3498db;
+  transition: all 0.4s ease;
+  filter: grayscale(20%);
 }
 
+.team-member:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+  filter: grayscale(0%);
+}
+
+.team-member h3 {
+  color: #2c3e50;
+  margin: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.team-member:hover h3 {
+  color: #3498db;
+}
+
+.team-member p {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Floating social icons */
+.team-social {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.team-social a {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.team-member:hover .team-social a {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.team-member:hover .team-social a:nth-child(1) { animation-delay: 0.1s; }
+.team-member:hover .team-social a:nth-child(2) { animation-delay: 0.2s; }
+.team-member:hover .team-social a:nth-child(3) { animation-delay: 0.3s; }
+
+.team-social a:hover {
+  color: #3498db;
+  transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .nosotros-content {
     grid-template-columns: 1fr;
@@ -80,5 +250,81 @@
   
   .nosotros-header h1 {
     font-size: 2.2rem;
+    animation: none;
+    opacity: 1;
+    border-right: none;
   }
+  
+  .nosotros-image {
+    animation: fadeInUp 1s ease-out 0.8s forwards;
+    transform: none;
+  }
+  
+  .team-member {
+    animation-delay: 1.8s !important;
+  }
+}
+
+/* Decorative elements */
+.wave-divider {
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin: 3rem 0;
+}
+
+.wave-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" fill="%23f8f9fa"></path></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: waveMove 15s linear infinite;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Stats counter animation */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 2.8s forwards;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.stat-number span {
+  display: inline-block;
+}
+
+.stat-label {
+  color: #7f8c8d;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 } 
