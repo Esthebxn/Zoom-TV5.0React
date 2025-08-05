@@ -7,7 +7,8 @@ import Deportes from '../pages/Actualidad/Deportes';
 import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
-import Programacion from "../pages/Programacion12/Programacion12";
+import Programacion12 from "../pages/Programacion/Programacion12.jsx";
+
 import Anunciantes from '../pages/Anunciantes/Anunciantes.jsx';
 import Live from '../pages/Live9/Live9';
 
@@ -33,7 +34,8 @@ function App() {
           </Route>
           
           <Route path="/redes-sociales" element={<RedesSociales />} />
-          <Route path="/Programacion" element={<Programacion />} />
+   <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
+
           <Route path="/anunciantes" element={<Anunciantes />} />
           <Route path="/live" element={<Live />} />
         </Routes>

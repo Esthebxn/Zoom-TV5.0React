@@ -1,4 +1,4 @@
-/* styles.css - Tema Rojo y Negro Responsive */
+/* styles.css - Tema Rojo y Negro Responsive con Animaciones */
 :root {
   /* Colores del tema */
   --primary-red: #e50914;
@@ -15,18 +15,38 @@
   /* Transiciones */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
   
   /* Sombras */
   --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.4);
+  
+  /* Efectos */
+  --glow-red: 0 0 10px rgba(229, 9, 20, 0.7);
 }
 
-/* Reset básico */
+/* Reset básico y animaciones */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 body {
@@ -34,6 +54,7 @@ body {
   background-color: var(--black);
   color: var(--white);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Layout principal */
@@ -50,7 +71,7 @@ body {
   padding: 0 20px;
 }
 
-/* Header */
+/* Header con efecto sticky */
 .main-header {
   background-color: var(--black);
   padding: 15px 0;
@@ -58,6 +79,13 @@ body {
   top: 0;
   z-index: 1000;
   border-bottom: 2px solid var(--primary-red);
+  transition: all var(--transition-medium);
+}
+
+.main-header.scrolled {
+  padding: 10px 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: var(--shadow-md);
 }
 
 .header-content {
@@ -70,10 +98,12 @@ body {
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
+  animation: fadeIn 1s var(--transition-slow) both;
 }
 
 .logo-red {
   color: var(--primary-red);
+  text-shadow: var(--glow-red);
 }
 
 .logo-white {
@@ -94,7 +124,7 @@ body {
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
   position: relative;
   padding: 5px 0;
 }
@@ -102,6 +132,7 @@ body {
 .main-nav a:hover,
 .main-nav a.active {
   color: var(--primary-red);
+  text-shadow: var(--glow-red);
 }
 
 .main-nav a::after {
@@ -120,6 +151,7 @@ body {
   width: 100%;
 }
 
+/* Menú hamburguesa para móviles */
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -130,6 +162,7 @@ body {
   width: 30px;
   height: 21px;
   padding: 0;
+  z-index: 1001;
 }
 
 .mobile-menu-btn span {
@@ -138,9 +171,23 @@ body {
   height: 3px;
   background-color: var(--white);
   transition: all var(--transition-medium);
+  transform-origin: center;
 }
 
-/* Hero Banner */
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Hero Banner con animación */
 .hero-banner {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
               url('https://via.placeholder.com/1920x1080?text=ZOOM+TV') center/cover no-repeat;
@@ -149,11 +196,24 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, transparent, var(--black) 70%);
+  z-index: 1;
 }
 
 .hero-content {
   max-width: 600px;
   z-index: 2;
+  animation: fadeIn 1s var(--transition-slow) both;
 }
 
 .hero-content h1 {
@@ -161,20 +221,23 @@ body {
   margin-bottom: 20px;
   text-transform: uppercase;
   text-shadow: var(--shadow-md);
+  animation: fadeIn 0.8s 0.3s both;
 }
 
 .hero-content p {
   font-size: 1.2rem;
   margin-bottom: 30px;
   text-shadow: var(--shadow-sm);
+  animation: fadeIn 0.8s 0.5s both;
 }
 
 .hero-buttons {
   display: flex;
   gap: 15px;
+  animation: fadeIn 0.8s 0.7s both;
 }
 
-/* Sección de Noticias */
+/* Sección de Noticias con animación */
 .news-section {
   padding: 60px 0;
   background-color: var(--dark-gray);
@@ -187,6 +250,7 @@ body {
   text-transform: uppercase;
   position: relative;
   padding-bottom: 15px;
+  animation: fadeIn 0.8s both;
 }
 
 .section-title::after {
@@ -197,6 +261,7 @@ body {
   width: 100px;
   height: 4px;
   background-color: var(--primary-red);
+  animation: slideIn 0.8s 0.3s both;
 }
 
 .news-grid {
@@ -209,12 +274,19 @@ body {
   background-color: var(--medium-gray);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  transition: all var(--transition-medium);
+  animation: fadeIn 0.6s both;
+  animation-delay: calc(var(--order) * 0.1s);
+  opacity: 0;
 }
 
 .news-card:hover {
   transform: translateY(-10px);
   box-shadow: var(--shadow-lg);
+}
+
+.news-card:hover .news-image::after {
+  opacity: 1;
 }
 
 .news-image {
@@ -223,15 +295,27 @@ body {
   overflow: hidden;
 }
 
+.news-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(229, 9, 20, 0.3), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+}
+
 .news-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-medium);
+  transition: transform var(--transition-slow);
 }
 
 .news-card:hover .news-image img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .news-category {
@@ -244,6 +328,8 @@ body {
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
+  z-index: 2;
+  animation: pulse 2s infinite;
 }
 
 .news-content {
@@ -254,6 +340,11 @@ body {
   font-size: 1.3rem;
   margin-bottom: 10px;
   color: var(--white);
+  transition: color var(--transition-fast);
+}
+
+.news-card:hover .news-content h3 {
+  color: var(--primary-red);
 }
 
 .news-content p {
@@ -267,11 +358,12 @@ body {
   font-weight: 600;
   display: inline-flex;
   align-items: center;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .read-more:hover {
   color: var(--white);
+  text-shadow: var(--glow-red);
 }
 
 .read-more::after {
@@ -284,7 +376,7 @@ body {
   transform: translateX(5px);
 }
 
-/* Botones */
+/* Botones con efectos */
 .btn {
   display: inline-block;
   padding: 12px 30px;
@@ -297,6 +389,23 @@ body {
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all var(--transition-slow);
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-red {
@@ -307,7 +416,7 @@ body {
 .btn-red:hover {
   background-color: var(--dark-red);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), var(--glow-red);
 }
 
 .btn-outline {
@@ -323,7 +432,7 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-/* Footer */
+/* Footer con animación */
 .main-footer {
   background-color: var(--black);
   padding: 40px 0;
@@ -340,6 +449,7 @@ body {
 .footer-logo {
   font-size: 2rem;
   margin-bottom: 20px;
+  animation: fadeIn 0.8s both;
 }
 
 .social-links {
@@ -351,11 +461,15 @@ body {
 .social-link {
   color: var(--white);
   font-size: 1.5rem;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
+  animation: fadeIn 0.8s both;
+  animation-delay: calc(var(--order) * 0.1s);
 }
 
 .social-link:hover {
   color: var(--primary-red);
+  transform: translateY(-3px) scale(1.2);
+  text-shadow: var(--glow-red);
 }
 
 .footer-links {
@@ -369,17 +483,68 @@ body {
 .footer-links a {
   color: var(--light-gray);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-red);
+  transition: width var(--transition-medium);
 }
 
 .footer-links a:hover {
   color: var(--primary-red);
 }
 
+.footer-links a:hover::after {
+  width: 100%;
+}
+
 .copyright {
   color: var(--medium-gray);
   font-size: 0.9rem;
   text-align: center;
+  animation: fadeIn 0.8s 0.3s both;
+}
+
+/* Efecto de carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--black);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity var(--transition-slow);
+}
+
+.loading-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--medium-gray);
+  border-top-color: var(--primary-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* Media Queries para Responsividad */
@@ -400,12 +565,13 @@ body {
     left: -100%;
     width: 100%;
     height: calc(100vh - 80px);
-    background-color: var(--black);
+    background-color: rgba(0, 0, 0, 0.95);
     flex-direction: column;
     align-items: center;
     padding: 40px 20px;
     transition: left var(--transition-medium);
     z-index: 999;
+    backdrop-filter: blur(5px);
   }
   
   .main-nav.active {
@@ -416,22 +582,16 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    width: 100%;
+  }
+  
+  .main-nav a {
+    font-size: 1.2rem;
+    padding: 10px 0;
   }
   
   .mobile-menu-btn {
     display: flex;
-  }
-  
-  .mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  
-  .mobile-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
   }
   
   .hero-banner {
@@ -474,4 +634,10 @@ body {
   .news-grid {
     grid-template-columns: 1fr;
   }
-}  
+  
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+} 

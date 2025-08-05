@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Programacion12.css';
-    
-const Programacion = () => {
+
+const Programacion12 = () => {
   const [activeDay, setActiveDay] = useState('LUNES');
 
   const programacion = {
@@ -96,5 +96,4 @@ const Programacion = () => {
   );
 };
 
-// Debe contener al final:
-export default Programacion; 
+export default Programacion12; 
