@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './HamburguesaMenu.css';
 
 const HamburguesaMenu = () => {
@@ -8,35 +9,43 @@ const HamburguesaMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="menu-container">
-      {/* Botón del menú hamburguesa */}
+    <div className="simple-menu">
+      {/* Botón hamburguesa simple */}
       <button 
-        className={`hamburguesa-btn ${isOpen ? 'open' : ''}`} 
+        className={`menu-btn ${isOpen ? 'open' : ''}`} 
         onClick={toggleMenu}
-        aria-label="Menú principal"
       >
-        <span className="hamburguesa-line"></span>
-        <span className="hamburguesa-line"></span>
-        <span className="hamburguesa-line"></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
-      {/* Menú desplegable */}
-      <nav className={`menu-nav ${isOpen ? 'open' : ''}`}>
-        <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/nosotros">Nosotros</a></li>
-          <li><a href="/programacion">Programación</a></li>
-          <li><a href="/noticias">Noticias</a></li>
-          <li><a href="/contacto">Contacto</a></li>
-          <li><a href="/en-vivo">En Vivo</a></li>
-        </ul>
-      </nav>
-
-      {/* Overlay para cerrar el menú al hacer clic fuera */}
+      {/* Menú simple */}
       {isOpen && (
-        <div className="menu-overlay" onClick={toggleMenu}></div>
+        <div className="menu-panel">
+          <div className="menu-header">
+            <h3>Menú</h3>
+            <button onClick={closeMenu} className="close-btn">×</button>
+          </div>
+          <div className="menu-items">
+            <Link to="/" onClick={closeMenu}>Inicio</Link>
+            <Link to="/nosotros" onClick={closeMenu}>Nosotros</Link>
+            <Link to="/actualidad" onClick={closeMenu}>Actualidad</Link>
+            <Link to="/zoom-tv-canal-10" onClick={closeMenu}>Programación</Link>
+            <Link to="/live" onClick={closeMenu}>En Vivo</Link>
+            <Link to="/anunciantes" onClick={closeMenu}>Anunciantes</Link>
+            <Link to="/redes-sociales" onClick={closeMenu}>Redes Sociales</Link>
+          </div>
+        </div>
       )}
+
+      {/* Overlay simple */}
+      {isOpen && <div className="menu-overlay" onClick={closeMenu}></div>}
     </div>
   );
 };
