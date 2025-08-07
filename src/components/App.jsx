@@ -31,7 +31,7 @@ function App() {
           </Route>
           
           <Route path="/redes-sociales" element={<RedesSociales />} />
-          <Route path="/programacion" element={<Programacion12 />} />
+          <Route path="/Zoomtvcanal10" element={<Programacion12 />} />
           <Route path="/anunciantes" element={<Anunciantes />} />
           <Route path="/live" element={<Live9 />} />
         </Routes>
