@@ -1,4 +1,3 @@
-/* Estilos generales */
 .deportes-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -6,23 +5,12 @@
   font-family: 'Arial', sans-serif;
 }
 
-.deportes-container h1 {
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 2.2em;
-}
-
 .subcontenido-deportes {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 30px;
 }
 
-/* Lista de noticias */
 .noticias-deportes h2 {
-  color: #e74c3c;
+  color: #2c3e50;
   border-bottom: 2px solid #e74c3c;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -30,55 +18,48 @@
 
 .lista-noticias {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
+  margin-top: 20px;
 }
 
 .noticia-item {
-  background: white;
+  background: #fff;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   transition: transform 0.3s ease;
 }
 
 .noticia-item:hover {
   transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .noticia-item h3 {
-  color: #2c3e50;
-  padding: 15px 15px 0;
-  margin: 0;
-  font-size: 1.2em;
-}
-
-.noticia-item h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.noticia-item h3 a:hover {
   color: #e74c3c;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
 }
 
 .noticia-fecha {
   color: #7f8c8d;
-  font-size: 0.9em;
-  padding: 0 15px;
-  margin: 5px 0;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
 }
 
 .imagen-container {
   height: 180px;
   overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .noticia-imagen-lista {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 
 .noticia-item:hover .noticia-imagen-lista {
@@ -86,98 +67,92 @@
 }
 
 .noticia-resumen {
-  padding: 0 15px 15px;
   color: #34495e;
   line-height: 1.5;
+  margin-bottom: 15px;
 }
 
 .fuente-lista {
   display: inline-block;
-  margin: 0 15px 15px;
-  padding: 8px 15px;
-  background-color: #e74c3c;
-  color: white;
+  color: #e74c3c;
   text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9em;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .fuente-lista:hover {
-  background-color: #c0392b;
+  text-decoration: underline;
 }
 
-/* Detalle de noticia */
+/* Estilos para la vista detallada */
 .noticia-detalle {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
+  background: #fff;
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .noticia-detalle h2 {
-  color: #2c3e50;
-  margin-top: 0;
+  color: #e74c3c;
+  margin-bottom: 10px;
 }
 
 .noticia-imagen {
   width: 100%;
-  max-height: 450px;
+  max-height: 400px;
   object-fit: cover;
-  border-radius: 4px;
-  margin: 15px 0;
+  border-radius: 8px;
+  margin: 20px 0;
 }
 
 .noticia-contenido {
   color: #34495e;
-  line-height: 1.8;
-  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
 }
 
 .fuente-original {
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #3498db;
+  background: #e74c3c;
   color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
   text-decoration: none;
-  border-radius: 4px;
   font-weight: bold;
-  transition: background-color 0.3s;
+  margin-bottom: 20px;
 }
 
 .fuente-original:hover {
-  background-color: #2980b9;
+  background: #c0392b;
 }
 
 .volver {
   display: inline-block;
-  margin-top: 20px;
-  color: #7f8c8d;
+  color: #e74c3c;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  margin-top: 20px;
 }
 
 .volver:hover {
-  color: #e74c3c;
+  text-decoration: underline;
 }
 
-/* Estados */
+/* Estilos para estados de carga y error */
 .cargando, .error {
   text-align: center;
   padding: 50px;
-  font-size: 1.2em;
-  color: #7f8c8d;
+  font-size: 1.2rem;
+  color: #34495e;
 }
 
 .error {
   color: #e74c3c;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .lista-noticias {
     grid-template-columns: 1fr;

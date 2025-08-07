@@ -1,49 +1,48 @@
 import { Routes, Route, Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './Actualidad.css';
-
+import './Deportes.css';
 // Datos de noticias deportivas de ejemplo
 const noticiasDeportes = [
   {
-    id: 'seleccion-copa-america',
-    title: 'Selección peruana anuncia nómina para Copa América',
-    date: '15 junio 2023',
-    summary: 'Ricardo Gareca presenta lista de 23 jugadores para el torneo continental.',
-    content: 'El entrenador de la selección peruana, Ricardo Gareca, ha anunciado hoy la lista definitiva de 23 jugadores que representarán al Perú en la próxima Copa América. La nómina incluye a veteranos como Paolo Guerrero y jóvenes promesas como Pedro Aquino. El equipo comenzará su preparación la próxima semana en Lima antes de viajar al país sede del torneo.',
-    imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia1'
-  },
-  {
-    id: 'liga1-resultados',
-    title: 'Liga 1: Resultados de la fecha 15',
-    date: '14 junio 2023',
-    summary: 'Alianza Lima se mantiene en la cima tras empate de Universitario.',
-    content: 'En una emocionante fecha 15 del torneo local, Alianza Lima logró mantener el primer lugar tras el empate 1-1 de Universitario contra Sporting Cristal. Otros resultados destacados incluyen la victoria de Cienciano sobre Melgar por 2-0 y el triunfo de Binacional como visitante ante UTC. La competencia se mantiene reñida con 5 equipos en lucha por el título.',
-    imageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1605&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia2'
-  },
-  {
-    id: 'luis-advincula',
-    title: 'Luis Advíncula firma con club turco',
-    date: '13 junio 2023',
-    summary: 'El lateral derecho peruano jugará en el Besiktas la próxima temporada.',
-    content: 'Luis Advíncula, defensor de la selección peruana, ha firmado un contrato por tres temporadas con el Besiktas de Turquía. El jugador llega procedente del Rayo Vallecano español y se convierte en el tercer peruano en vestir la camiseta del club turco. Advíncula expresó su emoción por este nuevo reto en su carrera profesional.',
-    imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia3'
-  },
-  {
     id: 'mundial-sub20',
     title: 'Perú clasifica al Mundial Sub-20 tras 18 años',
+    date: '15 junio 2023',
+    summary: 'La selección peruana logró su pase al Mundial de Indonesia tras vencer a Brasil en el Sudamericano.',
+    content: 'La selección peruana de fútbol Sub-20 hizo historia al clasificar al Mundial de Indonesia 2023 tras 18 años de ausencia. El equipo dirigido por José del Solar consiguió su pase tras una emocionante victoria 2-1 sobre Brasil en la última fecha del Sudamericano. Los goles peruanos fueron anotados por Bryan Reyna y Jhamir D"Arrigo en el segundo tiempo, dando la vuelta al marcador después de ir perdiendo en el primer tiempo.',
+    imageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1605&q=80',
+    sourceUrl: 'https://ejemplo.com/noticia-deportes1'
+  },
+  {
+    id: 'vargas-olimpico',
+    title: 'Luis Vargas gana medalla de oro en Panamericano de Atletismo',
+    date: '14 junio 2023',
+    summary: 'El atleta peruano logró el primer lugar en salto con garrocha con marca de 5.80 metros.',
+    content: 'Luis Vargas escribió su nombre en la historia del atletismo peruano al conquistar la medalla de oro en el Campeonato Panamericano de Atletismo realizado en Sao Paulo. El especialista en salto con garrocha superó la marca de 5.80 metros en su tercer intento, superando al brasileño Augusto Dutra y al cubano Yarisley Silva. "Esto es para todo el Perú, es el fruto de años de sacrificio", declaró emocionado Vargas tras su triunfo.',
+    imageUrl: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    sourceUrl: 'https://ejemplo.com/noticia-deportes2'
+  },
+  {
+    id: 'alianza-campeon',
+    title: 'Alianza Lima se corona campeón del Torneo Apertura',
+    date: '13 junio 2023',
+    summary: 'El equipo íntimo venció 3-0 a Sporting Cristal en el clásico nacional y aseguró el título.',
+    content: 'Alianza Lima se proclamó campeón del Torneo Apertura 2023 tras golear 3-0 a su eterno rival Sporting Cristal en partido disputado en el Estadio Nacional. Los goles fueron obra de Hernán Barcos (2) y Gabriel Costa. Con este resultado, los íntimos alcanzaron los 40 puntos y se aseguraron matemáticamente el primer título del año. "Esto es para nuestra hinchada que nos ha apoyado en las buenas y en las malas", declaró el técnico Carlos Bustos tras el partido.',
+    imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1493&q=80',
+    sourceUrl: 'https://ejemplo.com/noticia-deportes3'
+  },
+  {
+    id: 'voley-playa',
+    title: 'Diana y Carolina clasifican a semifinales del Mundial de Vóley Playa',
     date: '12 junio 2023',
-    summary: 'La selección juvenil venció a Chile en el último partido clasificatorio.',
-    content: 'La selección peruana Sub-20 ha logrado la clasificación al Mundial de la categoría por primera vez en 18 años tras vencer 2-1 a Chile en el último partido del Sudamericano. Los goles peruanos fueron anotados por Bryan Reyna y Jairo Concha. El entrenador Daniel Ahmed destacó el trabajo de grupo y la mentalidad de los jugadores.',
-    imageUrl: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia4'
+    summary: 'Las peruanas vencieron a las alemanas en sets corridos y avanzan a instancias definitivas.',
+    content: 'La dupla peruana formada por Diana Rios y Carolina Horta logró un histórico pase a las semifinales del Mundial de Vóley Playa que se disputa en Roma, Italia. Las sudamericanas vencieron por 21-18 y 21-16 a las alemanas Julia Sude y Chantal Laboureur en partido disputado en la cancha central. "Estamos jugando al máximo nivel, queremos la medalla", declaró Rios tras el partido. Este es el mejor resultado de una pareja peruana en la historia de los mundiales.',
+    imageUrl: 'https://images.unsplash.com/photo-1543357480-c60d400e2ef9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+    sourceUrl: 'https://ejemplo.com/noticia-deportes4'
   }
 ];
 
-// Componente para mostrar noticias deportivas individuales
-function NoticiaDeportivaDetalle() {
+// Componente para mostrar noticias individuales
+function NoticiaDeportesDetalle() {
   const { id } = useParams();
   const [noticia, setNoticia] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -66,8 +65,8 @@ function NoticiaDeportivaDetalle() {
     fetchNoticia();
   }, [id]);
 
-  if (loading) return <div className="cargando">Cargando noticia deportiva...</div>;
-  if (!noticia) return <div className="error">Noticia deportiva no encontrada</div>;
+  if (loading) return <div className="cargando">Cargando noticia...</div>;
+  if (!noticia) return <div className="error">Noticia no encontrada</div>;
 
   return (
     <div className="noticia-detalle">
@@ -103,7 +102,7 @@ function Deportes() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulamos la carga de noticias deportivas
+    // Simulamos la carga de noticias
     const fetchNoticias = () => {
       try {
         setTimeout(() => {
@@ -111,8 +110,8 @@ function Deportes() {
           setLoading(false);
         }, 800);
       } catch (error) {
-        console.error("Error fetching sports news:", error);
-        setError("Error al cargar las noticias deportivas");
+        console.error("Error fetching news:", error);
+        setError("Error al cargar las noticias");
         setLoading(false);
       }
     };
@@ -125,11 +124,11 @@ function Deportes() {
 
   return (
     <div className="deportes-container">
-      <h1>Últimas Noticias Deportivas del Perú</h1>
+      <h1>Últimas Noticias Deportivas</h1>
       
       <div className="subcontenido-deportes">
         <Routes>
-          <Route path="noticia/:id" element={<NoticiaDeportivaDetalle />} />
+          <Route path="noticia/:id" element={<NoticiaDeportesDetalle />} />
           <Route index element={
             <div className="noticias-deportes">
               <h2>Noticias Recientes</h2>
@@ -159,7 +158,7 @@ function Deportes() {
                       rel="noopener noreferrer" 
                       className="fuente-lista"
                     >
-                      Ver fuente
+                      Leer más
                     </a>
                   </div>
                 ))}
