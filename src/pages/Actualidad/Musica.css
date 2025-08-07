@@ -1,0 +1,91 @@
+.music-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.music-container h1 {
+  text-align: center;
+  color: #1DB954;
+  margin-bottom: 2rem;
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.music-card {
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  color: white;
+}
+
+.music-card:hover {
+  transform: scale(1.03);
+  background: #282828;
+}
+
+.image-container {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-info {
+  padding: 1rem;
+}
+
+.music-info h3 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-info p {
+  margin: 0.3rem 0;
+  color: #b3b3b3;
+  font-size: 0.9rem;
+}
+
+.play-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #1DB954;
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  transition: background 0.3s;
+}
+
+.play-button:hover {
+  background: #1ed760;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ff4d4d;
+} 
