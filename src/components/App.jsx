@@ -1,17 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header/Header';
-import Inicio from '../pages/Inicio/Inicio';
+// Asegúrate que las rutas sean exactamente así (sin mayúsculas innecesarias)
 import Nosotros from '../pages/Nosotros/Nosotros';
 import Actualidad from '../pages/Actualidad/Actualidad';
-import Deportes from '../pages/Actualidad/Deportes';
-import Nacionales from '../pages/Actualidad/Nacionales';
-import Regionales from '../pages/Actualidad/Regionales';
-import Musica from '../pages/Actualidad/Musica'; // Added new import
-
-import RedesSociales from '../pages/RedesSociales/RedesSociales';
-import Programacion12 from "../pages/Programacion/Programacion12.jsx";
-import Anunciantes from '../pages/Anunciantes/Anunciantes.jsx';
-import Live from '../pages/Live9/Live9';
+import Deportes from '../pages/Deportes/Deportes';
+import Nacionales from '../pages/Nacionales/Nacionales';
+import Regionales from '../pages/Regionales/Regionales'; 
 
 function App() {
   return (
@@ -27,13 +20,13 @@ function App() {
             <Route path="deportes" element={<Deportes />} />
             <Route path="nacionales" element={<Nacionales />} />
             <Route path="regionales" element={<Regionales />} />
-            <Route path="musica" element={<Musica />} /> {/* Added new route */}
+            <Route path="musica" element={<Musica />} />
           </Route>
           
           <Route path="/redes-sociales" element={<RedesSociales />} />
-          <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
+          <Route path="/programacion" element={<Programacion12 />} />
           <Route path="/anunciantes" element={<Anunciantes />} />
-          <Route path="/live" element={<Live />} />
+          <Route path="/live" element={<Live9 />} />
         </Routes>
       </div>
     </Router>

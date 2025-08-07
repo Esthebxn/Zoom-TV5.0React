@@ -1,6 +1,6 @@
 import React from 'react';
 import './Nacionales.css';
-import './Nacionales.jsx' 
+
 const Nacionales = () => {
   return (
     <div className="nacionales-container">
