@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useParams } from 'react-router-dom';
+import { Routes, Route, Link, useParams, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './Actualidad.css';
 
@@ -183,6 +183,9 @@ function Actualidad() {
             </div>
           } />
         </Routes>
+        
+        {/* Renderizar las rutas anidadas */}
+        <Outlet />
       </div>
     </div>
   );

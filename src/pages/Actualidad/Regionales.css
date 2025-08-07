@@ -1,7 +1,9 @@
+/* Regionales.css - Estilos específicos para noticias regionales */
+
 :root {
-  /* Colores */
-  --primary-color: #1e3a8a; /* Azul deportivo */
+  --primary-color: #1e3a8a; /* Azul regional */
   --secondary-color: #dc2626; /* Rojo para destacar */
+  --accent-color: #059669; /* Verde para elementos regionales */
   --text-color: #333333;
   --light-bg: #f8fafc;
   --border-color: #e2e8f0;
@@ -16,44 +18,155 @@
   --element-margin: 0.75rem;
 }
 
-.noticias-deportivas {
+/* Contenedor principal */
+.regionales-container {
   font-family: var(--font-main);
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: var(--section-padding);
+  background-color: var(--light-bg);
+  min-height: 100vh;
 }
 
-.categoria-header {
+/* Header de regionales */
+.regionales-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.regionales-title {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.regionales-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+/* Filtros */
+.filtros-regionales {
+  margin: 1rem 0;
+}
+
+.selector-departamentos {
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.selector-departamentos:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.selector-departamentos option {
   background-color: var(--primary-color);
   color: white;
-  padding: 0.5rem 1rem;
-  font-family: var(--font-title);
+}
+
+/* Grid de noticias */
+.regionales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Tarjeta de noticia regional */
+.noticia-regional {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 4px solid var(--accent-color);
+}
+
+.noticia-regional:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de imagen */
+.noticia-imagen-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.noticia-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.noticia-regional:hover .noticia-imagen {
+  transform: scale(1.05);
+}
+
+/* Contenido de la noticia */
+.noticia-contenido {
+  padding: 1.5rem;
+}
+
+.noticia-departamento {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
-  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
 }
 
-.noticia-card {
-  border-left: 4px solid var(--secondary-color);
-  padding: var(--card-spacing);
-  margin-bottom: 1.5rem;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-radius: 0 4px 4px 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.noticia-titulo {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  font-weight: 600;
 }
 
-.noticia-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.noticia-resumen {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Footer de la noticia */
+.noticia-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .noticia-fecha {
   color: #64748b;
   font-size: 0.85rem;
-  margin-bottom: var(--element-margin);
   display: flex;
   align-items: center;
 }
@@ -63,57 +176,72 @@
   margin-right: 0.5rem;
 }
 
-.noticia-titulo {
-  color: var(--primary-color);
-  font-family: var(--font-title);
-  font-size: 1.3rem;
-  margin: 0.5rem 0;
-  line-height: 1.3;
+.noticia-bandera {
+  font-size: 1.2rem;
 }
 
-.noticia-resumen {
+/* Footer de la página */
+.regionales-footer {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.regionales-footer p {
   color: var(--text-color);
-  line-height: 1.5;
-  margin-bottom: var(--element-margin);
+  margin-bottom: 1rem;
 }
 
-.noticia-etiqueta {
-  display: inline-block;
-  background-color: var(--light-bg);
+.peru-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   color: var(--primary-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  margin-top: 0.5rem;
+  font-weight: 600;
 }
 
-.noticia-destacado {
-  border-left-width: 6px;
-  background-color: var(--light-bg);
-}
-
-.noticia-destacado .noticia-titulo {
+.bandera {
   font-size: 1.5rem;
 }
 
-.separador {
-  border: none;
-  height: 1px;
-  background-color: var(--border-color);
-  margin: 1.5rem 0;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-  .noticias-deportivas {
+  .regionales-container {
+    padding: 1rem;
+  }
+  
+  .regionales-title {
+    font-size: 2rem;
+  }
+  
+  .regionales-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .noticia-contenido {
     padding: 1rem;
   }
   
   .noticia-titulo {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .regionales-header {
+    padding: 1.5rem;
   }
   
-  .noticia-destacado .noticia-titulo {
-    font-size: 1.3rem;
+  .regionales-title {
+    font-size: 1.8rem;
+  }
+  
+  .regionales-subtitle {
+    font-size: 1rem;
   }
 }

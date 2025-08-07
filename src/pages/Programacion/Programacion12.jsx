@@ -31,7 +31,7 @@ const Programacion12 = () => {
     'VIERNES': [
       { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'VIERNES TERROR 40' },
     ],
-    'SABADO': [
+    'SÁBADO': [
       { time: '06:00 - 06:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
       { time: '08:00 - 08:55', title: 'EXPANSE T5 5 - 6', description: '' },
       { time: '09:30 - 09:55', title: 'EL MANDALORIANO T3: 7 - 8', description: '' },
