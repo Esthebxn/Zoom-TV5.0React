@@ -22,7 +22,22 @@ const Anunciantes = () => {
       documents: ["PDF", "Especificaciones"],
       newsUrl: "https://example.com/news/green-energy"
     },
-    // Resto de los anunciantes...
+    {
+      id: 3,
+      name: "Transporte Turístico VIP",
+      image: "https://via.placeholder.com/300x200?text=Transporte+Turístico",
+      description: "Servicios de transporte turístico de lujo con unidades modernas y seguras.",
+      documents: ["Tarifas", "Paquetes"],
+      newsUrl: "https://example.com/news/transporte-turistico"
+    },
+    {
+      id: 4,
+      name: "Seguridad Total S.A.",
+      image: "https://via.placeholder.com/300x200?text=Seguridad+Total",
+      description: "Soluciones integrales de seguridad para empresas y hogares.",
+      documents: ["Brochure", "Certificaciones"],
+      newsUrl: "https://example.com/news/seguridad-total"
+    }
   ];
 
   const toggleExpandCard = (id) => {
@@ -72,24 +87,29 @@ const Anunciantes = () => {
               
               <p className="anunciante-description">{anunciante.description}</p>
               
-              {anunciante.documents?.length > 0 && (
-                <div className="anunciante-docs">
-                  {anunciante.documents.map((doc, index) => (
-                    <span key={index} className="doc-badge">{doc}</span>
-                  ))}
-                </div>
-              )}
-              
-              {anunciante.newsUrl && (
-                <a 
-                  href={anunciante.newsUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="news-link"
-                >
-                  Ver noticias relacionadas
-                  <FiArrowRight className="news-link-icon" />
-                </a>
+              {expandedCard === anunciante.id && (
+                <>
+                  {anunciante.documents?.length > 0 && (
+                    <div className="anunciante-docs">
+                      <h4>Documentos disponibles:</h4>
+                      {anunciante.documents.map((doc, index) => (
+                        <span key={index} className="doc-badge">{doc}</span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {anunciante.newsUrl && (
+                    <a 
+                      href={anunciante.newsUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="news-link"
+                    >
+                      Ver noticias relacionadas
+                      <FiArrowRight className="news-link-icon" />
+                    </a>
+                  )}
+                </>
               )}
             </div>
           </article>
@@ -99,4 +119,4 @@ const Anunciantes = () => {
   );
 };
 
-export default Anunciantes;
+export default Anunciantes; 
