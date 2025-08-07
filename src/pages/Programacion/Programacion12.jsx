@@ -51,7 +51,7 @@ const Programacion12 = () => {
   return (
     <div className="programacion-container">
       <div className="programacion-header">
-        <h1>PARRILLA DE PROGRAMACIÓN 2025</h1>
+      
         <h2>ZOOM TV, acércate más...</h2>
         <p>(Canal 10 - Megcable)</p>
       </div>
