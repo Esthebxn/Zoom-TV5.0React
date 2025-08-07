@@ -1,10 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Asegúrate que las rutas sean exactamente así (sin mayúsculas innecesarias)
+import Header from './Header/Header';
+import Inicio from '../pages/Inicio/Inicio';
 import Nosotros from '../pages/Nosotros/Nosotros';
 import Actualidad from '../pages/Actualidad/Actualidad';
-import Deportes from '../pages/Deportes/Deportes';
-import Nacionales from '../pages/Nacionales/Nacionales';
-import Regionales from '../pages/Regionales/Regionales'; 
+import Deportes from '../pages/Actualidad/Deportes';
+import Nacionales from '../pages/Actualidad/Nacionales';
+import Regionales from '../pages/Actualidad/Regionales';
+import Musica from '../pages/Actualidad/Musica';
+import RedesSociales from '../pages/RedesSociales/RedesSociales';
+import Programacion12 from '../pages/Programacion/Programacion12';
+import Anunciantes from '../pages/Anunciantes/Anunciantes';
+import Live9 from '../pages/Live9/Live9';
 
 function App() {
   return (
