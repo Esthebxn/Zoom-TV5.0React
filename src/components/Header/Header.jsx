@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../Navbar';
 import HamburguesaMenu from '../../pages/HamburguesaMenu/HamburguesaMenu';
 import './Header.css';
-import logo from '../../assets/images/logo-zoomtv.png';
+import logo from '../../assets/images/WhatsApp Image 2025-07-30 at 1.03.23 PM.jpeg';
 
 const Header = () => {
   console.log('HamburguesaMenu component:', HamburguesaMenu); // Debug

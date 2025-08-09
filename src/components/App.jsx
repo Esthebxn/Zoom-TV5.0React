@@ -7,7 +7,7 @@ import Actualidad from '../pages/Actualidad/Actualidad';
 import Deportes from '../pages/Actualidad/Deportes';
 import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
-import Musica from '../pages/Actualidad/Musica';
+import Musica from '../pages/Actualidad/Musica';    
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
 import Programacion12 from '../pages/Programacion/Programacion12';
 import Anunciantes from '../pages/Anunciantes/Anunciantes';
