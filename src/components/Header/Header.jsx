@@ -10,8 +10,8 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-top">
-        <img src={logo} alt="Zoom TV Canal 10" className="logo" />
-        <h1>Zoom TV Canal 10</h1>
+        <img src={logo} alt="Zoom TV Canal 10 Megacable" className="logo" />
+        <h1>ℤ𝕠𝕠𝕞 𝕋𝕍 ℂ𝕒𝕟𝕒𝕝 𝟙𝟘 𝕄𝕖𝕘𝕒𝕔𝕒𝕓𝕝𝕖</h1>
         {/* Menú hamburguesa solo visible en móviles */}
         <div className="mobile-menu">
           <HamburguesaMenu />
