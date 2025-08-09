@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          Zoom TV
+          Zoom TV 
         </Link>
         
         <ul className="navbar-menu">

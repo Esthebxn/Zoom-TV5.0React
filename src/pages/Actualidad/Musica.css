@@ -9,83 +9,98 @@
   text-align: center;
   color: #1DB954;
   margin-bottom: 2rem;
+  font-size: 2.5rem;
 }
 
 .music-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
+  padding: 1rem;
 }
 
 .music-card {
-  background: #181818;
-  border-radius: 8px;
+  background: #fff;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .music-card:hover {
-  transform: scale(1.03);
-  background: #282828;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .image-container {
   width: 100%;
-  padding-top: 100%;
-  position: relative;
+  height: 250px;
+  overflow: hidden;
 }
 
 .image-container img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.music-card:hover .image-container img {
+  transform: scale(1.05);
 }
 
 .music-info {
-  padding: 1rem;
+  padding: 1.2rem;
 }
 
 .music-info h3 {
-  margin: 0.5rem 0;
-  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .music-info p {
-  margin: 0.3rem 0;
-  color: #b3b3b3;
+  margin: 0 0 1rem 0;
+  color: #666;
   font-size: 0.9rem;
 }
 
 .play-button {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #1DB954;
+  background-color: #1DB954;
   color: white;
-  text-decoration: none;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
+  text-decoration: none;
   font-weight: bold;
-  font-size: 0.8rem;
-  transition: background 0.3s;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
 
 .play-button:hover {
-  background: #1ed760;
+  background-color: #1ed760;
 }
 
-.loading, .error {
-  text-align: center;
-  padding: 2rem;
-  font-size: 1.2rem;
+@media (max-width: 768px) {
+  .music-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .image-container {
+    height: 200px;
+  }
 }
 
-.error {
-  color: #ff4d4d;
+@media (max-width: 480px) {
+  .music-container {
+    padding: 1rem;
+  }
+  
+  .music-grid {
+    grid-template-columns: 1fr;
+  }
 } 
