@@ -23,6 +23,8 @@ const Navbar = () => {
               <Link to="/actualidad/deportes" className="dropdown-item">Deportes</Link>
               <Link to="/actualidad/nacionales" className="dropdown-item">Nacionales</Link>
               <Link to="/actualidad/regionales" className="dropdown-item">Regionales</Link>
+             <Link to="/actualidad/Musica" className="dropdown-item">Musica</Link>
+            
             </div>
           </li>
 
