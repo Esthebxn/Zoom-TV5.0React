@@ -40,3 +40,7 @@ src/
 - `/nosotros` - Página sobre nosotros
 - `/redes-sociales` - Página de redes sociales
 - `/zoom-tv-canal-10` - Página del canal
+<img width="1839" height="956" alt="Captura de pantalla 2025-08-15 134608 Zamora " src="https://github.com/user-attachments/assets/689cb01f-4d13-4522-a872-08f78783cb65" />
+
+
+
