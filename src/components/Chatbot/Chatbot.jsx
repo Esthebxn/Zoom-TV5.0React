@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './chatbot.css';
+import './chat.css';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);

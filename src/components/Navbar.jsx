@@ -1,49 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './Navbar.css'; // Archivo CSS específico para este navbar
 
-const Navbar = () => {
+const ZoomAppNavbar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">ZOOM TV</Link>
+    <nav className="zoom-navbar">
+      <div className="zoom-navbar-container">
+        <Link to="/zoom-app" className="zoom-navbar-logo">
+          <span className="zoom-logo-text">ZOOM</span>
+          <span className="app-logo-text">APP</span>
+        </Link>
 
-        <ul className="navbar-links">
-          <li className="nav-item">
-            <Link to="/" className="nav-link">Inicio</Link>
+        <ul className="zoom-navbar-links">
+          <li className="zoom-nav-item">
+            <Link to="/zoom-app" className="zoom-nav-link">Inicio</Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/nosotros" className="nav-link">Nosotros</Link>
+          <li className="zoom-nav-item">
+            <Link to="/zoom-app/features" className="zoom-nav-link">Características</Link>
           </li>
 
-          <li className="nav-item dropdown">
-            <Link to="/actualidad" className="nav-link">Actualidad</Link>
-            <div className="dropdown-menu">
-              <Link to="/actualidad/deportes" className="dropdown-item">Deportes</Link>
-              <Link to="/actualidad/nacionales" className="dropdown-item">Nacionales</Link>
-              <Link to="/actualidad/regionales" className="dropdown-item">Regionales</Link>
-             <Link to="/actualidad/Musica" className="dropdown-item">Musica</Link>
-            
+          <li className="zoom-nav-item dropdown">
+            <Link to="/zoom-app/download" className="zoom-nav-link">Descargar</Link>
+            <div className="zoom-dropdown-menu">
+              <Link to="/zoom-app/download/android" className="zoom-dropdown-item">Android</Link>
+              <Link to="/zoom-app/download/ios" className="zoom-dropdown-item">iOS</Link>
+              <Link to="/zoom-app/download/tv" className="zoom-dropdown-item">TV</Link>
             </div>
           </li>
 
-          <li className="nav-item">
-            <Link to="/zoom-tv-canal-10" className="nav-link">Programación</Link>
+          <li className="zoom-nav-item">
+            <Link to="/zoom-app/support" className="zoom-nav-link">Soporte</Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/live" className="nav-link">En Vivo</Link>
-         
-         
+          <li className="zoom-nav-item highlight">
+            <Link to="/live" className="zoom-nav-link highlight-link">Ver en Vivo</Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/anunciantes" className="nav-link">Anunciantes</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/redes-sociales" className="nav-link">Redes Sociales</Link>
+          <li className="zoom-nav-item">
+            <Link to="/zoom-tv-canal-10" className="zoom-nav-link">Programación</Link>
           </li>
         </ul>
       </div>
@@ -51,5 +46,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
- 
+export default ZoomAppNavbar; 

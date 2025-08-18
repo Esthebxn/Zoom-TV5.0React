@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// Asegúrate que las rutas sean exactamente así (sin mayúsculas innecesarias)
 import Header from './Header/Header';
 import Inicio from '../pages/Inicio/Inicio';
 import Nosotros from '../pages/Nosotros/Nosotros';
@@ -12,6 +11,8 @@ import RedesSociales from '../pages/RedesSociales/RedesSociales';
 import Programacion12 from '../pages/Programacion/Programacion12';
 import Anunciantes from '../pages/Anunciantes/Anunciantes';
 import Live9 from '../pages/Live9/Live9';
+import ZoomApp from '../pages/ZoomApp/ZoomApp';
+import Chatbot from './Chatbot/Chatbot';
 
 function App() {
   return (
@@ -34,10 +35,14 @@ function App() {
           <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
           <Route path="/anunciantes" element={<Anunciantes />} />
           <Route path="/live" element={<Live9 />} />
+          <Route path="/zoom-app" element={<ZoomApp />} />
         </Routes>
+        
+        {/* Chatbot integrado - visible en todas las páginas */}
+        <Chatbot />
       </div>
     </Router>
   );     
 }
 
-export default App; 
+export default App;      
