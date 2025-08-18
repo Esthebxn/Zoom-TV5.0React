@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Zoom.css';
+import './ZoomApp.css'; 
 
 const ZoomApp = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -7,6 +7,7 @@ const ZoomApp = () => {
     days: 0,
     hours: 0,
     minutes: 0,
+    seconds: 0
   });
   const targetDate = new Date('2025-09-01T00:00:00-05:00').getTime(); // Fecha objetivo
 
@@ -23,18 +24,21 @@ const ZoomApp = () => {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        setCountdown({ days, hours, minutes });
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        setCountdown({ days, hours, minutes, seconds });
+      } else {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
-    const countdownInterval = setInterval(updateCountdown, 60000); // Actualiza cada minuto
+    const countdownInterval = setInterval(updateCountdown, 1000); // Actualiza cada segundo
     updateCountdown(); // Actualiza inmediatamente al montar
 
     return () => {
       clearTimeout(timer);
       clearInterval(countdownInterval);
     };
-  }, []);
+  }, [targetDate]);
 
   const handleNotify = () => {
     alert('Te notificaremos cuando Zoom TV esté disponible. ¡Gracias!');
@@ -82,6 +86,13 @@ const ZoomApp = () => {
                       </span>
                       <span className="countdown-label">Min</span>
                     </div>
+                    <div className="countdown-separator">:</div>
+                    <div className="countdown-item">
+                      <span className="countdown-number">
+                        {countdown.seconds.toString().padStart(2, '0')}
+                      </span>
+                      <span className="countdown-label">Seg</span>
+                    </div>
                   </div>
                   
                   <button className="ios-notify-btn" onClick={handleNotify}>
@@ -95,14 +106,14 @@ const ZoomApp = () => {
           <footer className="app-footer">
             <p>© {new Date().getFullYear()} Zoom TV</p>
             <div className="social-icons">
-              <a href="https://facebook.com" className="social-icon ios-social-icon" target="_blank" rel="noopener noreferrer">
-                <i className="icon icon-facebook"></i>
+              <a href="https://facebook.com" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="https://twitter.com" className="social-icon ios-social-icon" target="_blank" rel="noopener noreferrer">
-                <i className="icon icon-twitter"></i>
+              <a href="https://twitter.com" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-twitter"></i>
               </a>
-              <a href="https://instagram.com" className="social-icon ios-social-icon" target="_blank" rel="noopener noreferrer">
-                <i className="icon icon-instagram"></i>
+              <a href="https://instagram.com" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-instagram"></i>
               </a>
             </div>
           </footer>

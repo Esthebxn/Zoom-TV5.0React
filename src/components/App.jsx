@@ -6,25 +6,29 @@ import Actualidad from '../pages/Actualidad/Actualidad';
 import Deportes from '../pages/Actualidad/Deportes';
 import Nacionales from '../pages/Actualidad/Nacionales';
 import Regionales from '../pages/Actualidad/Regionales';
-import Musica from '../pages/Actualidad/Musica';    
+import Musica from '../pages/Actualidad/Musica';
 import RedesSociales from '../pages/RedesSociales/RedesSociales';
 import Programacion12 from '../pages/Programacion/Programacion12';
 import Anunciantes from '../pages/Anunciantes/Anunciantes';
 import Live9 from '../pages/Live9/Live9';
 import ZoomApp from '../pages/ZoomApp/ZoomApp';
 import Chatbot from './Chatbot/Chatbot';
+import HamburguesaMenu from './HamburguesaMenu/HamburguesaMenu';
 
 function App() {
   return (
     <Router>
       <div className="app">
         <Header />
-        <Routes> 
-          <Route path="/" element={<Inicio />} />
+        <HamburguesaMenu />
+        <Routes>
+          <Route index element={<Inicio />} />
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/nosotros" element={<Nosotros />} />
           
+          {/* Nested routes for Actualidad section */}
           <Route path="/actualidad" element={<Actualidad />}>
+            <Route index element={<Actualidad />} />
             <Route path="deportes" element={<Deportes />} />
             <Route path="nacionales" element={<Nacionales />} />
             <Route path="regionales" element={<Regionales />} />
@@ -38,11 +42,11 @@ function App() {
           <Route path="/zoom-app" element={<ZoomApp />} />
         </Routes>
         
-        {/* Chatbot integrado - visible en todas las páginas */}
+        {/* Chatbot component */}
         <Chatbot />
       </div>
     </Router>
-  );     
+  );
 }
 
-export default App;      
+export default App; 

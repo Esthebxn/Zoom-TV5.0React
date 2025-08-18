@@ -1,0 +1,409 @@
+:root {
+  /* Color palette */
+  --primary: #007AFF;
+  --primary-dark: #0062CC;
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+  --gray-light: #F5F5F7;
+  --gray-medium: #E5E5EA;
+  --gray-dark: #8E8E93;
+  --gradient-dark: linear-gradient(145deg, #000000 0%, #1A1A1A 100%);
+  
+  /* Typography */
+  --font-title: 600 28px/1.2 'SF Pro Display', -apple-system, sans-serif;
+  --font-subtitle: 300 14px/1.4 'SF Pro Text', -apple-system, sans-serif;
+  --font-body: 400 16px/1.5 'SF Pro Text', -apple-system, sans-serif;
+  --font-countdown: 700 28px/1 'SF Pro Display', -apple-system, sans-serif;
+  --font-small: 400 12px/1.4 'SF Pro Text', -apple-system, sans-serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-primary: 0 4px 12px rgba(0, 122, 255, 0.3);
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+  
+  /* Transitions */
+  --transition-fast: all 0.2s ease-out;
+  --transition-medium: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* iPhone mockup - Professional styling */
+.iphone-mockup {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  background: var(--black);
+  border-radius: 48px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+  border: 8px solid var(--black);
+}
+
+.iphone-notch {
+  position: absolute;
+  top: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 28px;
+  background: var(--black);
+  border-bottom-left-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
+  z-index: 10;
+}
+
+.iphone-screen {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-sm);
+  right: var(--space-sm);
+  bottom: 72px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* App container structure */
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header section */
+.app-header {
+  padding: var(--space-lg) var(--space-md);
+  background: var(--gradient-dark);
+  color: var(--white);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+}
+
+.logo-container {
+  padding: var(--space-xs) 0;
+  animation: fadeIn 0.8s var(--transition-medium);
+}
+
+.logo-text {
+  margin: 0;
+  font: var(--font-title);
+  letter-spacing: 0.5px;
+  color: var(--white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.logo-subtext {
+  margin-top: var(--space-xs);
+  font: var(--font-subtitle);
+  color: var(--gray-dark);
+  opacity: 0.9;
+}
+
+/* Main content */
+.coming-soon-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-light);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.coming-soon-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,122,255,0.05) 0%, rgba(0,122,255,0) 70%);
+  animation: pulse 8s infinite alternate;
+}
+
+.coming-soon-content {
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.coming-soon-title {
+  font: var(--font-title);
+  color: var(--black);
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+.coming-soon-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.coming-soon-text {
+  font: var(--font-body);
+  color: var(--gray-dark);
+  margin-bottom: var(--space-xl);
+  opacity: 0.9;
+}
+
+/* Loading spinner */
+.apple-spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid rgba(0, 0, 0, 0.05);
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  position: relative;
+}
+
+.apple-spinner::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  border-top-color: rgba(0, 122, 255, 0.3);
+  animation: spin 1.5s linear infinite reverse;
+}
+
+/* Countdown styles */
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--space-xl) 0;
+  gap: var(--space-xs);
+}
+
+.countdown-item {
+  text-align: center;
+  min-width: 60px;
+  perspective: 200px;
+}
+
+.countdown-number {
+  display: block;
+  font: var(--font-countdown);
+  color: var(--black);
+  background: var(--white);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transform-style: preserve-3d;
+  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-number::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+}
+
+.countdown-label {
+  display: block;
+  font: var(--font-small);
+  color: var(--gray-dark);
+  margin-top: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.countdown-separator {
+  font: var(--font-countdown);
+  color: var(--primary);
+  font-weight: 300;
+  align-self: center;
+  padding-bottom: 12px;
+  opacity: 0.6;
+}
+
+/* Button styles */
+.ios-notify-btn {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-full);
+  font: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-medium);
+  box-shadow: var(--shadow-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.ios-notify-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.ios-notify-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
+}
+
+.ios-notify-btn:active {
+  transform: translateY(0);
+}
+
+.ios-notify-btn:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Footer styles */
+.app-footer {
+  padding: var(--space-md);
+  background: var(--gradient-dark);
+  color: var(--white);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.app-footer p {
+  margin: 0;
+  font: var(--font-small);
+  color: var(--gray-dark);
+}
+
+.social-icons {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.social-icon {
+  color: var(--white);
+  font-size: 20px;
+  transition: var(--transition-medium);
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  color: var(--primary);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* iPhone home indicator */
+.iphone-home-indicator {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: translate(25%, 25%); }
+  100% { transform: translate(-25%, -25%); }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .iphone-mockup {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  
+  .iphone-screen {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
+} 
