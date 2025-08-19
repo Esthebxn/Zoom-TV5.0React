@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import HamburguesaMenu from "../../pages/HamburguesaMenu/HamburguesaMenu";
 import "./Header.css";
-import logo from "../../assets/images/logo-zoomtv.png";
+import logo from "../../assets/images/1368e5e2-d1ec-4784-ae78-69b34cabb9ad.png";
 
 const Header = () => {
   return (

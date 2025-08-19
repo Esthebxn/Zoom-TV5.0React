@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ZoomApp.css'; 
+import './ZoomApp.css';
 
 const ZoomApp = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +9,7 @@ const ZoomApp = () => {
     minutes: 0,
     seconds: 0
   });
-  const targetDate = new Date('2025-09-01T00:00:00-05:00').getTime(); // Fecha objetivo
+  const targetDate = new Date('2025-09-01T00:00:00-05:00').getTime();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,8 +31,8 @@ const ZoomApp = () => {
       }
     };
 
-    const countdownInterval = setInterval(updateCountdown, 1000); // Actualiza cada segundo
-    updateCountdown(); // Actualiza inmediatamente al montar
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
 
     return () => {
       clearTimeout(timer);
@@ -124,4 +124,4 @@ const ZoomApp = () => {
   );
 };
 
-export default ZoomApp; 
+export default ZoomApp;

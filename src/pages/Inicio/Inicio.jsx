@@ -1,6 +1,6 @@
 import React from 'react';
 import './Inicio.css';
-import bannerPrincipal from '../../assets/images/banner-principal.jpg';
+import bannerPrincipal from '../../assets/images/1368e5e2-d1ec-4784-ae78-69b34cabb9ad.png';
 
 const Inicio = () => {
   // Choose either image banner or video banner

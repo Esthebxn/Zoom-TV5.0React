@@ -80,12 +80,12 @@
   left: var(--space-sm);
   right: var(--space-sm);
   bottom: 72px;
-  background: var(--white);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+              url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 /* App container structure */
@@ -94,16 +94,19 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Header section */
 .app-header {
   padding: var(--space-lg) var(--space-md);
-  background: var(--gradient-dark);
+  background: rgba(0, 0, 0, 0.7);
   color: var(--white);
   text-align: center;
   box-shadow: var(--shadow-sm);
   z-index: 2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .logo-container {
@@ -122,7 +125,7 @@
 .logo-subtext {
   margin-top: var(--space-xs);
   font: var(--font-subtitle);
-  color: var(--gray-dark);
+  color: var(--gray-medium);
   opacity: 0.9;
 }
 
@@ -132,21 +135,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--gray-light);
   padding: var(--space-xl);
   position: relative;
   overflow: hidden;
-}
-
-.coming-soon-container::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0,122,255,0.05) 0%, rgba(0,122,255,0) 70%);
-  animation: pulse 8s infinite alternate;
 }
 
 .coming-soon-content {
@@ -159,10 +150,11 @@
 
 .coming-soon-title {
   font: var(--font-title);
-  color: var(--black);
+  color: var(--white);
   margin-bottom: var(--space-md);
   position: relative;
   display: inline-block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .coming-soon-title::after {
@@ -179,7 +171,7 @@
 
 .coming-soon-text {
   font: var(--font-body);
-  color: var(--gray-dark);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--space-xl);
   opacity: 0.9;
 }
@@ -188,7 +180,7 @@
 .apple-spinner {
   width: 56px;
   height: 56px;
-  border: 4px solid rgba(0, 0, 0, 0.05);
+  border: 4px solid rgba(255, 255, 255, 0.1);
   border-top: 4px solid var(--primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -227,8 +219,8 @@
 .countdown-number {
   display: block;
   font: var(--font-countdown);
-  color: var(--black);
-  background: var(--white);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
@@ -236,6 +228,9 @@
   transition: var(--transition-fast);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .countdown-number::before {
@@ -251,20 +246,19 @@
 .countdown-label {
   display: block;
   font: var(--font-small);
-  color: var(--gray-dark);
+  color: rgba(255, 255, 255, 0.7);
   margin-top: var(--space-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
-  opacity: 0.7;
 }
 
 .countdown-separator {
   font: var(--font-countdown);
-  color: var(--primary);
+  color: var(--white);
   font-weight: 300;
   align-self: center;
   padding-bottom: 12px;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Button styles */
@@ -281,6 +275,8 @@
   box-shadow: var(--shadow-primary);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .ios-notify-btn::after {
@@ -314,16 +310,18 @@
 /* Footer styles */
 .app-footer {
   padding: var(--space-md);
-  background: var(--gradient-dark);
+  background: rgba(0, 0, 0, 0.7);
   color: var(--white);
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .app-footer p {
   margin: 0;
   font: var(--font-small);
-  color: var(--gray-dark);
+  color: var(--gray-medium);
 }
 
 .social-icons {
