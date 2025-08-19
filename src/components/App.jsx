@@ -13,7 +13,7 @@ import Anunciantes from '../pages/Anunciantes/Anunciantes';
 import Live9 from '../pages/Live9/Live9';
 import ZoomApp from '../pages/ZoomApp/ZoomApp';
 import Chatbot from './Chatbot/Chatbot';
-import HamburguesaMenu from './HamburguesaMenu/HamburguesaMenu';
+import HamburguesaMenu from '../pages/HamburguesaMenu/HamburguesaMenu';
 
 function App() {
   return (

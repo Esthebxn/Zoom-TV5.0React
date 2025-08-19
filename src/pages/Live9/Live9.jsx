@@ -4,8 +4,16 @@ import Hls from 'hls.js';
 import './live9.css';
 
 const Live9 = () => {
-  // Configuración del stream (no visible en pantalla)
+  // Configuración del stream - REEMPLAZA CON TU URL REAL DE STREAM
+  // Ejemplos de formatos válidos:
+  // - HLS: "https://tu-servidor.com/stream.m3u8"
+  // - RTMP: "rtmp://tu-servidor.com/live/stream"
+  // - YouTube Live: "https://www.youtube.com/embed/TU_VIDEO_ID?autoplay=1"
   const PLAYBACK_URL = "https://fa723fc1b171.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527374.channel.YOUR_CHANNEL_ID.m3u8";
+  
+  // IMPORTANTE: Reemplaza la URL de arriba con tu stream real
+  // Si no tienes un stream configurado, puedes usar un video de prueba:
+  // const PLAYBACK_URL = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
   // Estados del reproductor
   const [playerState, setPlayerState] = useState({
@@ -253,6 +261,21 @@ const Live9 = () => {
             <button onClick={reloadStream} className="retry-btn">
               <FaRedo /> Reintentar
             </button>
+          </div>
+        )}
+
+        {/* Mensaje informativo cuando no hay stream configurado */}
+        {!playerState.loading && !playerState.error && !playerState.streamActive && (
+          <div className="stream-status info">
+            <h3>Stream no configurado</h3>
+            <p>Para ver el contenido en vivo, necesitas configurar una URL de stream válida.</p>
+            <p><strong>Pasos para configurar:</strong></p>
+            <ol>
+              <li>Edita el archivo <code>src/pages/Live9/Live9.jsx</code></li>
+              <li>Reemplaza <code>PLAYBACK_URL</code> con tu URL real de stream</li>
+              <li>Formatos soportados: HLS (.m3u8), RTMP, YouTube Live</li>
+            </ol>
+            <p><em>Ejemplo: "https://tu-servidor.com/stream.m3u8"</em></p>
           </div>
         )}
 

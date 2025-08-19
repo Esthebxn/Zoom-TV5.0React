@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
-import HamburguesaMenu from "./HamburguesaMenu/HamburguesaMenu";
+import Navbar from "./Navbar";
+import HamburguesaMenu from "../../pages/HamburguesaMenu/HamburguesaMenu";
 import "./Header.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/images/logo-zoomtv.png";
 
 const Header = () => {
   return (
