@@ -1,174 +1,137 @@
-import { Routes, Route, Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Deportes.css';
-// Datos de noticias deportivas de ejemplo
+
 const noticiasDeportes = [
   {
-    id: 'mundial-sub20',
-    title: 'Perú clasifica al Mundial Sub-20 tras 18 años',
-    date: '15 junio 2023',
-    summary: 'La selección peruana logró su pase al Mundial de Indonesia tras vencer a Brasil en el Sudamericano.',
-    content: 'La selección peruana de fútbol Sub-20 hizo historia al clasificar al Mundial de Indonesia 2023 tras 18 años de ausencia. El equipo dirigido por José del Solar consiguió su pase tras una emocionante victoria 2-1 sobre Brasil en la última fecha del Sudamericano. Los goles peruanos fueron anotados por Bryan Reyna y Jhamir D"Arrigo en el segundo tiempo, dando la vuelta al marcador después de ir perdiendo en el primer tiempo.',
-    imageUrl: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1605&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia-deportes1'
+    id: 'fulbito-femenino',
+    title: 'Selección huanuqueña de fulbito femenino gana torneo nacional',
+    author: 'Sofía Castro',
+    date: '15 de Agosto, 2023',
+    summary: 'Jugadoras de Ambo se coronan campeonas en Lima.',
+    content: 'El equipo femenino de fulbito de la provincia de Ambo se coronó campeón del Torneo Nacional Interprovincial de Fulbito Femenino. Las deportistas huanuqueñas demostraron un excelente nivel a lo largo del campeonato, ganando todos sus partidos. Esta victoria representa el primer título nacional para la región en esta disciplina. El equipo recibió un homenaje en la municipalidad provincial y se prepara para representar al Perú en el campeonato sudamericano.',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvNzWlf8pIdzsxRjAUbjZkkXnFcoVWRPgxXg&s'
   },
   {
-    id: 'vargas-olimpico',
-    title: 'Luis Vargas gana medalla de oro en Panamericano de Atletismo',
-    date: '14 junio 2023',
-    summary: 'El atleta peruano logró el primer lugar en salto con garrocha con marca de 5.80 metros.',
-    content: 'Luis Vargas escribió su nombre en la historia del atletismo peruano al conquistar la medalla de oro en el Campeonato Panamericano de Atletismo realizado en Sao Paulo. El especialista en salto con garrocha superó la marca de 5.80 metros en su tercer intento, superando al brasileño Augusto Dutra y al cubano Yarisley Silva. "Esto es para todo el Perú, es el fruto de años de sacrificio", declaró emocionado Vargas tras su triunfo.',
-    imageUrl: 'https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia-deportes2'
+    id: 'maraton-andino',
+    title: 'XXIII Maratón Andino reunió a más de 500 corredores',
+    author: 'Carlos Mendoza',
+    date: '22 de Julio, 2023',
+    summary: 'Atletas de todo el país participaron en la competencia.',
+    content: 'La XXIII edición del Maratón Andino de Huánuco congregó a más de 500 corredores de diferentes regiones del país. La competencia se desarrolló en las categorías 10K y 21K, con recorridos que mostraron la belleza paisajística de la región. Los ganadores en la categoría elite recibieron premios en efectivo y trofeos. El evento contó con el apoyo de la Municipalidad Provincial y varias empresas privadas que apuestan por el desarrollo deportivo en la región.',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFIq3YWvj8J8kUCwX9WFfkdoScLcbUZHIOsQ&s'
   },
   {
-    id: 'alianza-campeon',
-    title: 'Alianza Lima se corona campeón del Torneo Apertura',
-    date: '13 junio 2023',
-    summary: 'El equipo íntimo venció 3-0 a Sporting Cristal en el clásico nacional y aseguró el título.',
-    content: 'Alianza Lima se proclamó campeón del Torneo Apertura 2023 tras golear 3-0 a su eterno rival Sporting Cristal en partido disputado en el Estadio Nacional. Los goles fueron obra de Hernán Barcos (2) y Gabriel Costa. Con este resultado, los íntimos alcanzaron los 40 puntos y se aseguraron matemáticamente el primer título del año. "Esto es para nuestra hinchada que nos ha apoyado en las buenas y en las malas", declaró el técnico Carlos Bustos tras el partido.',
-    imageUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1493&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia-deportes3'
+    id: 'boxeo-huanuco',
+    title: 'Boxeador huanuqueño clasifica a Juegos Panamericanos',
+    author: 'Roberto Díaz',
+    date: '5 de Septiembre, 2023',
+    summary: 'Luis Torres aseguró su participación en Santiago 2023.',
+    content: 'El pugilista huanuqueño Luis Torres clasificó a los Juegos Panamericanos Santiago 2023 tras obtener el subcampeonato en el Pre-Panamericano realizado en Colombia. Torres, de 22 años, compitió en la categoría 57kg y demostró un gran nivel técnico throughout el torneo. "Es un orgullo representar a Huánuco en estos juegos", declaró el deportista. La federación peruana de boxeo anunció que financiará su preparación para la justa continental.',
+    imageUrl: 'https://pagina3.pe/wp-content/uploads/2024/04/Bryan-Meza-quiere-representar-al-Peru-en-Lima-2027-2.jpg'
   },
   {
-    id: 'voley-playa',
-    title: 'Diana y Carolina clasifican a semifinales del Mundial de Vóley Playa',
-    date: '12 junio 2023',
-    summary: 'Las peruanas vencieron a las alemanas en sets corridos y avanzan a instancias definitivas.',
-    content: 'La dupla peruana formada por Diana Rios y Carolina Horta logró un histórico pase a las semifinales del Mundial de Vóley Playa que se disputa en Roma, Italia. Las sudamericanas vencieron por 21-18 y 21-16 a las alemanas Julia Sude y Chantal Laboureur en partido disputado en la cancha central. "Estamos jugando al máximo nivel, queremos la medalla", declaró Rios tras el partido. Este es el mejor resultado de una pareja peruana en la historia de los mundiales.',
-    imageUrl: 'https://images.unsplash.com/photo-1543357480-c60d400e2ef9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    sourceUrl: 'https://ejemplo.com/noticia-deportes4'
+    id: 'voley-juvenil',
+    title: 'Equipo de vóley juvenil de Huánuco gana etapa regional',
+    author: 'Ana Torres',
+    date: '30 de Agosto, 2023',
+    summary: 'Jóvenes deportistas avanzan a la etapa nacional.',
+    content: 'El equipo de vóley juvenil femenino de Huánuco se coronó campeón de la etapa regional de los Juegos Deportivos Escolares 2023. Las estudiantes del colegio Santa María del Valle vencieron en la final al equipo de Cerro Pasco por 3 sets a 1. El equipo ahora se prepara para representar a la región en la etapa nacional que se realizará en Lima en octubre. Las jugadoras recibieron el apoyo de la Dirección Regional de Educación para su preparación.',
+    imageUrl: 'https://pagina3.pe/wp-content/uploads/2024/02/Huanuco-sede-de-la-etapa-regional-de-voleibol.jpg'
+  },
+  {
+    id: 'futbol-sala',
+    title: 'Inauguran nuevo coliseo de fútbol sala en Amarilis',
+    author: 'Javier Rojas',
+    date: '12 de Septiembre, 2023',
+    summary: 'Moderno escenario beneficiará a más de 500 deportistas.',
+    content: 'La Municipalidad Distrital de Amarilis inauguró un moderno coliseo de fútbol sala con capacidad para 800 espectadores. La infraestructura cuenta con piso flotante profesional, sistema de iluminación LED, camerinos y tribunas preferenciales. El alcalde destacó que este escenario permitirá organizar torneos de nivel nacional e internacional. El coliseo ya está albergando la Liga Distrital de Fútbol Sala 2023 con la participación de 16 equipos.',
+    imageUrl: 'https://tudiariohuanuco.pe/wp-content/uploads/2023/12/complejo-de-paucarbamba-vista-aerea-2.jpg'
+  },
+  {
+    id: 'ciclismo-montaña',
+    title: 'Realizarán primer campeonato de ciclismo de montaña en Huánuco',
+    author: 'Pedro Vargas',
+    date: '18 de Agosto, 2023',
+    summary: 'Competencia se desarrollará en los cerros de Pillco Marca.',
+    content: 'La Asociación Regional de Ciclismo anunció la realización del primer campeonato de ciclismo de montaña en Huánuco. La competencia se llevará a cabo el próximo mes en los cerros del distrito de Pillco Marca, que ofrecen rutas desafiantes y paisajes espectaculares. Las categorías incluirán principiantes, avanzados y elite, tanto en masculino como femenino. Los organizadores esperan la participación de ciclistas de diversas regiones del país.',
+    imageUrl: 'https://tudiariohuanuco.pe/wp-content/uploads/2022/03/Ciclismo.jpg'
+  },
+  {
+    id: 'natacion-master',
+    title: 'Nadadores master huanuqueños brillan en campeonato nacional',
+    author: 'Lucía Fernández',
+    date: '3 de Septiembre, 2023',
+    summary: 'Deportistas obtuvieron 10 medallas en competencia de Lima.',
+    content: 'El equipo de natación master de Huánuco obtuvo un total de 10 medallas (4 oro, 3 plata y 3 bronce) en el Campeonato Nacional de Natación Master realizado en Lima. Los nadadores compitieron en diferentes categorías según edad y demostraron un excelente nivel. "Estamos muy orgullosos de estos resultados que reflejan años de dedicación y entrenamiento", declaró el entrenador del equipo. La municipalidad provincial les brindará un reconocimiento especial.',
+    imageUrl: 'https://pagina3.pe/wp-content/uploads/2025/05/Nadadores-se-preparan-para-competir-2.jpg'
+  },
+  {
+    id: 'atletismo-adaptado',
+    title: 'Deportistas adaptados de Huánuco reciben implementos especializados',
+    author: 'Carmen Ruiz',
+    date: '25 de Agosto, 2023',
+    summary: 'Gobierno Regional entregó sillas de ruedas deportivas y prótesis.',
+    content: 'El Gobierno Regional de Huánuco entregó implementos deportivos especializados a atletas con discapacidad de la región. La donación incluye sillas de ruedas para básquet y atletismo, próteses running y equipamiento para goalball. "Estos implementos nos permitirán entrenar en mejores condiciones y competir a nivel nacional", expresó uno de los beneficiarios. El acto de entrega contó con la presencia del director regional del deporte y representantes de organizaciones de personas con discapacidad.',
+    imageUrl: 'https://tudiariohuanuco.pe/wp-content/uploads/2019/09/JUEGOS-ESCOLARES-1.gif'
   }
 ];
 
-// Componente para mostrar noticias individuales
-function NoticiaDeportesDetalle() {
-  const { id } = useParams();
-  const [noticia, setNoticia] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulamos la carga de una noticia específica
-    const fetchNoticia = () => {
-      try {
-        const noticiaEncontrada = noticiasDeportes.find(n => n.id === id);
-        setTimeout(() => {
-          setNoticia(noticiaEncontrada || null);
-          setLoading(false);
-        }, 500);
-      } catch (error) {
-        console.error("Error:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchNoticia();
-  }, [id]);
-
-  if (loading) return <div className="cargando">Cargando noticia...</div>;
-  if (!noticia) return <div className="error">Noticia no encontrada</div>;
-
-  return (
-    <div className="noticia-detalle">
-      <h2>{noticia.title}</h2>
-      <p className="noticia-fecha">{noticia.date}</p>
-      <img 
-        src={noticia.imageUrl} 
-        alt={noticia.title} 
-        className="noticia-imagen"
-        onError={(e) => {
-          e.target.onerror = null; 
-          e.target.src = 'https://via.placeholder.com/800x400?text=Imagen+No+Disponible';
-        }}
-      />
-      <p className="noticia-contenido">{noticia.content}</p>
-      <a 
-        href={noticia.sourceUrl} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="fuente-original"
-      >
-        Ver noticia completa en fuente original
-      </a>
-      <Link to="/deportes" className="volver">← Volver a noticias deportivas</Link>
-    </div>
-  );
-}
-
-// Componente principal Deportes
-function Deportes() {
-  const [noticias, setNoticias] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Simulamos la carga de noticias
-    const fetchNoticias = () => {
-      try {
-        setTimeout(() => {
-          setNoticias(noticiasDeportes);
-          setLoading(false);
-        }, 800);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-        setError("Error al cargar las noticias");
-        setLoading(false);
-      }
-    };
-
-    fetchNoticias();
-  }, []);
-
-  if (loading) return <div className="cargando">Cargando noticias deportivas...</div>;
-  if (error) return <div className="error">{error}</div>;
+export default function Deportes() {
+  const [noticiaSeleccionada, setNoticiaSeleccionada] = useState(null);
 
   return (
     <div className="deportes-container">
-      <h1>Últimas Noticias Deportivas</h1>
+      <header className="header-deportes">
+        <h1>Deportes Huánuco</h1>
+        <p>Las últimas noticias del deporte huanuqueño</p>
+      </header>
       
-      <div className="subcontenido-deportes">
-        <Routes>
-          <Route path="noticia/:id" element={<NoticiaDeportesDetalle />} />
-          <Route index element={
-            <div className="noticias-deportes">
-              <h2>Noticias Recientes</h2>
-              
-              <div className="lista-noticias">
-                {noticias.map((noticia) => (
-                  <div className="noticia-item" key={noticia.id}>
-                    <Link to={`noticia/${noticia.id}`}>
-                      <h3>{noticia.title}</h3>
-                    </Link>
-                    <p className="noticia-fecha">{noticia.date}</p>
-                    <div className="imagen-container">
-                      <img 
-                        src={noticia.imageUrl} 
-                        alt={noticia.title} 
-                        className="noticia-imagen-lista"
-                        onError={(e) => {
-                          e.target.onerror = null; 
-                          e.target.src = 'https://via.placeholder.com/300x200?text=Imagen+No+Disponible';
-                        }}
-                      />
-                    </div>
-                    <p className="noticia-resumen">{noticia.summary}</p>
-                    <a 
-                      href={noticia.sourceUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="fuente-lista"
-                    >
-                      Leer más
-                    </a>
-                  </div>
-                ))}
-              </div>
+      <div className="noticias-lista">
+        {noticiasDeportes.map((noticia, index) => (
+          <article key={noticia.id} className={`noticia-item ${index === 0 ? 'destacada' : ''}`}>
+            <div className="noticia-imagen">
+              <img src={noticia.imageUrl} alt={noticia.title} />
             </div>
-          } />
-        </Routes>
+            <div className="noticia-contenido">
+              <h2 className="noticia-titulo">{noticia.title}</h2>
+              <p className="noticia-resumen">{noticia.summary}</p>
+              <div className="noticia-meta">
+                <span className="noticia-autor">Por {noticia.author}</span>
+                <span className="noticia-fecha">{noticia.date}</span>
+              </div>
+              <button 
+                className="noticia-boton"
+                onClick={() => setNoticiaSeleccionada(noticia)}
+              >
+                Leer más
+              </button>
+            </div>
+          </article>
+        ))}
       </div>
+      
+      {noticiaSeleccionada && (
+        <div className="modal" onClick={() => setNoticiaSeleccionada(null)}>
+          <div className="modal-contenido" onClick={e => e.stopPropagation()}>
+            <button 
+              className="modal-cerrar"
+              onClick={() => setNoticiaSeleccionada(null)}
+            >
+              &times;
+            </button>
+            <img src={noticiaSeleccionada.imageUrl} alt={noticiaSeleccionada.title} />
+            <div className="modal-texto">
+              <h2>{noticiaSeleccionada.title}</h2>
+              <div className="modal-meta">
+                <span>Por {noticiaSeleccionada.author}</span>
+                <span>{noticiaSeleccionada.date}</span>
+              </div>
+              <p className="modal-resumen">{noticiaSeleccionada.summary}</p>
+              <p className="modal-contenido">{noticiaSeleccionada.content}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
-
-export default Deportes; 
+} 

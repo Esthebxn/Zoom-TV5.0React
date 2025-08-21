@@ -2,11 +2,15 @@
 :root {
   --header-bg: #1a1a2e;
   --primary-color: #e94560;
+  --neon-color-1: #ff00ff;
+  --neon-color-2: #00ffff;
+  --neon-color-3: #ff0000;
   --text-color: #fff7f7;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --logo-size: 80px;
   --title-size: 2rem;
+  --neon-glow-size: 15px;
 }
 
 /* Reset y estilos base */
@@ -29,13 +33,6 @@
   animation: slideDown 0.5s ease-out;
 }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Sección superior del header */
 .header-top {
   display: flex;
@@ -46,13 +43,6 @@
 }
 
 /* Logo y título */
-.brand-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  transition: var(--transition);
-}
-
 .logo {
   height: var(--logo-size);
   width: auto;
@@ -61,7 +51,7 @@
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-.header-title {
+.header-top h1 {
   margin: 0;
   font-size: var(--title-size);
   color: var(--primary-color);
@@ -69,116 +59,89 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   transition: var(--transition);
   font-family: 'Montserrat', sans-serif;
+  
+  /* Efecto de neón animado */
+  animation: neon-flicker 2s infinite alternate;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px var(--neon-color-1),
+    0 0 20px var(--neon-color-1),
+    0 0 35px var(--neon-color-1),
+    0 0 40px var(--neon-color-1),
+    0 0 50px var(--neon-color-1),
+    0 0 75px var(--neon-color-1);
+  position: relative;
+  text-align: center;
+  flex-grow: 1;
+  padding: 0 1rem;
+}
+
+/* Animación de neón con múltiples colores */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px var(--neon-color-1),
+      0 0 20px var(--neon-color-1),
+      0 0 35px var(--neon-color-1),
+      0 0 40px var(--neon-color-1),
+      0 0 50px var(--neon-color-1),
+      0 0 75px var(--neon-color-1);
+  }
+  20%, 24% {
+    text-shadow: none;
+  }
+  55% {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px var(--neon-color-2),
+      0 0 20px var(--neon-color-2),
+      0 0 35px var(--neon-color-2),
+      0 0 40px var(--neon-color-2),
+      0 0 50px var(--neon-color-2),
+      0 0 75px var(--neon-color-2);
+  }
+}
+
+/* Efecto adicional de parpadeo aleatorio */
+.header-top h1::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: var(--neon-color-3);
+  opacity: 0.3;
+  z-index: -1;
+  border-radius: 10px;
+  filter: blur(var(--neon-glow-size));
+  animation: random-flicker 3s infinite alternate;
+}
+
+@keyframes random-flicker {
+  0%, 5%, 7%, 19%, 21%, 23%, 100% {
+    opacity: 0.3;
+  }
+  6%, 20%, 22% {
+    opacity: 0.1;
+  }
 }
 
 /* Menú de navegación */
-.nav-container {
-  display: flex;
-  align-items: center;
-}
-
 .desktop-nav {
   display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.nav-link {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 0;
-  transition: var(--transition);
-  position: relative;
-  font-size: 1.1rem;
-}
-
-.nav-link:hover {
-  color: var(--primary-color);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--primary-color);
-  transition: var(--transition);
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* Botón de menú móvil */
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.8rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: var(--transition);
-  z-index: 1001;
-}
-
-.mobile-menu-btn:hover {
-  color: var(--primary-color);
-  transform: rotate(90deg);
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 /* Menú móvil */
-.mobile-nav {
+.mobile-menu {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(26, 26, 46, 0.95);
-  z-index: 999;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.mobile-nav.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.mobile-nav-list {
-  list-style: none;
-  text-align: center;
-}
-
-.mobile-nav-item {
-  margin: 1.5rem 0;
-}
-
-.mobile-nav-link {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 500;
-  transition: var(--transition);
-  padding: 0.5rem 1rem;
-  display: inline-block;
-}
-
-.mobile-nav-link:hover {
-  color: var(--primary-color);
-  transform: scale(1.05);
 }
 
 /* Animaciones */
@@ -193,20 +156,12 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* Media Queries para responsive design */
 @media (max-width: 992px) {
   :root {
     --logo-size: 70px;
     --title-size: 1.8rem;
+    --neon-glow-size: 12px;
   }
 }
 
@@ -214,13 +169,14 @@
   :root {
     --logo-size: 60px;
     --title-size: 1.5rem;
+    --neon-glow-size: 10px;
   }
   
   .header {
     padding: 0.75rem;
   }
   
-  .mobile-menu-btn {
+  .mobile-menu {
     display: block;
   }
   
@@ -228,8 +184,29 @@
     display: none;
   }
   
-  .brand-container {
-    gap: 0.75rem;
+  /* Reducir efecto de neón en móviles para mejor rendimiento */
+  .header-top h1 {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px var(--neon-color-1),
+      0 0 15px var(--neon-color-1);
+    animation: neon-flicker-mobile 3s infinite alternate;
+  }
+  
+  @keyframes neon-flicker-mobile {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: 
+        0 0 5px #fff,
+        0 0 10px var(--neon-color-1),
+        0 0 15px var(--neon-color-1);
+    }
+    20%, 24% {
+      text-shadow: none;
+    }
+  }
+  
+  .header-top h1::after {
+    display: none; /* Ocultar efecto de desenfoque en móviles para mejor rendimiento */
   }
 }
 
@@ -243,8 +220,9 @@
     padding: 0.5rem;
   }
   
-  .mobile-nav-link {
-    font-size: 1.3rem;
+  .header-top h1 {
+    font-size: 1.1rem; /* Ajuste adicional para pantallas muy pequeñas */
+    padding: 0 0.5rem;
   }
 }
 
@@ -254,16 +232,7 @@
     --title-size: 1.1rem;
   }
   
-  .brand-container {
-    gap: 0.5rem;
+  .header-top h1 {
+    font-size: 1rem; /* Ajuste adicional para pantallas muy pequeñas */
   }
-}
-
-/* Efecto activo para la página actual */
-.active-link {
-  color: var(--primary-color) !important;
-}
-
-.active-link::after {
-  width: 100% !important;
-}
+} 

@@ -26,14 +26,14 @@ function App() {
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/nosotros" element={<Nosotros />} />
           
-          {/* Nested routes for Actualidad section */}
-          <Route path="/actualidad" element={<Actualidad />}>
-            <Route index element={<Actualidad />} />
-            <Route path="deportes" element={<Deportes />} />
-            <Route path="nacionales" element={<Nacionales />} />
-            <Route path="regionales" element={<Regionales />} />
-            <Route path="musica" element={<Musica />} />
-          </Route>
+          {/* Ruta principal de Actualidad */}
+          <Route path="/actualidad" element={<Actualidad />} />
+          
+          {/* Rutas hijas de Actualidad */}
+          <Route path="/actualidad/deportes/*" element={<Deportes />} />
+          <Route path="/actualidad/nacionales" element={<Nacionales />} />
+          <Route path="/actualidad/regionales" element={<Regionales />} />
+          <Route path="/actualidad/musica" element={<Musica />} />
           
           <Route path="/redes-sociales" element={<RedesSociales />} />
           <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
