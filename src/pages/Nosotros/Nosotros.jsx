@@ -2,16 +2,16 @@ import React from 'react';
 import './Nosotros.css';
 
 const Nosotros = () => {
-  // URLs de imágenes (reemplazadas con imágenes reales)
-  const logoCanal = "https://scontent.fhuu1-1.fna.fbcdn.net/v/t1.6435-9/32074036_581089132266740_3140400007169966080_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeF1pCWW1FLHWSTFmbhSVYg1IduIpdRmI68h24il1GYjr6-_9F4EC6mLfr6zyRS7iTTloK7au30K0-CK8XA3PHXw&_nc_ohc=f99ETj3xWKoQ7kNvwF8-3G5&_nc_oc=AdkknrAhsQkokYDXk1GHO0cyyOlywuKJ34Fn961jCggZgs46zeCZ7P8S4ei-tgUOLI467TE8FK6C5wJrotYUC2Yj&_nc_zt=23&_nc_ht=scontent.fhuu1-1.fna&_nc_gid=pj3p7cXMm0f_8jor4fwjYw&oh=00_AfVW4B_4bP2JIwWItup_aYDnHZyPfh10amvv8DZNTcay_w&oe=68CB5084";
-  const equipoTrabajo = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
-  const historiaImagen = "https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
-  const misionImagen = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
-  const visionImagen = "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
-  const persona1 = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
-  const persona2 = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
-  const persona3 = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
-  const persona4 = "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80";
+  // URLs de imágenes (reemplazadas con URLs reales)
+  const logoCanal = "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80";
+  const equipoTrabajo = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const historiaImagen = "https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const misionImagen = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const visionImagen = "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const persona1 = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const persona2 = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const persona3 = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  const persona4 = "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
   // Datos del equipo de trabajo
   const equipo = [
@@ -174,4 +174,4 @@ const Nosotros = () => {
   );
 };
 
-export default Nosotros;
+export default Nosotros; 
