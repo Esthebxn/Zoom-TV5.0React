@@ -33,7 +33,7 @@ const Inicio = () => {
               loading="lazy"
             />
             <div className="banner-overlay">
-              <h1>Zoom TV Canal 10 Megacable</h1>
+              
               <p></p>
             </div>
           </>
