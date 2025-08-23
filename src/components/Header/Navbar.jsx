@@ -31,19 +31,19 @@ const Navbar = () => {
           </li>
 
           <li className="zoom-nav-item">
-            <Link to="/redes-sociales" className="zoom-nav-link">Redes Sociales</Link>
+            <Link to="/programacion" className="zoom-nav-link">Programación</Link>
+          </li>
+
+          <li className="zoom-nav-item highlight">
+            <Link to="/envivo" className="zoom-nav-link highlight-link">Ver en Vivo</Link>
           </li>
 
           <li className="zoom-nav-item">
             <Link to="/anunciantes" className="zoom-nav-link">Anunciantes</Link>
           </li>
 
-          <li className="zoom-nav-item highlight">
-            <Link to="/live" className="zoom-nav-link highlight-link">Ver en Vivo</Link>
-          </li>
-
           <li className="zoom-nav-item">
-            <Link to="/zoom-tv-canal-10" className="zoom-nav-link">Programación</Link>
+            <Link to="/redes-sociales" className="zoom-nav-link">Redes Sociales</Link>
           </li>
 
           <li className="zoom-nav-item">
@@ -55,4 +55,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;  

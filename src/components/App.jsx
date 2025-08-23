@@ -35,11 +35,21 @@ function App() {
           <Route path="/actualidad/regionales" element={<Regionales />} />
           <Route path="/actualidad/musica" element={<Musica />} />
           
-          <Route path="/redes-sociales" element={<RedesSociales />} />
-          <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
+          {/* Ruta de Programación (corregida para coincidir con navbar) */}
+          <Route path="/programacion" element={<Programacion12 />} />
+          
+          {/* Ruta En Vivo (añadida para coincidir con navbar) */}
+          <Route path="/envivo" element={<Live9 />} />
+          
           <Route path="/anunciantes" element={<Anunciantes />} />
-          <Route path="/live" element={<Live9 />} />
+          <Route path="/redes-sociales" element={<RedesSociales />} />
           <Route path="/zoom-app" element={<ZoomApp />} />
+          
+          {/* Ruta alternativa para Live (se mantiene por compatibilidad) */}
+          <Route path="/live" element={<Live9 />} />
+          
+          {/* Ruta alternativa para Programación (se mantiene por compatibilidad) */}
+          <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
         </Routes>
         
         {/* Chatbot component */}
