@@ -1,80 +1,88 @@
-/* Estilos para el botón del menú hamburguesa */
+/* HamburguesaMenu.css */
+
+/* === Botón hamburguesa === */
 .nav-menu-btn {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: none;
+  gap: 8px;
+  padding: 10px 14px;
   border: none;
+  background: #111;
+  color: #fff;
   cursor: pointer;
-  padding: 0.5rem;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  z-index: 1100;
   position: relative;
-  z-index: 1001;
-  transition: all 0.3s ease;
+}
+
+.nav-menu-btn:hover {
+  background: #333;
 }
 
 .nav-single-bar {
-  display: block;
-  width: 24px;
+  width: 20px;
   height: 2px;
-  background-color: currentColor;
+  background: #fff;
   position: relative;
+  display: inline-block;
   transition: all 0.3s ease;
 }
 
 .nav-single-bar::before,
 .nav-single-bar::after {
   content: '';
+  width: 20px;
+  height: 2px;
+  background: #fff;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: currentColor;
   left: 0;
   transition: all 0.3s ease;
 }
 
 .nav-single-bar::before {
-  top: -8px;
+  top: -6px;
 }
 
 .nav-single-bar::after {
-  bottom: -8px;
+  top: 6px;
 }
 
+/* Animación cuando el menú está abierto */
 .nav-menu-btn.open .nav-single-bar {
-  background-color: transparent;
+  background: transparent;
 }
 
 .nav-menu-btn.open .nav-single-bar::before {
-  top: 0;
   transform: rotate(45deg);
+  top: 0;
 }
 
 .nav-menu-btn.open .nav-single-bar::after {
-  bottom: 0;
   transform: rotate(-45deg);
+  top: 0;
 }
 
+/* Texto dentro del botón */
 .menu-btn-text {
-  margin-top: 4px;
-  font-size: 0.75rem;
   font-weight: 500;
 }
 
-/* Panel del menú */
+/* === Panel del menú === */
 .menu-panel {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 320px;
-  max-width: 85vw;
-  height: 100vh;
-  background-color: #fff;
-  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+  z-index: 1200;
   display: flex;
   flex-direction: column;
-  transition: right 0.3s ease-in-out;
+  transition: right 0.3s ease;
   overflow-y: auto;
 }
 
@@ -82,94 +90,58 @@
   right: 0;
 }
 
-/* Header del menú */
+/* Encabezado del menú */
 .menu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  border-bottom: 1px solid #eee;
-  background-color: #f8f9fa;
+  padding: 18px 16px;
+  background: #111;
+  color: #fff;
 }
 
 .logo-container h2 {
   margin: 0;
-  color: #d32f2f;
-  font-size: 1.5rem;
+  font-size: 20px;
 }
 
 .logo-container span {
-  font-size: 0.875rem;
-  color: #666;
+  font-size: 12px;
+  opacity: 0.8;
 }
 
 .close-btn {
+  font-size: 28px;
   background: none;
   border: none;
-  font-size: 2rem;
+  color: #fff;
   cursor: pointer;
-  color: #555;
-  padding: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
 }
 
-.close-btn:hover {
-  background-color: #eee;
-}
-
-/* Elementos del menú */
+/* Items del menú */
 .menu-items {
-  flex: 1;
-  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
 }
 
 .menu-link {
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
+  gap: 10px;
+  padding: 12px 10px;
+  border-radius: 8px;
   text-decoration: none;
-  color: #333;
-  border-left: 4px solid transparent;
-  transition: all 0.2s ease;
-  position: relative;
+  color: #111;
+  transition: background 0.3s;
 }
 
 .menu-link:hover {
-  background-color: #f5f5f5;
-  border-left-color: #d32f2f;
-}
-
-.menu-link.highlight {
-  background-color: #fff4f4;
-  border-left-color: #d32f2f;
-}
-
-.menu-link.highlight .menu-title {
-  color: #d32f2f;
-  font-weight: 600;
-}
-
-.menu-link.app-link {
-  background-color: #f0f8ff;
-  border-left-color: #1976d2;
-}
-
-.menu-link.app-link .menu-title {
-  color: #1976d2;
-  font-weight: 600;
+  background: #f3f3f3;
 }
 
 .menu-icon {
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  width: 24px;
-  text-align: center;
+  font-size: 20px;
 }
 
 .menu-text {
@@ -178,81 +150,85 @@
 }
 
 .menu-title {
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 .menu-desc {
-  font-size: 0.75rem;
-  color: #666;
+  font-size: 12px;
+  color: #555;
 }
 
 /* Submenú */
-.menu-link.has-submenu {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+.has-submenu {
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .submenu-toggle {
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
+  font-size: 18px;
   margin-left: auto;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.submenu-toggle:hover {
-  background-color: #eee;
+  padding: 4px;
+  color: #555;
 }
 
 .submenu {
   list-style: none;
   padding: 0;
-  margin: 0;
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+  margin: 6px 0 0 28px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.menu-link.has-submenu.expanded .submenu {
-  max-height: 500px;
+.has-submenu:hover .submenu {
+  display: flex;
 }
 
 .submenu-link {
-  display: block;
-  padding: 0.75rem 1.5rem 0.75rem 3.5rem;
+  padding: 8px 0;
   text-decoration: none;
-  color: #555;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
+  color: #444;
+  font-size: 14px;
 }
 
 .submenu-link:hover {
-  background-color: #f9f9f9;
-  color: #d32f2f;
+  color: #000;
+  font-weight: 500;
+}
+
+/* En Vivo resaltado */
+.menu-link.highlight {
+  background: #ff0033;
+  color: #fff;
+}
+
+.menu-link.highlight:hover {
+  background: #e60029;
+}
+
+/* Enlace App */
+.app-link {
+  background: #111;
+  color: #fff;
+}
+
+.app-link:hover {
+  background: #333;
 }
 
 /* Footer del menú */
 .menu-footer {
-  padding: 1.5rem;
-  border-top: 1px solid #eee;
+  margin-top: auto;
+  padding: 16px;
   text-align: center;
-  background-color: #f8f9fa;
-}
-
-.menu-footer p {
-  margin: 0 0 0.25rem 0;
-  font-size: 0.875rem;
-  color: #555;
-}
-
-.menu-footer small {
-  color: #888;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #eee;
 }
 
 /* Overlay */
@@ -262,11 +238,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
+  z-index: 1100;
 }
 
 .menu-overlay.visible {
@@ -274,78 +250,25 @@
   visibility: visible;
 }
 
-/* Utilidades de accesibilidad */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* === CORRECCIÓN: Ocultar botón duplicado === */
+.header .nav-menu-btn {
+  display: none !important;
 }
 
-/* Mejoras de responsive */
-@media (max-width: 480px) {
-  .menu-panel {
-    width: 100%;
-    max-width: 100%;
+/* === RESPONSIVE: Mostrar solo en móviles/tablets === */
+@media (max-width: 991px) {
+  .nav-menu-btn {
+    display: flex !important;
   }
-  
-  .menu-link {
-    padding: 1rem;
-  }
-  
-  .submenu-link {
-    padding-left: 3rem;
+
+  .header .nav-links {  /* ocultar menú normal en móvil */
+    display: none !important;
   }
 }
 
-/* Mejora para modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .menu-panel {
-    background-color: #2d2d2d;
-    color: #f0f0f0;
+@media (min-width: 992px) {
+  .nav-menu-btn {
+    display: none !important;
   }
-  
-  .menu-header,
-  .menu-footer {
-    background-color: #1e1e1e;
-    border-color: #444;
-  }
-  
-  .menu-link {
-    color: #f0f0f0;
-  }
-  
-  .menu-link:hover {
-    background-color: #383838;
-  }
-  
-  .menu-desc {
-    color: #aaa;
-  }
-  
-  .close-btn {
-    color: #ccc;
-  }
-  
-  .close-btn:hover {
-    background-color: #383838;
-  }
-  
-  .submenu-toggle:hover {
-    background-color: #383838;
-  }
-  
-  .submenu-link {
-    color: #ccc;
-  }
-  
-  .submenu-link:hover {
-    background-color: #383838;
-    color: #f0f0f0;
-  }
-} 
+}
+ 
