@@ -3,31 +3,30 @@ import './Deportes.css';
 
 const noticiasDeportes = [
   {
-    id: 'fulbito-femenino',
-    title: 'Selección huanuqueña de fulbito femenino gana torneo nacional',
-    author: 'Sofía Castro',
-    date: '15 de Agosto, 2023',
-    summary: 'Jugadoras de Ambo se coronan campeonas en Lima.',
-    content: 'El equipo femenino de fulbito de la provincia de Ambo se coronó campeón del Torneo Nacional Interprovincial de Fulbito Femenino. Las deportistas huanuqueñas demostraron un excelente nivel a lo largo del campeonato, ganando todos sus partidos. Esta victoria representa el primer título nacional para la región en esta disciplina. El equipo recibió un homenaje en la municipalidad provincial y se prepara para representar al Perú en el campeonato sudamericano.',
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvNzWlf8pIdzsxRjAUbjZkkXnFcoVWRPgxXg&s'
+  "id": "Hoy definen el título departamental: León de Huánuco buscará la hazaña ante Miguel Grau",
+  "title": "Hoy definen el título",
+  "author": "Zoom TV Canal 10 Megacable",
+  "summary": "Hoy definen el título.",
+  "content": "Hoy martes 26 de agosto, a las 7:00 p.m., el Complejo Deportivo de Paucarbamba será el escenario del encuentro decisivo entre León de Huánuco y Miguel Grau UDH en el partido de vuelta que definirá al campeón departamental de la Copa Perú en Huánuco. El conjunto dirigido por Nifflin Bermúdez llega con una cómoda ventaja tras imponerse por 4 a 1 en el duelo de ida jugado en el mismo recinto deportivo, resultado que obliga a León de Huánuco a remontar una diferencia de tres goles si quiere alzarse con el título. El cuadro crema confía en el respaldo de su afición para revertir el marcador, por lo mismo que mantiene vivas sus aspiraciones de levantar el título departamental, aunque se hace cuesta arriba con la ventaja del rival. León de Huánuco afronta este compromiso bajo la dirección técnica interina de Luis Zegarra, luego de la salida de Jaime Cuadros, quien fue cesado tras la dura derrota sufrida, precisamente frente a Miguel Grau. La dirigencia aún no ha oficializado al nuevo entrenador, lo que añade un componente de incertidumbre en un momento clave para el club. La expectativa es alta y el ambiente promete ser vibrante. Todo está listo para una noche de fútbol que podría marcar un punto de inflexión en la temporada de León de Huánuco. Como se recuerda, ambos equipos, además de Municipal de Chacos, son los representantes de Huánuco para la etapa nacional de la Copa Perú.",
+  "imageUrl": "https://tudiariohuanuco.pe/wp-content/uploads/2025/06/leon-e1756197687999.jpg"           
+  },    
+  {
+    "id": "El regreso de Yotún",
+  "title": "El regreso de Yotún ",
+  "author": "Carlos Mendoza",
+  "date": "22 de Julio, 2023",
+  "summary": "El regreso de Yotún .",
+  "content": "El regreso a la selección peruana del centrocampista Yoshimar Yotún es la mayor novedad de la lista de convocados para afrontar las dos últimas fechas de las eliminatorias sudamericanas del Mundial de 2026, donde la Blanquirroja se medirá con Uruguay de visitante y Paraguay de local. La principal ausencia en la lista del entrenador argentino Óscar Ibáñez es el delantero y máximo goleador de la selección Blanquirroja, Paolo Guerrero, que se lesionó la pasada semana en un partido de Copa Sudamericana con Alianza Lima. Dentro de una nómina de veintisiete futbolistas, Yotún volvió a ser convocado tras regresar recientemente a las canchas con la camiseta de Sporting Cristal, después de recuperarse de una complicada lesión de ligamentos de la rodilla que lo mantuvo alejado de la competición por 15 meses. Junto a Yotún también han vuelto a ser llamados para la Blanquirroja otros futbolistas que no habían sido parte de las últimas listas, como el mediapunta Christofer Gonzáles y los delanteros Álex Valera y Joao Grimaldo. Otras sorpresas de la convocatoria publicada este domingo son las inclusiones del centrocampista Alessandro Burlamaqui y Matías Lazo, que por primera vez han sido llamados por el combinado nacional y podrían tener su debut con la selección absoluta. También se encuentra el centrocampista Erick Noriega, flamante fichaje del Gremio de Porto Alegre, que lo ha incorporado a sus filas procedente de Alianza Lima. Alianza Lima es el equipo que más futbolistas aporta en esta convocatoria a la selección de Perú con un total de seis, al aprovechar Ibáñez el buen momento del equipo blanquiazul, dirigido por el técnico argentino Néstor Gorosito, que ha alcanzado los cuartos de final de la Copa Sudamericana. La selección peruana afronta las dos últimas fechas de las eliminatorias con opciones casi nulas de alcanzar uno de los puestos de clasificación para el Mundial, al encontrarse penúltimo de la clasificación con 12 puntos, a seis de Venezuela, que tiene 18 unidades y se encuentra en la séptima plaza, que da acceso a la repesca. La Blanquirroja visitará a Uruguay en Montevideo el 4 de septiembre y 5 días más tarde recibirá a Paraguay en el Estadio Nacional de Lima.",
+  "imageUrl": "https://tudiariohuanuco.pe/wp-content/uploads/2025/08/yotun-768x464.jpg" 
   },
   {
-    id: 'maraton-andino',
-    title: 'XXIII Maratón Andino reunió a más de 500 corredores',
-    author: 'Carlos Mendoza',
-    date: '22 de Julio, 2023',
-    summary: 'Atletas de todo el país participaron en la competencia.',
-    content: 'La XXIII edición del Maratón Andino de Huánuco congregó a más de 500 corredores de diferentes regiones del país. La competencia se desarrolló en las categorías 10K y 21K, con recorridos que mostraron la belleza paisajística de la región. Los ganadores en la categoría elite recibieron premios en efectivo y trofeos. El evento contó con el apoyo de la Municipalidad Provincial y varias empresas privadas que apuestan por el desarrollo deportivo en la región.',
-    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFIq3YWvj8J8kUCwX9WFfkdoScLcbUZHIOsQ&s'
-  },
-  {
-    id: 'boxeo-huanuco',
-    title: 'Boxeador huanuqueño clasifica a Juegos Panamericanos',
+    id: 'Miguel Grau UDH dio el primer golpe a León de Huánuco por el título departamental',
+    title: 'Miguel Grau UDH dio el primer golpe a León de Huánuco por el título departamenta',  
     author: 'Roberto Díaz',
     date: '5 de Septiembre, 2023',
     summary: 'Luis Torres aseguró su participación en Santiago 2023.',
     content: 'El pugilista huanuqueño Luis Torres clasificó a los Juegos Panamericanos Santiago 2023 tras obtener el subcampeonato en el Pre-Panamericano realizado en Colombia. Torres, de 22 años, compitió en la categoría 57kg y demostró un gran nivel técnico throughout el torneo. "Es un orgullo representar a Huánuco en estos juegos", declaró el deportista. La federación peruana de boxeo anunció que financiará su preparación para la justa continental.',
-    imageUrl: 'https://pagina3.pe/wp-content/uploads/2024/04/Bryan-Meza-quiere-representar-al-Peru-en-Lima-2027-2.jpg'
+    imageUrl: 'https://pagina3.pe/wp-content/uploads/2024/04/Bryan-Meza-quiere-representar-al-Peru-en-Lima-2027-2.'
   },
   {
     id: 'voley-juvenil',

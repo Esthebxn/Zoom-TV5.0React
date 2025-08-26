@@ -91,8 +91,9 @@ export default function Actualidad() {
   return (
     <div className="actualidad-container">
       <header className="header-actualidad">
-        <h1 className="titulo-principal">Noticias Nacionales</h1>
-        <p className="subtitulo">Información relevante de todo el Perú</p>
+      <h1 className="titulo-principal">Actualidad</h1>
+ 
+<p className="subtitulo">Noticias Mundiales</p>
       </header>
       
       <div className="noticias-lista">
