@@ -1,119 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { programmingApi } from '../../services/api';
+import React, { useState } from 'react';
 import './Programacion12.css';
 
 const Programacion12 = () => {
   const [activeDay, setActiveDay] = useState('LUNES');
-  const [programacion, setProgramacion] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const days = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
-
-  // Función para cargar la programación semanal
-  const loadWeeklyProgramming = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const response = await programmingApi.getWeekly();
-      
-      if (response.success && response.data) {
-        setProgramacion(response.data);
-      } else {
-        setError('No se pudo cargar la programación');
-      }
-    } catch (error) {
-      console.error('Error loading programming:', error);
-      setError('Error al cargar la programación');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Función para cargar programación por día específico
-  const loadDayProgramming = async (day) => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const response = await programmingApi.getByDay(day);
-      
-      if (response.success && response.data) {
-        setProgramacion(prev => ({
-          ...prev,
-          [day]: response.data
-        }));
-      } else {
-        setError(`No se pudo cargar la programación de ${day}`);
-      }
-    } catch (error) {
-      console.error(`Error loading ${day} programming:`, error);
-      setError(`Error al cargar la programación de ${day}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Cargar programación al montar el componente
-  useEffect(() => {
-    loadWeeklyProgramming();
-  }, []);
-
-  // Función para formatear el tiempo
-  const formatTime = (startTime, endTime) => {
-    return `${startTime} - ${endTime}`;
-  };
-
-  // Función para manejar el cambio de día
-  const handleDayChange = (day) => {
-    setActiveDay(day);
-    
-    // Si no tenemos datos para ese día, cargarlos
-    if (!programacion[day] || programacion[day].length === 0) {
-      loadDayProgramming(day);
-    }
-  };
-
-  // Función para renderizar la tabla de programación
-  const renderProgrammingTable = (dayPrograms) => {
-    if (!dayPrograms || dayPrograms.length === 0) {
-      return (
-        <tr>
-          <td colSpan="2" className="no-programs">
-            No hay programación disponible para este día
-          </td>
-        </tr>
-      );
-    }
-
-    return dayPrograms.map((program, index) => (
-      <tr key={program._id || index} className="program-item">
-        <td className="program-time">
-          {formatTime(program.startTime, program.endTime)}
-        </td>
-        <td className="program-info">
-          <h3>{program.title}</h3>
-          {program.description && <p>{program.description}</p>}
-          {program.category && <p className="program-category">{program.category}</p>}
-        </td>
-      </tr>
-    ));
+  const programacion = {
+    'LUNES': [
+      { time: '06:00 - 06:55', title: 'PUNTUALIZA LA NOTICIA', description: 'JÉSSICA LAVADO' },
+      { time: '07:00 - 7:55', title: 'POLÉMICA', description: 'Yulia Luna' },
+      { time: '08:00 - 08:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
+      { time: '09:00 - 09:25', title: '(ANIME) BUKO NO HERO: T2: 09 - 10', description: '' },
+      { time: '10:00 - 10:25', title: 'SERIE ANIME: DEMON SLAYER T1: 22 - 23', description: '' },
+      { time: '11:00 - 11:55', title: '(POP & ROCK) 2022 MORAT - DUKI - PARÍS', description: '' },
+      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'LUNES CLÁSICOS 32' },
+      { time: '16:00 - 16:55', title: '(POP & ROCK) 2022 MORAT - DUKI - PARÍS', description: '' },
+      { time: '18:00 - 18:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
+      { time: '19:00 - 19:55', title: 'HCO. 60 MIN', description: 'Mariluz Alegría' },
+      { time: '20:00 - 20:55', title: 'PARÉNTESIS', description: 'José Aguirre' },
+      { time: '21:00 - 21:55', title: 'THE BOYS T2 - 4', description: '' },
+    ],
+    'MARTES': [
+      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'MARTES CIENCIA FX 24 / ACCIÓN 23' },
+    ],
+    'MIÉRCOLES': [
+      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'MIÉRCOLES ANIMADO 54' },
+    ],
+    'JUEVES': [
+      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'JUEVES DE DRAMA 42' },
+    ],
+    'VIERNES': [
+      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'VIERNES TERROR 40' },
+    ],
+    'SÁBADO': [
+      { time: '06:00 - 06:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
+      { time: '08:00 - 08:55', title: 'EXPANSE T5 5 - 6', description: '' },
+      { time: '09:30 - 09:55', title: 'EL MANDALORIANO T3: 7 - 8', description: '' },
+      { time: '13:00 - 14:55', title: 'MARATON DEMON SLAYER T1: 1 - 6', description: '' },
+      { time: '19:00 - 19:55', title: 'BAILABLES', description: '' },
+    ],
+    'DOMINGO': [
+      { time: '06:00 - 06:55', title: 'ROCK', description: '' },
+      { time: '08:00 - 08:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
+      { time: '09:30 - 09:55', title: 'DOMINGO ROCK', description: '' },
+      { time: '13:00 - 14:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
+      { time: '16:00 - 16:55', title: 'DOMINGO ROCK', description: '' },
+      { time: '20:00 - 20:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
+    ],
   };
 
   return (
     <div className="programacion-container">
       <div className="programacion-header">
+      
         <h2>ZOOM TV, acércate más...</h2>
         <p>(Canal 10 - Megcable)</p>
       </div>
 
       <div className="filter-buttons">
-        {days.map(day => (
+        {Object.keys(programacion).map(day => (
           <button
             key={day}
             className={`filter-button ${activeDay === day ? 'active' : ''}`}
-            onClick={() => handleDayChange(day)}
+            onClick={() => setActiveDay(day)}
           >
             {day}
           </button>
@@ -123,35 +71,25 @@ const Programacion12 = () => {
       <div className="schedule">
         <div className="schedule-day">
           <div className="day-header">{activeDay}</div>
-          
-          {loading ? (
-            <div className="loading-container">
-              <div className="loading-spinner"></div>
-              <p>Cargando programación...</p>
-            </div>
-          ) : error ? (
-            <div className="error-container">
-              <p className="error-message">{error}</p>
-              <button 
-                onClick={() => loadDayProgramming(activeDay)}
-                className="retry-button"
-              >
-                Reintentar
-              </button>
-            </div>
-          ) : (
-            <table className="programs-table">
-              <thead>
-                <tr>
-                  <th>HORA</th>
-                  <th>PROGRAMA</th>
+          <table className="programs-table">
+            <thead>
+              <tr>
+                <th>HORA</th>
+                <th>PROGRAMA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {programacion[activeDay].map((program, index) => (
+                <tr key={index} className="program-item">
+                  <td className="program-time">{program.time}</td>
+                  <td className="program-info">
+                    <h3>{program.title}</h3>
+                    {program.description && <p>{program.description}</p>}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {renderProgrammingTable(programacion[activeDay])}
-              </tbody>
-            </table>
-          )}
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

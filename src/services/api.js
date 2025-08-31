@@ -119,4 +119,89 @@ export const programmingApi = {
   }
 };
 
+// API para anunciantes
+export const anunciantesApi = {
+  // Obtener todos los anunciantes
+  getAll: async (filters = {}) => {
+    try {
+      const params = new URLSearchParams();
+      if (filters.status) params.append('status', filters.status);
+      if (filters.category) params.append('category', filters.category);
+      if (filters.limit) params.append('limit', filters.limit);
+
+      const response = await apiClient.get(`/anunciantes?${params.toString()}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching anunciantes:', error);
+      throw error;
+    }
+  },
+
+  // Obtener anunciante por ID
+  getById: async (id) => {
+    try {
+      const response = await apiClient.get(`/anunciantes/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching anunciante by ID:', error);
+      throw error;
+    }
+  },
+
+  // Crear nuevo anunciante
+  create: async (anuncianteData) => {
+    try {
+      const response = await apiClient.post('/anunciantes', anuncianteData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating anunciante:', error);
+      throw error;
+    }
+  },
+
+  // Actualizar anunciante
+  update: async (id, anuncianteData) => {
+    try {
+      const response = await apiClient.put(`/anunciantes/${id}`, anuncianteData);
+      return response.data;
+    } catch (error) {
+      console.error('Error updating anunciante:', error);
+      throw error;
+    }
+  },
+
+  // Eliminar anunciante
+  delete: async (id) => {
+    try {
+      const response = await apiClient.delete(`/anunciantes/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting anunciante:', error);
+      throw error;
+    }
+  },
+
+  // Cambiar estado del anunciante
+  updateStatus: async (id, status) => {
+    try {
+      const response = await apiClient.put(`/anunciantes/${id}/status`, { status });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating anunciante status:', error);
+      throw error;
+    }
+  },
+
+  // Reordenar anunciantes
+  reorder: async (anunciantes) => {
+    try {
+      const response = await apiClient.put('/anunciantes/reorder', { anunciantes });
+      return response.data;
+    } catch (error) {
+      console.error('Error reordering anunciantes:', error);
+      throw error;
+    }
+  }
+};
+
 export default apiClient;
