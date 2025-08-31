@@ -4,12 +4,9 @@ import Hls from 'hls.js';
 import './live9.css';
 
 const Live9 = () => {
-  // Configuración del stream - REEMPLAZA CON TU URL REAL DE STREAM
-  // Ejemplos de formatos válidos:
-  // - HLS: "https://tu-servidor.com/stream.m3u8"
-  // - RTMP: "rtmp://tu-servidor.com/live/stream"
-  // - YouTube Live: "https://www.youtube.com/embed/TU_VIDEO_ID?autoplay=1"
-  const PLAYBACK_URL = "https://fa723fc1b171.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527374.channel.YOUR_CHANNEL_ID.m3u8";
+  // Configuración del stream - Transmisión en vivo desde Kick.com
+  // URL del stream HLS de Kick.com
+  const PLAYBACK_URL = "https://stream.kick.com/ivs/v1/196233775518/7IFTKqts0nlT/2025/8/30/17/7/97u5ppOrDEd4/media/hls/720p60/playlist.m3u8";
   
   // IMPORTANTE: Reemplaza la URL de arriba con tu stream real
   // Si no tienes un stream configurado, puedes usar un video de prueba:
@@ -267,15 +264,16 @@ const Live9 = () => {
         {/* Mensaje informativo cuando no hay stream configurado */}
         {!playerState.loading && !playerState.error && !playerState.streamActive && (
           <div className="stream-status info">
-            <h3>Stream no configurado</h3>
-            <p>Para ver el contenido en vivo, necesitas configurar una URL de stream válida.</p>
-            <p><strong>Pasos para configurar:</strong></p>
-            <ol>
-              <li>Edita el archivo <code>src/pages/Live9/Live9.jsx</code></li>
-              <li>Reemplaza <code>PLAYBACK_URL</code> con tu URL real de stream</li>
-              <li>Formatos soportados: HLS (.m3u8), RTMP, YouTube Live</li>
-            </ol>
-            <p><em>Ejemplo: "https://tu-servidor.com/stream.m3u8"</em></p>
+            <h3>Transmisión en Vivo</h3>
+            <p>Zoom TV está transmitiendo en vivo desde Kick.com</p>
+            <p><strong>Características del stream:</strong></p>
+            <ul>
+              <li>Formato: HLS (HTTP Live Streaming)</li>
+              <li>Calidad: 720p60</li>
+              <li>Plataforma: Kick.com</li>
+              <li>Latencia: Baja</li>
+            </ul>
+            <p><em>Si no puedes ver la transmisión, verifica tu conexión a internet</em></p>
           </div>
         )}
 
