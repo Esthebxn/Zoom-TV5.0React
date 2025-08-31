@@ -12,6 +12,70 @@ const apiClient = axios.create({
   },
 });
 
+// API para noticias
+export const newsApi = {
+  // Obtener todas las noticias
+  getAll: async (filters = {}) => {
+    try {
+      const params = new URLSearchParams();
+      if (filters.page) params.append('page', filters.page);
+      if (filters.limit) params.append('limit', filters.limit);
+      if (filters.category) params.append('category', filters.category);
+      if (filters.status) params.append('status', filters.status);
+      if (filters.search) params.append('search', filters.search);
+
+      const response = await apiClient.get(`/noticias?${params.toString()}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      throw error;
+    }
+  },
+
+  // Obtener noticia por ID
+  getById: async (id) => {
+    try {
+      const response = await apiClient.get(`/noticias/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching news by ID:', error);
+      throw error;
+    }
+  },
+
+  // Obtener noticias por categoría
+  getByCategory: async (category, filters = {}) => {
+    try {
+      const params = new URLSearchParams();
+      params.append('category', category);
+      if (filters.page) params.append('page', filters.page);
+      if (filters.limit) params.append('limit', filters.limit);
+      if (filters.search) params.append('search', filters.search);
+
+      const response = await apiClient.get(`/noticias?${params.toString()}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching news by category:', error);
+      throw error;
+    }
+  },
+
+  // Obtener noticias destacadas
+  getFeatured: async (limit = 5) => {
+    try {
+      const params = new URLSearchParams();
+      params.append('limit', limit);
+      params.append('featured', 'true');
+
+      const response = await apiClient.get(`/noticias?${params.toString()}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching featured news:', error);
+      throw error;
+    }
+  }
+};
+
 // API para programación
 export const programmingApi = {
   // Obtener toda la programación
