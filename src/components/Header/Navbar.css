@@ -50,11 +50,59 @@
   padding: 0;
 }
 
+/* Ensure hover works on all elements */
+.zoom-nav-item:hover .zoom-nav-link {
+  color: #f05454 !important;
+  background-color: rgba(240, 84, 84, 0.1) !important;
+}
+
+.zoom-nav-item:hover .zoom-nav-link::after {
+  width: 100%;
+}
+
+/* Fix for highlight items hover - only when not active */
+.highlight:hover .zoom-nav-link:not(.active) {
+  background-color: #d14343 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(240, 84, 84, 0.3);
+}
+
+/* Active state for highlight items */
+.highlight .zoom-nav-link.active {
+  background-color: #f05454 !important;
+  color: white !important;
+  transform: none;
+  box-shadow: none;
+  font-weight: 600;
+}
+
+/* Remove hover effects when highlight item is active */
+.highlight .zoom-nav-link.active:hover {
+  background-color: #f05454 !important;
+  color: white !important;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Ensure proper z-index and positioning */
 .zoom-nav-item {
   position: relative;
   padding: 0.5rem 0;
+  z-index: 1;
 }
 
+/* Ensure hover works on all elements - but not when active */
+.zoom-nav-item:hover .zoom-nav-link:not(.active) {
+  color: #f05454 !important;
+  background-color: rgba(240, 84, 84, 0.1) !important;
+}
+
+.zoom-nav-item:hover .zoom-nav-link:not(.active)::after {
+  width: 100%;
+}
+
+/* Base styles for all links */
 .zoom-nav-link {
   color: #e6e6e6;
   text-decoration: none;
@@ -64,11 +112,16 @@
   border-radius: 4px;
   transition: all 0.3s ease;
   position: relative;
+  display: block;
+  cursor: pointer;
+  z-index: 2;
 }
 
-.zoom-nav-link:hover {
-  color: #f05454;
-  background-color: rgba(240, 84, 84, 0.1);
+/* Regular hover for links */
+.zoom-nav-link:hover:not(.active) {
+  color: #f05454 !important;
+  background-color: rgba(240, 84, 84, 0.1) !important;
+  transform: translateY(-1px);
 }
 
 .zoom-nav-link::after {
@@ -86,6 +139,24 @@
   width: 100%;
 }
 
+/* Active state for current page */
+.zoom-nav-link.active {
+  color: #f05454 !important;
+  background-color: rgba(240, 84, 84, 0.1) !important;
+  font-weight: 600;
+}
+
+.zoom-nav-link.active::after {
+  width: 100%;
+}
+
+/* Remove hover effects when active */
+.zoom-nav-link.active:hover {
+  color: #f05454 !important;
+  background-color: rgba(240, 84, 84, 0.1) !important;
+  transform: none;
+}
+
 /* Highlighted Link (Ver en Vivo) */
 .highlight .zoom-nav-link {
   background-color: #f05454;
@@ -96,7 +167,8 @@
 }
 
 .highlight .zoom-nav-link:hover {
-  background-color: #d14343;
+  background-color: #d14343 !important;
+  color: white !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(240, 84, 84, 0.3);
 }
