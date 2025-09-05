@@ -1,63 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Programacion12.css';
+import { programmingApi } from '../../services/api';
 
 const Programacion12 = () => {
   const [activeDay, setActiveDay] = useState('LUNES');
+  const [programacion, setProgramacion] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const programacion = {
-    'LUNES': [
-      { time: '06:00 - 06:55', title: 'PUNTUALIZA LA NOTICIA', description: 'JÉSSICA LAVADO' },
-      { time: '07:00 - 7:55', title: 'POLÉMICA', description: 'Yulia Luna' },
-      { time: '08:00 - 08:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
-      { time: '09:00 - 09:25', title: '(ANIME) BUKO NO HERO: T2: 09 - 10', description: '' },
-      { time: '10:00 - 10:25', title: 'SERIE ANIME: DEMON SLAYER T1: 22 - 23', description: '' },
-      { time: '11:00 - 11:55', title: '(POP & ROCK) 2022 MORAT - DUKI - PARÍS', description: '' },
-      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'LUNES CLÁSICOS 32' },
-      { time: '16:00 - 16:55', title: '(POP & ROCK) 2022 MORAT - DUKI - PARÍS', description: '' },
-      { time: '18:00 - 18:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
-      { time: '19:00 - 19:55', title: 'HCO. 60 MIN', description: 'Mariluz Alegría' },
-      { time: '20:00 - 20:55', title: 'PARÉNTESIS', description: 'José Aguirre' },
-      { time: '21:00 - 21:55', title: 'THE BOYS T2 - 4', description: '' },
-    ],
-    'MARTES': [
-      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'MARTES CIENCIA FX 24 / ACCIÓN 23' },
-    ],
-    'MIÉRCOLES': [
-      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'MIÉRCOLES ANIMADO 54' },
-    ],
-    'JUEVES': [
-      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'JUEVES DE DRAMA 42' },
-    ],
-    'VIERNES': [
-      { time: '13:00 - 14:55', title: 'CINE ZOOM TV', description: 'VIERNES TERROR 40' },
-    ],
-    'SÁBADO': [
-      { time: '06:00 - 06:55', title: 'MÚSICA LATINOAMERICANA', description: '' },
-      { time: '08:00 - 08:55', title: 'EXPANSE T5 5 - 6', description: '' },
-      { time: '09:30 - 09:55', title: 'EL MANDALORIANO T3: 7 - 8', description: '' },
-      { time: '13:00 - 14:55', title: 'MARATON DEMON SLAYER T1: 1 - 6', description: '' },
-      { time: '19:00 - 19:55', title: 'BAILABLES', description: '' },
-    ],
-    'DOMINGO': [
-      { time: '06:00 - 06:55', title: 'ROCK', description: '' },
-      { time: '08:00 - 08:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
-      { time: '09:30 - 09:55', title: 'DOMINGO ROCK', description: '' },
-      { time: '13:00 - 14:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
-      { time: '16:00 - 16:55', title: 'DOMINGO ROCK', description: '' },
-      { time: '20:00 - 20:55', title: 'EL PLANETA DE LOS SIMIOS 2 - 3', description: '' },
-    ],
+  const days = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
+
+  useEffect(() => {
+    loadProgramming();
+  }, []);
+
+  const loadProgramming = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const programmingData = {};
+      
+      // Cargar programación para cada día
+      for (const day of days) {
+        try {
+          const response = await programmingApi.getByDay(day);
+          if (response.success) {
+            programmingData[day] = response.data || [];
+          } else {
+            console.error(`Error loading programming for ${day}:`, response.message);
+            programmingData[day] = [];
+          }
+        } catch (error) {
+          console.error(`Error loading programming for ${day}:`, error);
+          programmingData[day] = [];
+        }
+      }
+      
+      setProgramacion(programmingData);
+    } catch (error) {
+      console.error('Error loading programming:', error);
+      setError('Error al cargar la programación');
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const formatTime = (startTime, endTime) => {
+    return `${startTime} - ${endTime}`;
+  };
+
+  if (loading) {
+    return (
+      <div className="programacion-container">
+        <div className="programacion-header">
+          <h2>ZOOM TV, acércate más...</h2>
+          <p>(Canal 10 - Megcable)</p>
+        </div>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Cargando programación...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+  return (
+    <div className="programacion-container">
+      <div className="programacion-header">
+          <h2>ZOOM TV, acércate más...</h2>
+          <p>(Canal 10 - Megcable)</p>
+        </div>
+        <div className="error-container">
+          <p className="error-message">{error}</p>
+          <button onClick={loadProgramming} className="retry-button">
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="programacion-container">
       <div className="programacion-header">
-      
         <h2>ZOOM TV, acércate más...</h2>
         <p>(Canal 10 - Megcable)</p>
       </div>
 
       <div className="filter-buttons">
-        {Object.keys(programacion).map(day => (
+        {days.map(day => (
           <button
             key={day}
             className={`filter-button ${activeDay === day ? 'active' : ''}`}
@@ -79,15 +112,28 @@ const Programacion12 = () => {
               </tr>
             </thead>
             <tbody>
-              {programacion[activeDay].map((program, index) => (
-                <tr key={index} className="program-item">
-                  <td className="program-time">{program.time}</td>
+              {programacion[activeDay] && programacion[activeDay].length > 0 ? (
+                programacion[activeDay].map((program, index) => (
+                  <tr key={program._id || index} className="program-item">
+                    <td className="program-time">
+                      {formatTime(program.startTime, program.endTime)}
+                    </td>
                   <td className="program-info">
                     <h3>{program.title}</h3>
                     {program.description && <p>{program.description}</p>}
+                      {program.category && (
+                        <span className="program-category">{program.category}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="2" className="no-programs">
+                    No hay programación disponible para {activeDay}
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

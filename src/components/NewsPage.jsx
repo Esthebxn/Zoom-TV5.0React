@@ -64,14 +64,15 @@ const NewsPage = ({
         <p>{subtitle}</p>
       </header>
       
-      {error && (
-        <div className="error-banner">
-          <p>{error}</p>
-          <button onClick={() => setError(null)}>&times;</button>
-        </div>
-      )}
-      
-      <div className="noticias-lista">
+      <div className="noticias-contenido">
+        {error && (
+          <div className="error-banner">
+            <p>{error}</p>
+            <button onClick={() => setError(null)}>&times;</button>
+          </div>
+        )}
+        
+        <div className="noticias-lista">
         {noticias.map((noticia, index) => (
           <article key={noticia._id || noticia.id} className={`noticia-item ${index === 0 ? 'destacada' : ''}`}>
             <div className="noticia-imagen">
@@ -105,32 +106,33 @@ const NewsPage = ({
             </div>
           </article>
         ))}
-      </div>
-
-      {/* Paginación */}
-      {pagination.pages > 1 && (
-        <div className="paginacion">
-          <button 
-            className="pagina-btn"
-            disabled={pagination.page <= 1}
-            onClick={() => cambiarPagina(pagination.page - 1)}
-          >
-            Anterior
-          </button>
-          
-          <span className="pagina-info">
-            Página {pagination.page} de {pagination.pages}
-          </span>
-          
-          <button 
-            className="pagina-btn"
-            disabled={pagination.page >= pagination.pages}
-            onClick={() => cambiarPagina(pagination.page + 1)}
-          >
-            Siguiente
-          </button>
         </div>
-      )}
+
+        {/* Paginación */}
+        {pagination.pages > 1 && (
+          <div className="paginacion">
+            <button 
+              className="pagina-btn"
+              disabled={pagination.page <= 1}
+              onClick={() => cambiarPagina(pagination.page - 1)}
+            >
+              Anterior
+            </button>
+            
+            <span className="pagina-info">
+              Página {pagination.page} de {pagination.pages}
+            </span>
+            
+            <button 
+              className="pagina-btn"
+              disabled={pagination.page >= pagination.pages}
+              onClick={() => cambiarPagina(pagination.page + 1)}
+            >
+              Siguiente
+            </button>
+          </div>
+        )}
+      </div>
       
       {/* Modal de noticia completa */}
       {noticiaSeleccionada && (

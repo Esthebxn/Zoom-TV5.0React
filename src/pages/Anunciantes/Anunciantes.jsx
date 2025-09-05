@@ -90,13 +90,19 @@ const Anunciantes = () => {
 
   return (
     <div className="anunciantes-container">
-      <div className="anunciantes-grid">
-        {anunciantes.length === 0 ? (
-          <div className="no-anunciantes">
-            <p>No hay anunciantes disponibles en este momento.</p>
-          </div>
-        ) : (
-          anunciantes.map(anunciante => (
+      <div className="anunciantes-header">
+        <h1>Anunciantes</h1>
+        <p>Descubre nuestros socios comerciales y servicios locales</p>
+      </div>
+      
+      <div className="anunciantes-contenido">
+        <div className="anunciantes-grid">
+          {anunciantes.length === 0 ? (
+            <div className="no-anunciantes">
+              <p>No hay anunciantes disponibles en este momento.</p>
+            </div>
+          ) : (
+            anunciantes.map(anunciante => (
           <article 
               key={anunciante._id} 
               className={`anunciante-card ${expandedCard === anunciante._id ? 'expanded' : ''}`}
@@ -140,8 +146,9 @@ const Anunciantes = () => {
                 )}
             </div>
           </article>
-          ))
-        )}
+            ))
+          )}
+        </div>
       </div>
 
       {/* Modal para imagen ampliada */}

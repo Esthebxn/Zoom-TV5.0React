@@ -1,57 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Nosotros.css';
+import { companyApi } from '../../services/api';
 
 const Nosotros = () => {
-  // URLs de imágenes (reemplazadas con URLs reales)
-  const logoCanal = "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80";
-  const equipoTrabajo = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const historiaImagen = "https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const misionImagen = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const visionImagen = "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const persona1 = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const persona2 = "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const persona3 = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
-  const persona4 = "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
+  // Estados para los datos de la API
+  const [companyInfo, setCompanyInfo] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [companyHistory, setCompanyHistory] = useState(null);
+  const [companyValues, setCompanyValues] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Datos del equipo de trabajo
-  const equipo = [
-    {
-      id: 1,
-      nombre: "María González",
-      puesto: "Directora General",
-      imagen: persona1,
-      descripcion: "Con más de 20 años de experiencia en medios de comunicación."
-    },
-    {
-      id: 2,
-      nombre: "Carlos Mendoza",
-      puesto: "Jefe de Producción",
-      imagen: persona2,
-      descripcion: "Especialista en producción televisiva y contenidos digitales."
-    },
-    {
-      id: 3,
-      nombre: "Laura Jiménez",
-      puesto: "Editora en Jefe",
-      imagen: persona3,
-      descripcion: "Periodista con amplia trayectoria en medios nacionales."
-    },
-    {
-      id: 4,
-      nombre: "Roberto Sánchez",
-      puesto: "Director Técnico",
-      imagen: persona4,
-      descripcion: "Experto en tecnología audiovisual y transmisiones en vivo."
+  // Cargar datos de la API
+  useEffect(() => {
+    loadCompanyData();
+  }, []);
+
+  const loadCompanyData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Cargar todos los datos en paralelo
+      const [infoResponse, teamResponse, historyResponse, valuesResponse] = await Promise.all([
+        companyApi.getInfo(),
+        companyApi.getTeam(),
+        companyApi.getHistory(),
+        companyApi.getValues()
+      ]);
+
+      if (infoResponse.success) setCompanyInfo(infoResponse.data);
+      if (teamResponse.success) setTeamMembers(teamResponse.data);
+      if (historyResponse.success) setCompanyHistory(historyResponse.data);
+      if (valuesResponse.success) setCompanyValues(valuesResponse.data);
+
+    } catch (err) {
+      console.error('Error loading company data:', err);
+      setError('Error al cargar la información de la empresa');
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  // Mostrar loading
+  if (loading) {
+    return (
+      <div className="nosotros-container">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Cargando información de la empresa...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Mostrar error
+  if (error) {
+    return (
+      <div className="nosotros-container">
+        <div className="error-container">
+          <h2>Error al cargar la información</h2>
+          <p>{error}</p>
+          <button onClick={loadCompanyData} className="retry-button">
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="nosotros-container">
       {/* Banner superior con logo */}
       <div className="nosotros-banner">
-        <img src={logoCanal} alt="Logo Zoom TV Canal 10" className="logo-canal" />
-        <h1>Zoom TV Canal 10</h1>
-        <p>Información veraz, entretenimiento de calidad</p>
+        <img 
+          src={companyInfo?.logo || "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"} 
+          alt={`Logo ${companyInfo?.name || 'Zoom TV Canal 10'}`} 
+          className="logo-canal" 
+        />
+        <h1>{companyInfo?.name || 'Zoom TV Canal 10'}</h1>
+        <p>{companyInfo?.slogan || 'Información veraz, entretenimiento de calidad'}</p>
       </div>
 
       {/* Sección principal */}
@@ -64,17 +92,33 @@ const Nosotros = () => {
       <div className="equipo-section">
         <h2>Nuestro Equipo</h2>
         <div className="equipo-grid">
-          {equipo.map(miembro => (
-            <div key={miembro.id} className="miembro-equipo">
-              <img src={miembro.imagen} alt={miembro.nombre} />
-              <h3>{miembro.nombre}</h3>
-              <p className="puesto">{miembro.puesto}</p>
-              <p className="descripcion">{miembro.descripcion}</p>
+          {teamMembers.length > 0 ? (
+            teamMembers.map(miembro => (
+              <div key={miembro._id} className="miembro-equipo">
+                <img 
+                  src={miembro.image || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"} 
+                  alt={miembro.name} 
+                />
+                <h3>{miembro.name}</h3>
+                <p className="puesto">{miembro.position}</p>
+                <p className="descripcion">{miembro.bio}</p>
+                {miembro.skills && miembro.skills.length > 0 && (
+                  <div className="skills">
+                    {miembro.skills.map((skill, index) => (
+                      <span key={index} className="skill-tag">{skill}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="no-team">
+              <p>No hay información del equipo disponible</p>
             </div>
-          ))}
+          )}
         </div>
         <div className="equipo-completo">
-          <img src={equipoTrabajo} alt="Equipo completo de Zoom TV Canal 10" />
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Equipo completo de Zoom TV Canal 10" />
           <p>Nuestro equipo completo de más de 50 profesionales trabajando para ustedes</p>
         </div>
       </div>
@@ -84,82 +128,96 @@ const Nosotros = () => {
         {/* Sección Historia */}
         <div className="nosotros-section historia">
           <div className="section-image">
-            <img src={historiaImagen} alt="Historia de Zoom TV Canal 10" />
+            <img 
+              src={companyHistory?.image || "https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"} 
+              alt="Historia de Zoom TV Canal 10" 
+            />
           </div>
           <div className="section-content">
-            <h2>Nuestra Historia</h2>
-            <p>Zoom TV Canal 10 nació en 2005 con la misión de llevar información veraz y entretenimiento de calidad a nuestros televidentes. Desde nuestros humildes comienzos en un pequeño estudio local, hemos crecido para convertirnos en uno de los canales más importantes de la región.</p>
-            <p>Nuestro primer programa salió al aire el 15 de marzo de 2005 con un equipo de solo 5 personas. Hoy contamos con más de 50 profesionales dedicados a la producción de contenido de calidad.</p>
-            <div className="logros">
-              <h3>Logros importantes:</h3>
-              <ul>
-                <li>2007: Primer premio regional a la mejor producción periodística</li>
-                <li>2012: Expansión a transmisión digital</li>
-                <li>2018: Lanzamiento de nuestra plataforma de streaming</li>
-                <li>2022: Reconocimiento nacional por cobertura de eventos comunitarios</li>
-              </ul>
-            </div>
+            <h2>{companyHistory?.title || 'Nuestra Historia'}</h2>
+            {companyHistory?.content ? (
+              companyHistory.content.split('\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))
+            ) : (
+              <>
+                <p>Zoom TV Canal 10 nació en 2005 con la misión de llevar información veraz y entretenimiento de calidad a nuestros televidentes. Desde nuestros humildes comienzos en un pequeño estudio local, hemos crecido para convertirnos en uno de los canales más importantes de la región.</p>
+                <p>Nuestro primer programa salió al aire el 15 de marzo de 2005 con un equipo de solo 5 personas. Hoy contamos con más de 50 profesionales dedicados a la producción de contenido de calidad.</p>
+              </>
+            )}
+            {companyHistory?.milestones && companyHistory.milestones.length > 0 && (
+              <div className="logros">
+                <h3>Hitos importantes:</h3>
+                <ul>
+                  {companyHistory.milestones.map((milestone, index) => (
+                    <li key={index}>
+                      <strong>{milestone.year}:</strong> {milestone.title} - {milestone.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Sección Misión */}
         <div className="nosotros-section mision reverse">
           <div className="section-image">
-            <img src={misionImagen} alt="Misión de Zoom TV Canal 10" />
+            <img 
+              src={companyValues?.mission?.image || "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"} 
+              alt="Misión de Zoom TV Canal 10" 
+            />
           </div>
           <div className="section-content">
-            <h2>Nuestra Misión</h2>
-            <p>Informar, educar y entretener a nuestra audiencia con contenido de alta calidad, manteniendo siempre los más altos estándares periodísticos y éticos.</p>
-            <p>Nos comprometemos a:</p>
-            <ul>
-              <li>Proveer información precisa y oportuna</li>
-              <li>Fomentar el pensamiento crítico en nuestra audiencia</li>
-              <li>Promover los valores culturales de nuestra región</li>
-              <li>Ser un medio accesible para toda la comunidad</li>
-              <li>Mantener independencia editorial y periodística</li>
-              <li>Innovar constantemente en nuestros formatos y contenidos</li>
-            </ul>
+            <h2>{companyValues?.mission?.title || 'Nuestra Misión'}</h2>
+            <p>{companyValues?.mission?.content || 'Informar, educar y entretener a nuestra audiencia con contenido de alta calidad, manteniendo siempre los más altos estándares periodísticos y éticos.'}</p>
+            {companyValues?.mission?.commitments && companyValues.mission.commitments.length > 0 && (
+              <>
+                <p>Nos comprometemos a:</p>
+                <ul>
+                  {companyValues.mission.commitments.map((commitment, index) => (
+                    <li key={index}>{commitment}</li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
 
         {/* Sección Visión */}
         <div className="nosotros-section vision">
           <div className="section-image">
-            <img src={visionImagen} alt="Visión de Zoom TV Canal 10" />
+            <img 
+              src={companyValues?.vision?.image || "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"} 
+              alt="Visión de Zoom TV Canal 10" 
+            />
           </div>
           <div className="section-content">
-            <h2>Nuestra Visión</h2>
-            <p>Ser reconocidos como el canal líder en innovación periodística y producción de contenido multimedia en la región para el año 2025.</p>
-            <p>Aspiramos a:</p>
-            <ul>
-              <li>Expandir nuestra cobertura a nivel nacional</li>
-              <li>Implementar las últimas tecnologías en producción televisiva</li>
-              <li>Convertirnos en referente de periodismo independiente</li>
-              <li>Formar alianzas estratégicas con medios internacionales</li>
-              <li>Desarrollar programas educativos para la comunidad</li>
-              <li>Ser pioneros en la transición a tecnologías de transmisión 4K</li>
-            </ul>
-            <div className="valores">
-              <h3>Nuestros Valores</h3>
-              <div className="valores-grid">
-                <div className="valor-item">
-                  <h4>Integridad</h4>
-                  <p>Actuamos con honestidad y transparencia en todo momento</p>
-                </div>
-                <div className="valor-item">
-                  <h4>Innovación</h4>
-                  <p>Buscamos constantemente nuevas formas de comunicar</p>
-                </div>
-                <div className="valor-item">
-                  <h4>Compromiso</h4>
-                  <p>Con nuestra audiencia y con la verdad</p>
-                </div>
-                <div className="valor-item">
-                  <h4>Excelencia</h4>
-                  <p>Nos esforzamos por la más alta calidad en todo lo que hacemos</p>
+            <h2>{companyValues?.vision?.title || 'Nuestra Visión'}</h2>
+            <p>{companyValues?.vision?.content || 'Ser reconocidos como el canal líder en innovación periodística y producción de contenido multimedia en la región para el año 2025.'}</p>
+            {companyValues?.vision?.aspirations && companyValues.vision.aspirations.length > 0 && (
+              <>
+                <p>Aspiramos a:</p>
+                <ul>
+                  {companyValues.vision.aspirations.map((aspiration, index) => (
+                    <li key={index}>{aspiration}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {companyValues?.values && companyValues.values.length > 0 && (
+              <div className="valores">
+                <h3>Nuestros Valores</h3>
+                <div className="valores-grid">
+                  {companyValues.values.map((valor, index) => (
+                    <div key={index} className="valor-item">
+                      <h4>{valor.name}</h4>
+                      <p>{valor.description}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -167,8 +225,23 @@ const Nosotros = () => {
       {/* Sección de contacto */}
       <div className="contacto-section">
         <h2>¿Quieres unirte a nuestro equipo o colaborar con nosotros?</h2>
-        <p>Envíanos tu información a: <a href="mailto:contacto@zoomtvcanal10.com">contacto@zoomtvcanal10.com</a></p>
-        <p>O llámanos al: <a href="tel:+1234567890">+1 234 567 890</a></p>
+        {companyInfo?.contactInfo ? (
+          <>
+            <p>Envíanos tu información a: <a href={`mailto:${companyInfo.contactInfo.email}`}>{companyInfo.contactInfo.email}</a></p>
+            <p>O llámanos al: <a href={`tel:${companyInfo.contactInfo.phone}`}>{companyInfo.contactInfo.phone}</a></p>
+            {companyInfo.contactInfo.website && (
+              <p>Visita nuestro sitio web: <a href={companyInfo.contactInfo.website} target="_blank" rel="noopener noreferrer">{companyInfo.contactInfo.website}</a></p>
+            )}
+            {companyInfo.contactInfo.address && (
+              <p>Nuestra dirección: {companyInfo.contactInfo.address}</p>
+            )}
+          </>
+        ) : (
+          <>
+            <p>Envíanos tu información a: <a href="mailto:contacto@zoomtvcanal10.com">contacto@zoomtvcanal10.com</a></p>
+            <p>O llámanos al: <a href="tel:+1234567890">+1 234 567 890</a></p>
+          </>
+        )}
       </div>
     </div>
   );
