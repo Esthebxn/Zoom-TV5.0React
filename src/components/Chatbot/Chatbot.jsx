@@ -1,193 +1,206 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './chat.css';
+import React, { useState, useRef, useEffect } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { CHATBOT_CONFIG, generatePrompt, getApiConfig } from './chatbotConfig';
+import './Chatbot.css';
 
 const Chatbot = () => {
-  const [messages, setMessages] = useState([]);
-  const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [showNameInput, setShowNameInput] = useState(true);
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      text: CHATBOT_CONFIG.MESSAGES.WELCOME,
+      isUser: false,
+      timestamp: new Date()
+    }
+  ]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
-  // Respuestas específicas para Zoom TV Canal 10
-  const botResponses = {
-    greeting: `¡Hola${userName ? ` ${userName}` : ''}! Soy el asistente de Zoom TV Canal 10. ¿En qué puedo ayudarte hoy?`,
-    default: [
-      "Puedo ayudarte con información sobre programación, noticias y eventos de Zoom TV Canal 10.",
-      "¿Quieres saber sobre nuestros programas en vivo o nuestra programación diaria?",
-      "En Zoom TV Canal 10 nos especializamos en contenido local y entretenimiento familiar.",
-      "Puedo darte información sobre cómo contactar a nuestra producción o participar en programas."
-    ],
-    programacion: "Nuestra programación incluye noticias a las 7 AM, 1 PM y 7 PM, telenovelas por las tardes y variedades los fines de semana. ¿Quieres detalles de algún programa en particular?",
-    contacto: "Puedes contactarnos al teléfono 555-1234, por WhatsApp al 555-5678 o visitar nuestro sitio web www.zoomtvcanal10.com",
-    publicidad: "Para información sobre publicidad, escribe a publicidad@zoomtvcanal10.com o llama al 555-9012 de lunes a viernes de 9 AM a 5 PM.",
-    reportero: "¿Tienes una noticia que reportar? Envíala a reportero@zoomtvcanal10.com con fotos o videos y tus datos de contacto.",
-    horarios: "Transmitimos las 24 horas. Programación estelar de 7 PM a 10 PM y repeticiones de programas populares en la madrugada."
-  };
+  // Configuración de Gemini
+  const apiConfig = getApiConfig();
+  const genAI = new GoogleGenerativeAI(apiConfig.apiKey);
+  const model = genAI.getGenerativeModel({ model: apiConfig.model });
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    if (isOpen && messages.length === 0 && !showNameInput) {
-      // Mostrar mensaje de bienvenida cuando se abre el chat
-      setTimeout(() => {
-        setMessages([{ text: botResponses.greeting, sender: 'bot' }]);
-      }, 500);
-    }
-  }, [isOpen, showNameInput]);
-
-  const handleNameSubmit = (e) => {
-    e.preventDefault();
-    if (userName.trim() !== '') {
-      setShowNameInput(false);
-      setMessages([{ text: `¡Hola ${userName}! Soy el asistente de Zoom TV Canal 10. ¿En qué puedo ayudarte hoy?`, sender: 'bot' }]);
-    }
-  };
-
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() === '') return;
-
-    // Agregar mensaje del usuario
-    const userMessage = { text: inputValue, sender: 'user' };
-    setMessages([...messages, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    // Procesar la respuesta del bot
-    setTimeout(() => {
-      let botResponse = '';
-      const userText = inputValue.toLowerCase();
-
-      if (userText.includes('programación') || userText.includes('programacion') || userText.includes('horario')) {
-        botResponse = botResponses.programacion;
-      } else if (userText.includes('contacto') || userText.includes('llamar') || userText.includes('teléfono')) {
-        botResponse = botResponses.contacto;
-      } else if (userText.includes('publicidad') || userText.includes('anuncio')) {
-        botResponse = botResponses.publicidad;
-      } else if (userText.includes('reportero') || userText.includes('noticia')) {
-        botResponse = botResponses.reportero;
-      } else if (userText.includes('horario') || userText.includes('transmisión')) {
-        botResponse = botResponses.horarios;
-      } else {
-        const randomDefault = botResponses.default[Math.floor(Math.random() * botResponses.default.length)];
-        botResponse = randomDefault;
-      }
-
-      const botMessage = { text: botResponse, sender: 'bot' };
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 2000); // Retraso variable para parecer más natural
-  };
-
   const toggleChat = () => {
     setIsOpen(!isOpen);
-    if (!isOpen && messages.length === 0 && !showNameInput) {
-      // Mostrar mensaje de bienvenida solo si no hay mensajes previos
+    if (!isOpen) {
+      // Focus en el input cuando se abre el chat
       setTimeout(() => {
-        setMessages([{ text: botResponses.greeting, sender: 'bot' }]);
-      }, 300);
+        inputRef.current?.focus();
+      }, 100);
     }
+  };
+
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim() || isLoading) return;
+
+    const userMessage = {
+      id: Date.now(),
+      text: inputMessage.trim(),
+      isUser: true,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputMessage('');
+    setIsLoading(true);
+
+    try {
+      const prompt = generatePrompt(userMessage.text);
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+
+      const botMessage = {
+        id: Date.now() + 1,
+        text: text,
+        isUser: false,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Error al obtener respuesta de Gemini:', error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: CHATBOT_CONFIG.MESSAGES.ERROR,
+        isUser: false,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const formatTime = (timestamp) => {
+    return timestamp.toLocaleTimeString('es-ES', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
   };
 
   return (
-    <div className={`chatbot-container ${isOpen ? 'open' : ''}`}>
-      <button className="chatbot-toggle" onClick={toggleChat}>
-        {isOpen ? (
-          <span className="close-icon">×</span>
-        ) : (
-          <div className="chat-icon">
-            <span className="tv-icon">📺</span>
-            <span className="assistant-text">Zoom TV</span>
-          </div>
-        )}
-      </button>
-      
+    <div className="chatbot-container">
+      {/* Chat Window */}
       {isOpen && (
-        <div className="chatbot-window">
-          <div className="chatbot-header">
-            <div className="logo-container">
-              <span className="tv-logo">📺</span>
-              <h3>Zoom TV Canal 10</h3>
-            </div>
-            <p>Asistente Virtual</p>
-          </div>
-          
-          <div className="chatbot-messages">
-            {showNameInput ? (
-              <div className="name-input-container">
-                <div className="bot-message">
-                  <p>¡Bienvenido al asistente de Zoom TV Canal 10! ¿Cuál es tu nombre?</p>
+        <div className="chatbot-window dark:chatbot-window-dark">
+          <div className="flex flex-col h-[400px]">
+            {/* Header */}
+            <div className="chatbot-header">
+              <div className="flex justify-between items-center">
+                <h2 className="text-lg font-semibold text-white">
+                  {CHATBOT_CONFIG.MESSAGES.CHAT_TITLE}
+                </h2>
+                <div className="flex items-center gap-2">
+                  <div className="chatbot-online-indicator text-xs px-2 py-1 rounded-full">
+                    {CHATBOT_CONFIG.MESSAGES.ONLINE_STATUS}
+                  </div>
+                  <button 
+                    onClick={toggleChat}
+                    className="chatbot-close-button"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <form onSubmit={handleNameSubmit} className="name-form">
-                  <input
-                    type="text"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    placeholder="Escribe tu nombre..."
-                    autoFocus
-                  />
-                  <button type="submit">Continuar</button>
-                </form>
               </div>
-            ) : messages.length === 0 ? (
-              <div className="welcome-message">
-                <p>{botResponses.greeting}</p>
-              </div>
-            ) : (
-              messages.map((message, index) => (
-                <div key={index} className={`message ${message.sender}`}>
-                  {message.sender === 'bot' && <span className="bot-avatar">📺</span>}
-                  <div className="message-content">
-                    {message.text}
-                    {message.sender === 'bot' && (
-                      <div className="message-time">{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-                    )}
+            </div>
+            
+            {/* Messages */}
+            <div className="chatbot-messages" id="chatDisplay">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`chatbot-message-container ${
+                    message.isUser ? 'chatbot-message-user-container' : 'chatbot-message-bot-container'
+                  }`}
+                >
+                  <div
+                    className={`${
+                      message.isUser
+                        ? 'chatbot-message-user'
+                        : 'chatbot-message-bot'
+                    }`}
+                  >
+                    <div className="chatbot-message-text">{message.text}</div>
+                    <div className="chatbot-message-time">
+                      {formatTime(message.timestamp)}
+                    </div>
                   </div>
                 </div>
-              ))
-            )}
-            
-            {isTyping && (
-              <div className="message bot">
-                <span className="bot-avatar">📺</span>
-                <div className="typing-indicator">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+              ))}
+              
+              {isLoading && (
+                <div className="chatbot-message-container chatbot-message-bot-container">
+                  <div className="chatbot-message-bot">
+                    <div className="chatbot-loading-container">
+                      <div className="chatbot-loading-dots">
+                        <div className="chatbot-loading-dot"></div>
+                        <div className="chatbot-loading-dot"></div>
+                        <div className="chatbot-loading-dot"></div>
+                      </div>
+                      <span className="chatbot-loading-text">{CHATBOT_CONFIG.MESSAGES.LOADING}</span>
+                    </div>
+                  </div>
                 </div>
+              )}
+              
+              <div ref={messagesEndRef} />
+            </div>
+            
+            {/* Input */}
+            <div className="chatbot-input-area dark:chatbot-input-area-dark">
+              <div className="flex gap-2">
+                <input 
+                  ref={inputRef}
+                  placeholder={CHATBOT_CONFIG.MESSAGES.PLACEHOLDER} 
+                  className="chatbot-input dark:chatbot-input-dark flex-1" 
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  disabled={isLoading}
+                  type="text" 
+                />
+                <button 
+                  className="chatbot-send-button"
+                  onClick={handleSendMessage}
+                  disabled={isLoading || !inputMessage.trim()}
+                >
+                  {isLoading ? CHATBOT_CONFIG.MESSAGES.SEND_LOADING : CHATBOT_CONFIG.MESSAGES.SEND_BUTTON}
+                </button>
               </div>
-            )}
-            <div ref={messagesEndRef} />
+            </div>
           </div>
-          
-          {!showNameInput && (
-            <form onSubmit={handleSendMessage} className="chatbot-input">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Escribe tu mensaje..."
-                autoFocus
-              />
-              <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                </svg>
-              </button>
-            </form>
-          )}
         </div>
       )}
+
+      {/* Floating Button */}
+      <button
+        onClick={toggleChat}
+        className={`chatbot-floating-button ${isOpen ? 'chat-open' : ''}`}
+        aria-label="Open chat"
+      >
+      </button>
     </div>
   );
 };
 
-export default Chatbot; 
+export default Chatbot;
