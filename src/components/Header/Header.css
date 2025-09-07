@@ -1,4 +1,6 @@
-/* Variables CSS para personalización */
+/* Header.css */
+
+/* Variables CSS */
 :root {
   --header-bg: #1a1a2e;
   --primary-color: #000000;
@@ -13,14 +15,7 @@
   --neon-glow-size: 15px;
 }
 
-/* Reset y estilos base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Estructura principal del header */
+/* Ajustes principales */
 .header {
   background-color: var(--header-bg);
   color: var(--text-color);
@@ -33,38 +28,44 @@
   animation: slideDown 0.5s ease-out;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  font-family: 'Montserrat', sans-serif;
+  border-bottom: 3px solid var(--neon-color-1);
 }
 
-/* Sección superior del header */
+/* Header top: logo a la izquierda + título centrado */
 .header-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  position: relative;
   width: 100%;
+  position: relative;
+  padding: 0.5rem 0;
+  min-height: 70px; /* Altura mínima para asegurar espacio */
 }
 
-/* Logo y título */
+/* Logo - POSICIONADO A LA IZQUIERDA */
 .logo {
   height: var(--logo-size);
   width: auto;
   object-fit: contain;
   transition: var(--transition);
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+  margin-right: 20px;
+  z-index: 2;
 }
 
+/* Título - ABSOLUTAMENTE CENTRADO */
 .header-top h1 {
-  margin: 0 auto;
   font-size: var(--title-size);
   color: var(--primary-color);
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transition: var(--transition);
-  font-family: 'Montserrat', sans-serif;
+  margin: 0;
   text-align: center;
-
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  z-index: 1;
+  
   /* Efecto de neón animado */
   animation: neon-flicker 2s infinite alternate;
   text-shadow: 
@@ -73,13 +74,10 @@
     0 0 15px var(--neon-color-1),
     0 0 20px var(--neon-color-1),
     0 0 35px var(--neon-color-1),
-    0 0 40px var(--neon-color-1),
-    0 0 50px var(--neon-color-1),
-    0 0 75px var(--neon-color-1);
-  position: relative;
+    0 0 40px var(--neon-color-1);
 }
 
-/* Animación de neón con múltiples colores */
+/* Animación de neón */
 @keyframes neon-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow: 
@@ -88,23 +86,10 @@
       0 0 15px var(--neon-color-1),
       0 0 20px var(--neon-color-1),
       0 0 35px var(--neon-color-1),
-      0 0 40px var(--neon-color-1),
-      0 0 50px var(--neon-color-1),
-      0 0 75px var(--neon-color-1);
+      0 0 40px var(--neon-color-1);
   }
   20%, 24% {
     text-shadow: none;
-  }
-  55% {
-    text-shadow: 
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px var(--neon-color-2),
-      0 0 20px var(--neon-color-2),
-      0 0 35px var(--neon-color-2),
-      0 0 40px var(--neon-color-2),
-      0 0 50px var(--neon-color-2),
-      0 0 75px var(--neon-color-2);
   }
 }
 
@@ -134,20 +119,7 @@
   }
 }
 
-/* Menú de navegación */
-.desktop-nav {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-/* Menú móvil */
-.mobile-menu {
-  display: none;
-}
-
-/* Animaciones */
+/* Animación de aparición */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -159,15 +131,28 @@
   }
 }
 
-/* Media Queries para responsive design */
-@media (max-width: 992px) {
-  :root {
-    --logo-size: 70px;
-    --title-size: 1.8rem;
-    --neon-glow-size: 12px;
-  }
+/* Botón hamburguesa - OCULTO POR DEFECTO */
+.mobile-menu {
+  display: none;
 }
 
+/* Navbar escritorio - VISIBLE POR DEFECTO */
+.desktop-nav {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Efecto hover para elementos interactivos */
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(2px 2px 6px rgba(255, 0, 0, 0.5));
+}
+
+/* ===== MEDIA QUERIES RESPONSIVE ===== */
+
+/* Para móviles: ocultar navbar y mostrar menú hamburguesa */
 @media (max-width: 768px) {
   :root {
     --logo-size: 60px;
@@ -179,37 +164,31 @@
     padding: 0.75rem;
   }
   
+  /* Ocultar navbar en móviles */
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  /* Mostrar y posicionar menú hamburguesa en móviles */
   .mobile-menu {
-    display: block;
+    display: block !important;
     position: absolute;
-    right: 1rem;
+    right: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1001;
   }
   
-  .desktop-nav {
-    display: none;
-  }
-  
-  /* Reducir efecto de neón en móviles para mejor rendimiento */
   .header-top h1 {
+    font-size: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Reducir efecto de neón en móviles */
     text-shadow: 
       0 0 5px #fff,
       0 0 10px var(--neon-color-1),
       0 0 15px var(--neon-color-1);
-    animation: neon-flicker-mobile 3s infinite alternate;
-  }
-  
-  @keyframes neon-flicker-mobile {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-      text-shadow: 
-        0 0 5px #fff,
-        0 0 10px var(--neon-color-1),
-        0 0 15px var(--neon-color-1);
-    }
-    20%, 24% {
-      text-shadow: none;
-    }
   }
   
   .header-top h1::after {
@@ -217,6 +196,18 @@
   }
 }
 
+/* Para desktop: ocultar menú hamburguesa */
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .desktop-nav {
+    display: flex !important;
+  }
+}
+
+/* Ajustes para tablets pequeñas */
 @media (max-width: 576px) {
   :root {
     --logo-size: 50px;
@@ -229,17 +220,37 @@
   
   .header-top h1 {
     font-size: 1.1rem;
-    margin-left: 0.5rem;
+    max-width: 60%;
+  }
+  
+  .mobile-menu {
+    right: 1rem;
+  }
+  
+  .logo {
+    margin-right: 15px;
+    height: 45px;
   }
 }
 
+/* Ajustes para móviles muy pequeños */
 @media (max-width: 400px) {
   :root {
     --logo-size: 45px;
-    --title-size: 1.1rem;
+    --title-size: 1rem;
   }
   
   .header-top h1 {
     font-size: 1rem;
+    max-width: 50%;
+  }
+  
+  .logo {
+    margin-right: 10px;
+    height: 40px;
+  }
+  
+  .mobile-menu {
+    right: 0.8rem;
   }
 } 

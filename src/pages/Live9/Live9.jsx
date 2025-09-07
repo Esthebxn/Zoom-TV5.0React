@@ -4,13 +4,8 @@ import Hls from 'hls.js';
 import './live9.css';
 
 const Live9 = () => {
-  // Configuración del stream - Transmisión en vivo desde Kick.com
-  // URL del stream HLS de Kick.com
-  const PLAYBACK_URL = "https://stream.kick.com/ivs/v1/196233775518/7IFTKqts0nlT/2025/8/30/17/7/97u5ppOrDEd4/media/hls/720p60/playlist.m3u8";
-  
-  // IMPORTANTE: Reemplaza la URL de arriba con tu stream real
-  // Si no tienes un stream configurado, puedes usar un video de prueba:
-  // const PLAYBACK_URL = "https://sae12.playlist.live-video.net/v1/playlist/CpAG1Yxa6joV-PM90W4cXVJWkk1ypyO4NeL0C6m9DnRcgF3yE6FBIoIrQ-WqEhRuQOcQ9n9Ou8tOAzsgD-HgO2WvVuvagPP3vtcDvFn2zDAH27AmH0w1rqFxHn_DISVpMs-q6xiAOwNqY3lQxJtmpwik8vl7crOxwdTIrxAHTfEfyZlDfIP-9--TbnlSOKmvOPwjtn3jN3tj6qGVR2sImBjfJx7ps93ruAZqPG43pK5dqks3bq1sHq7GAlppIFJlkV6zNAk98nHb3FHOKa0HmQT18JRoNMi2Z9gWO6SezYzJEChZhcwXJkNKZsAosKEjqiZFvtKiJwfxvj13EyNkCt4C3qMWatXQ0fFgEo1CGlPNAU6EOshr9gutjkWsKG0t6B57ChX3s52yjTkuBWmXxQlZi9CFBrd-NU9-CBvwirGLb9BCqaDAh1oIJNHW1TXsX0jF9pVuocj0qJNp3sAIgUPZx-VPPJ2f-bHk0iDfMi_kB-LlEleXqkRMiYwxkc9CjI99cQ2dOCdX58vfj7RXQZS_y1SBCLwJJEzT5IIO6bWG6s_4MjUww7CwyXF_h17SY8gqU8IxQKEqwW0z-Pp3FCU9UKH2dGXrzo_BNHgFIJLNm3LSig2cBkz0eSyomg74cNHGvBQjqZIzeoQi5kSc4Zupn_dcsxmoU5TXpLkkMmOVJJ8Mk15pxQknjwPk_yMQz96yrAA-EyDo5CHcCiLjfr983b9TUMRljIg__GPoLda4ypNJMcZEEjcJHmTAxDk7WXniPyWaiwJ5UAJ_a-ip1B5FmIhPTB3GHRj8zxSjZhDp9_X0pNiKGUoBAufxqVDZ2cpHUiKkk8HSUmWn7NJzcmPxEcmdOph9rNA0DV-yEeXooOtlYut25Ch-VRRIvl9I2x2n-pCs_fRlY_jpQD6tlKjr5sDayxbWrXexfq84n5SJT2z5fy7B11Xj2QUkFT_DSJuI--fmmJ3YM23rY6TJ9F4ekRfASCm70DJkxCPC0d0nkuUSwIfrTT8K-YiNcxAy5C9rrGYwPTXHKkUCBMz0B01KCRoMmCGe1UGUKnV5yHD6IAEqCXVzLWVhc3QtMjCNDQ.m3u8";
+  // Configuración del stream
+  const PLAYBACK_URL = "https://sae12.playlist.live-video.net/v1/playlist/CqIGJyM_GIMjlc_nAqzEZuokbV9EZ6USN3gpD1oYFGotbcDdicD6RkzIbXMYsSXvRvCbuU43KDdi-x19E1LHKeIzzB14NHSPySGcFLVeR4uMi_uRGo1xkpq7F3ap3F3OuxG7-L0qMuHRx6_J3Phb59747AOjHsT14ZmBF7hWi1UGmDnV4Ndi_LmNJbv2rycGG72G49CxDZ6bCPEaKy7PGIdbbcvxzQP0l_xKIsRCVnSD-Y5_QUIAMIULT5nzP_xixu0Z6FhC44FTSCb-zlfXfV-nQHyItxH79Iw3LPANDOzhedQe4ftsvRmJZr2jzDU4uIesM2MX5VEeP2wo3STZGThJkTk5cPpg4SBik0xsdOFKv70X6mzUM1d6Fl0tAdxtsrepE3bViNUPjq_BZrHK4H1F0EivFq3hD8YP8AMgth5L2RlgmL3XFMWm88dfcVgqanPmMdJ7uUjG3N6O2CI7-mGtcVO7yCH6eDcyiWKEWNGUWo3FMW9h1v8o4ODJjGfzPkFIQW0YuXCvtvfTqVYzz6Mr7_TwFrFn0ZLGHuTzfV0WbkuN-uM3UL1sa1Jfh_3qR0YSY-wjGcTJibklUFbq44iEVoEsUfOaUNLAkVykqluo-GLZYRjbj1Y8XrGRlYk8vTbv2GWm9G1Avti9lAmelHokMP__ibPHxuIGW_lRn-meNdvNGbTpePkFrO8sWLy1zvFhxgD-qVREP6mwcZGAYjgbR9Eec_MDz_UQnxjzJPFpOXg_p8Amo3SjfG3zbHDqH7gqZoxUXenDcjQKnlQsso8ttYth0aJju7LE7n2Yk4OpVjuRMLVZ3ZbXjhGPnGBnX-ouuZRHEAXSs3tDWdbUJHsHIUqKnet6Ep0ccWEIuxOtPxAgD01ftgttP-9Q7UBd2_tpuOMni_2JbBVXDNI4L36z9cR-9yONRopsx2YTpqA8PLuSJ2kTzcCBg7GqT7dc9uK_oveBynbwrFdwAmICI5-xJuz7WXSAHLNbmi0APf8fojWzaZM3KqLhfqf2okqgn4VuF-MAuSFycIJ3VWwTnhcFF0TcdyD2585g49HN6_b73ViHVxoM3EuL6D2wSmlS2D4rIAEqCXVzLWVhc3QtMjCWDQ.m3u8";
 
   // Estados del reproductor
   const [playerState, setPlayerState] = useState({
@@ -34,7 +29,6 @@ const Live9 = () => {
   const initPlayer = () => {
     setPlayerState(prev => ({ ...prev, loading: true, error: null }));
 
-    // Limpiar instancia anterior de HLS
     if (hlsRef.current) {
       hlsRef.current.destroy();
     }
@@ -85,7 +79,6 @@ const Live9 = () => {
         }
       });
     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-      // Soporte nativo para Safari
       videoRef.current.src = PLAYBACK_URL;
       videoRef.current.addEventListener('loadedmetadata', () => {
         videoRef.current.play()
@@ -114,7 +107,7 @@ const Live9 = () => {
   // Manejo de errores con reintento
   const handleStreamError = (errorMsg) => {
     const maxRetries = 3;
-    const retryDelay = 3000; // 3 segundos
+    const retryDelay = 3000;
     
     if (playerState.retryCount < maxRetries) {
       setPlayerState(prev => ({
@@ -203,7 +196,6 @@ const Live9 = () => {
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
     document.addEventListener('msfullscreenchange', handleFullscreenChange);
 
-    // Inicializar el reproductor
     initPlayer();
 
     return () => {
@@ -220,92 +212,139 @@ const Live9 = () => {
   }, []);
 
   return (
-    <div 
-      className="live-stream-container"
-      ref={containerRef}
-      onMouseEnter={() => setPlayerState(prev => ({ ...prev, showControls: true }))}
-      onMouseLeave={() => setPlayerState(prev => ({ ...prev, showControls: false }))}
-    >
-      {/* Marca de agua del canal - Solo muestra EN VIVO */}
-      <div className="channel-brand">
-        <span className="live-badge">EN VIVO</span>
-      </div>
-
-      {/* Contenedor del video */}
-      <div className="video-wrapper">
-        <video
-          ref={videoRef}
-          width="100%"
-          height="100%"
-          controls={false}
-          autoPlay
-          muted={playerState.isMuted}
-          playsInline
-        />
-
-        {/* Estado de carga */}
-        {playerState.loading && (
-          <div className="stream-status">
-            <div className="loading-spinner"></div>
-            <p>{playerState.error || 'Cargando transmisión...'}</p>
+    <div className="retro-tv-container">
+      {/* Marco de TV retro años 70 */}
+      <div className="retro-tv-frame">
+        {/* Parte superior de la TV con controles */}
+        <div className="tv-top-panel">
+          <div className="tv-brand">ZOOM TV</div>
+          <div className="tv-controls-horizontal">
+            <div className="control-dial">
+              <span className="dial-label">VOL</span>
+              <div className="dial-knob"></div>
+            </div>
+            <div className="control-dial">
+              <span className="dial-label">CH</span>
+              <div className="dial-knob"></div>
+            </div>
+            <div className="power-switch">
+              <div className="switch"></div>
+              <span className="switch-label">POWER</span>
+            </div>
           </div>
-        )}
+        </div>
+        
+        {/* Pantalla de TV */}
+        <div className="retro-tv-screen">
+          <div 
+            className="live-stream-container"
+            ref={containerRef}
+            onMouseEnter={() => setPlayerState(prev => ({ ...prev, showControls: true }))}
+            onMouseLeave={() => setPlayerState(prev => ({ ...prev, showControls: false }))}
+          >
+            {/* Marca de agua del canal */}
+            <div className="channel-brand">
+              <span className="live-badge">EN VIVO</span>
+            </div>
 
-        {/* Mensaje de error */}
-        {!playerState.loading && playerState.error && (
-          <div className="stream-status error">
-            <p>{playerState.error}</p>
-            <button onClick={reloadStream} className="retry-btn">
-              <FaRedo /> Reintentar
-            </button>
-          </div>
-        )}
+            {/* Contenedor del video */}
+            <div className="video-wrapper">
+              <video
+                ref={videoRef}
+                width="100%"
+                height="100%"
+                controls={false}
+                autoPlay
+                muted={playerState.isMuted}
+                playsInline
+              />
 
-        {/* Mensaje informativo cuando no hay stream configurado */}
-        {!playerState.loading && !playerState.error && !playerState.streamActive && (
-          <div className="stream-status info">
-            <h3>Transmisión en Vivo</h3>
-            <p>Zoom TV está transmitiendo en vivo desde Kick.com</p>
-            <p><strong>Características del stream:</strong></p>
-            <ul>
-              <li>Formato: HLS (HTTP Live Streaming)</li>
-              <li>Calidad: 720p60</li>
-              <li>Plataforma: Kick.com</li>
-              <li>Latencia: Baja</li>
-            </ul>
-            <p><em>Si no puedes ver la transmisión, verifica tu conexión a internet</em></p>
-          </div>
-        )}
+              {/* Estado de carga */}
+              {playerState.loading && (
+                <div className="stream-status">
+                  <div className="loading-spinner"></div>
+                  <p>{playerState.error || 'Cargando transmisión...'}</p>
+                </div>
+              )}
 
-        {/* Controles del reproductor */}
-        {playerState.showControls && !playerState.loading && !playerState.error && playerState.streamActive && (
-          <div className="video-controls">
-            <button 
-              onClick={togglePlay} 
-              className="control-btn"
-              aria-label={playerState.isPlaying ? 'Pausar' : 'Reproducir'}
-            >
-              {playerState.isPlaying ? <FaPause /> : <FaPlay />}
-            </button>
-            <button 
-              onClick={toggleMute} 
-              className="control-btn"
-              aria-label={playerState.isMuted ? 'Activar sonido' : 'Silenciar'}
-            >
-              {playerState.isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-            </button>
-            <button 
-              onClick={toggleFullscreen}
-              className="control-btn"
-              aria-label="Pantalla completa"
-            >
-              <FaExpand />
-            </button>
+              {/* Mensaje de error */}
+              {!playerState.loading && playerState.error && (
+                <div className="stream-status error">
+                  <p>{playerState.error}</p>
+                  <button onClick={reloadStream} className="retry-btn">
+                    <FaRedo /> Reintentar
+                  </button>
+                </div>
+              )}
+
+              {/* Mensaje informativo cuando no hay stream configurado */}
+              {!playerState.loading && !playerState.error && !playerState.streamActive && (
+                <div className="stream-status info">
+                  <h3>Transmisión en Vivo</h3>
+                  <p>Zoom TV está transmitiendo en vivo desde Kick.com</p>
+                  <p><strong>Características del stream:</strong></p>
+                  <ul>
+                    <li>Formato: HLS (HTTP Live Streaming)</li>
+                    <li>Calidad: 720p60</li>
+                    <li>Plataforma: Kick.com</li>
+                    <li>Latencia: Baja</li>
+                  </ul>
+                  <p><em>Si no puedes ver la transmisión, verifica tu conexión a internet</em></p>
+                </div>
+              )}
+
+              {/* Controles del reproductor */}
+              {playerState.showControls && !playerState.loading && !playerState.error && playerState.streamActive && (
+                <div className="video-controls">
+                  <button 
+                    onClick={togglePlay} 
+                    className="control-btn"
+                    aria-label={playerState.isPlaying ? 'Pausar' : 'Reproducir'}
+                  >
+                    {playerState.isPlaying ? <FaPause /> : <FaPlay />}
+                  </button>
+                  <button 
+                    onClick={toggleMute} 
+                    className="control-btn"
+                    aria-label={playerState.isMuted ? 'Activar sonido' : 'Silenciar'}
+                  >
+                    {playerState.isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+                  </button>
+                  <button 
+                    onClick={toggleFullscreen}
+                    className="control-btn"
+                    aria-label="Pantalla completa"
+                  >
+                    <FaExpand />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
+        
+        {/* Base de la TV */}
+        <div className="tv-base">
+          <div className="tv-speakers">
+            <div className="speaker-grill"></div>
+            <div className="speaker-grill"></div>
+          </div>
+        </div>
+        
+        {/* Logotipos en los costados */}
+        <div className="tv-logo left-logo">
+          <div className="logo-placeholder">
+            <span>LOGO</span>
+          </div>
+        </div>
+        <div className="tv-logo right-logo">
+          <div className="logo-placeholder">
+            <span>LOGO</span>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Live9;
+export default Live9; 

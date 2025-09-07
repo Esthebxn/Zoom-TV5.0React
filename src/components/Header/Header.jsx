@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import HamburguesaMenu from "../../pages/HamburguesaMenu/HamburguesaMenu";
+import HamburguesaMenu from "../HamburguesaMenu/HamburguesaMenu";
 import "./Header.css";
 import logo from "../../assets/images/1368e5e2-d1ec-4784-ae78-69b34cabb9ad.png";
 
@@ -10,17 +10,19 @@ const Header = () => {
       <div className="header-top">
         <img 
           src={logo} 
-          alt="Zoom TV Canal 10 Megacable" 
+          alt="Zoom TV Canal 10 " 
           className="logo" 
-          loading="lazy"
         />
-        <h1>ℤ𝕠𝕠𝕞 𝕋𝕍 ℂ𝕒𝕟𝕒𝕝 𝟙𝟘 𝕄𝕖𝕘𝕒𝕔𝕒𝕓𝕝𝕖</h1>
         
+        <h1>ℤ𝕠𝕠𝕞 𝕋𝕍 ℂ𝕒𝕟𝕒𝕝 𝟙𝟘 </h1>
+
+        {/* Menú hamburguesa - visible solo en mobile */}
         <div className="mobile-menu">
           <HamburguesaMenu />
         </div>
       </div>
-      
+
+      {/* Navbar - visible solo en desktop */}
       <div className="desktop-nav">
         <Navbar />
       </div>
@@ -28,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header; 

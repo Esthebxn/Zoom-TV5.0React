@@ -1,58 +1,68 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header/Header';
-import Inicio from '../pages/Inicio/Inicio';
-import Nosotros from '../pages/Nosotros/Nosotros';
-import Actualidad from '../pages/Actualidad/Actualidad';
-import Deportes from '../pages/Actualidad/Deportes';
-import Nacionales from '../pages/Actualidad/Nacionales';
-import Regionales from '../pages/Actualidad/Regionales';
-import Musica from '../pages/Actualidad/Musica';
-import RedesSociales from '../pages/RedesSociales/RedesSociales';
-import Programacion12 from '../pages/Programacion/Programacion12';
-import Anunciantes from '../pages/Anunciantes/Anunciantes';
-import Live9 from '../pages/Live9/Live9';
-import ZoomApp from '../pages/ZoomApp/ZoomApp';
-import Chatbot from './Chatbot/Chatbot';
-import HamburguesaMenu from '../pages/HamburguesaMenu/HamburguesaMenu';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import Header from "./Header/Header";
+import Chatbot from "./Chatbot/Chatbot";
+import Loading from "../components/Loading/Loading";
+import TVFloatingScreens from "../components/TVFloatingScreens/TVFloatingScreens"; // ✅ Importación correcta
+
+// Páginas principales
+import Inicio from "../pages/Inicio/Inicio";
+import Nosotros from "../pages/Nosotros/Nosotros";
+import Actualidad from "../pages/Actualidad/Actualidad";
+import Deportes from "../pages/Actualidad/Deportes";
+import Nacionales from "../pages/Actualidad/Nacionales";
+import Regionales from "../pages/Actualidad/Regionales";
+import Musica from "../pages/Actualidad/Musica";
+import RedesSociales from "../pages/RedesSociales/RedesSociales";
+import Programacion12 from "../pages/Programacion/Programacion12";
+import Anunciantes from "../pages/Anunciantes/Anunciantes";
+import Live9 from "../pages/Live9/Live9";
+import ZoomApp from "../pages/ZoomApp/ZoomApp";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showFloatingScreens, setShowFloatingScreens] = useState(false);
+
+  // Simula carga inicial
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      // Mostrar pantallas flotantes después de que termine la carga
+      setTimeout(() => setShowFloatingScreens(true), 500);
+    }, 3000); // ⏳ 3 segundos de loading
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />; // 🔥 Se muestra primero el Loading
+  }
+
   return (
     <Router>
       <div className="app">
-        <Header />
-        <HamburguesaMenu />
+        {showFloatingScreens && <TVFloatingScreens />} {/* ✅ Pantallas de TV flotantes */}
+        <Header /> {/* ✅ HamburguesaMenu ya está dentro del Header */}
         <Routes>
           <Route index element={<Inicio />} />
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/nosotros" element={<Nosotros />} />
-          
-          {/* Ruta principal de Actualidad */}
           <Route path="/actualidad" element={<Actualidad />} />
-          
-          {/* Rutas hijas de Actualidad */}
           <Route path="/actualidad/deportes/*" element={<Deportes />} />
           <Route path="/actualidad/nacionales" element={<Nacionales />} />
           <Route path="/actualidad/regionales" element={<Regionales />} />
           <Route path="/actualidad/musica" element={<Musica />} />
-          
-          {/* Ruta de Programación (corregida para coincidir con navbar) */}
           <Route path="/programacion" element={<Programacion12 />} />
-          
-          {/* Ruta En Vivo (añadida para coincidir con navbar) */}
           <Route path="/envivo" element={<Live9 />} />
-          
           <Route path="/anunciantes" element={<Anunciantes />} />
           <Route path="/redes-sociales" element={<RedesSociales />} />
           <Route path="/zoom-app" element={<ZoomApp />} />
-          
-          {/* Ruta alternativa para Live (se mantiene por compatibilidad) */}
           <Route path="/live" element={<Live9 />} />
-          
-          {/* Ruta alternativa para Programación (se mantiene por compatibilidad) */}
           <Route path="/zoom-tv-canal-10" element={<Programacion12 />} />
+          {/* Ruta directa de Loading (opcional) */}
+          <Route path="/loading" element={<Loading />} />
         </Routes>
-        
-        {/* Chatbot component */}
         <Chatbot />
       </div>
     </Router>

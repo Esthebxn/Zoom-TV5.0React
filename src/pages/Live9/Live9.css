@@ -1,124 +1,306 @@
-.live-stream-container {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #000;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+/* Estilo de TV retro años 70 - Tema rojo y negro con fondo negro */
+.retro-tv-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: #000000;
+  min-height: 100vh;
   font-family: 'Arial', sans-serif;
 }
 
-.channel-brand {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 20;
+.retro-tv-frame {
+  position: relative;
+  width: 900px;
+  background: #450909;
+  border-radius: 20px 20px 60px 20px;
+  padding: 25px;
+  box-shadow: 0 25px 50px rgba(255, 0, 0, 0.3),
+              inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+              inset 0 10px 20px rgba(255, 50, 50, 0.2);
+  border: 8px solid #300606;
 }
 
-.live-badge {
-  background-color: #ff0000;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 14px;
+.tv-top-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 15px;
+}
+
+.tv-brand {
+  font-family: 'Impact', sans-serif;
+  font-size: 28px;
+  color: #ff2a2a;
+  text-shadow: 2px 2px 0 #000, 0 0 10px rgba(255, 42, 42, 0.7);
+  letter-spacing: 2px;
+}
+
+.tv-controls-horizontal {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.control-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dial-label {
+  font-size: 12px;
+  color: #ff9999;
+  margin-bottom: 5px;
   font-weight: bold;
-  text-transform: uppercase;
-  animation: pulse 2s infinite;
+  text-shadow: 1px 1px 2px #000;
 }
 
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+.dial-knob {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #ff2a2a 0%, #cc0000 100%);
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4),
+              inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  border: 2px solid #800000;
+}
+
+.power-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.switch {
+  width: 20px;
+  height: 35px;
+  background: linear-gradient(to bottom, #ff2a2a, #cc0000);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 2px solid #800000;
+  margin-bottom: 5px;
+}
+
+.switch-label {
+  font-size: 10px;
+  color: #ff9999;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.retro-tv-screen {
+  position: relative;
+  background: #1a0000;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9),
+              0 0 20px rgba(255, 0, 0, 0.3);
+  border: 12px solid #260000;
+  padding: 5px;
+}
+
+.live-stream-container {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background: #000;
+  overflow: hidden;
 }
 
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  background-color: #000;
+  height: 100%;
 }
 
-.video-wrapper video {
-  position: absolute;
-  top: 0;
-  left: 0;
+video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Badge EN VIVO */
+.live-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff2a2a;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 15px rgba(255, 42, 42, 0.8);
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 1px;
+  border: 1px solid #cc0000;
+  text-shadow: 1px 1px 2px #000;
+}
+
+@keyframes pulse {
+  0% { 
+    background: #ff2a2a;
+    box-shadow: 0 0 15px rgba(255, 42, 42, 0.8);
+  }
+  50% { 
+    background: #cc0000;
+    box-shadow: 0 0 20px rgba(255, 42, 42, 1);
+  }
+  100% { 
+    background: #ff2a2a;
+    box-shadow: 0 0 15px rgba(255, 42, 42, 0.8);
+  }
+}
+
+/* Base de la TV */
+.tv-base {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.tv-speakers {
+  display: flex;
+  gap: 40px;
+}
+
+.speaker-grill {
+  width: 120px;
+  height: 20px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #260000,
+    #260000 2px,
+    #1a0000 2px,
+    #1a0000 4px
+  );
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Logotipos en los costados */
+.tv-logo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-logo {
+  left: -55px;
+}
+
+.right-logo {
+  right: -55px;
+}
+
+.logo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff2a2a, #cc0000);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+              0 0 15px rgba(255, 42, 42, 0.4);
+  border: 3px solid #800000;
+  font-size: 12px;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Para implementar tu logo real:
+   Reemplaza .logo-placeholder con:
+   <img src="/ruta/a/tu/1368e5e2-d1ec-4784-ae78-69b34cabb9ad.png" alt="Logo" className="logo-image" />
+   
+   Y añade estos estilos:
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #800000;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+              0 0 15px rgba(255, 42, 42, 0.4);
+}
+*/
+
+/* Controles del reproductor */
+.video-controls {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
+.control-btn {
+  background: rgba(255, 42, 42, 0.8);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid #800000;
+}
+
+.control-btn:hover {
+  background: rgba(255, 42, 42, 1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6),
+              0 0 15px rgba(255, 42, 42, 0.5);
+}
+
+/* Estados de carga y error */
 .stream-status {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
   text-align: center;
-  z-index: 15;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 300px;
+  color: white;
+  background: rgba(38, 0, 0, 0.9);
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 80%;
+  border: 2px solid #ff2a2a;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
 }
 
 .stream-status.error {
-  background-color: rgba(214, 48, 49, 0.7);
+  background: rgba(204, 0, 0, 0.9);
+  border: 2px solid #ff2a2a;
 }
 
 .stream-status.info {
-  background-color: rgba(33, 150, 243, 0.7);
-  text-align: left;
-  padding: 20px;
-  max-width: 500px;
-}
-
-.stream-status.info h3 {
-  margin: 0 0 15px 0;
-  color: #fff;
-  font-size: 18px;
-}
-
-.stream-status.info p {
-  margin: 8px 0;
-  color: #fff;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.stream-status.info ul {
-  margin: 10px 0;
-  padding-left: 20px;
-  color: #fff;
-}
-
-.stream-status.info li {
-  margin: 5px 0;
-  color: #fff;
-}
-
-.stream-status.info code {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: monospace;
-  color: #fff;
-}
-
-.stream-status.info em {
-  color: #e3f2fd;
-  font-style: italic;
+  background: rgba(76, 0, 0, 0.9);
+  border: 2px solid #ff2a2a;
 }
 
 .loading-spinner {
   border: 4px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top: 4px solid #ffffff;
+  border-top: 4px solid #ff2a2a;
   width: 40px;
   height: 40px;
   animation: spin 1s linear infinite;
@@ -131,79 +313,97 @@
 }
 
 .retry-btn {
-  background-color: #fff;
-  color: #d32f2f;
+  background: #ff2a2a;
+  color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border-radius: 5px;
   margin-top: 15px;
-  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
+  margin: 15px auto 0;
+  font-weight: bold;
+  transition: all 0.3s;
+  border: 1px solid #800000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .retry-btn:hover {
-  background-color: #f5f5f5;
+  background: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.video-controls {
+/* Efectos de brillo para elementos rojos */
+.tv-brand, .live-badge, .control-btn, .retry-btn {
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+}
+
+/* Brillo sutil en el marco de la TV */
+.retro-tv-frame::before {
+  content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 15px 15px 55px 15px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 1;
 }
 
-.live-stream-container:hover .video-controls {
-  opacity: 1;
-}
-
-.control-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 16px;
-  backdrop-filter: blur(5px);
-}
-
-.control-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
-  .live-badge {
-    font-size: 12px;
-    padding: 4px 8px;
+/* Responsive */
+@media (max-width: 1000px) {
+  .retro-tv-frame {
+    width: 90%;
+    padding: 20px;
   }
   
-  .video-controls {
-    padding: 10px;
+  .live-stream-container {
+    height: 400px;
+  }
+  
+  .tv-logo {
+    display: none;
+  }
+  
+  .tv-top-panel {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .retro-tv-frame {
+    padding: 15px;
+    border-radius: 15px 15px 40px 15px;
+  }
+  
+  .live-stream-container {
+    height: 300px;
+  }
+  
+  .tv-controls-horizontal {
     gap: 15px;
   }
   
-  .control-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 14px;
+  .dial-knob {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .tv-speakers {
+    gap: 20px;
+  }
+  
+  .speaker-grill {
+    width: 80px;
+  }
+  
+  .tv-brand {
+    font-size: 22px;
   }
 } 
