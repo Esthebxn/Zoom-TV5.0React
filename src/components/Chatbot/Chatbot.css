@@ -1,7 +1,7 @@
 /* Estilos específicos para el Chatbot - Tema Zoom TV */
 .chatbot-container {
   position: fixed !important;
-  bottom: 1.5rem !important;
+  bottom: 0.5rem !important;
   right: 1.5rem !important;
   z-index: 1002 !important;
 }
@@ -48,9 +48,18 @@
   transform: scale(0.95) !important;
 }
 
-/* Botón siempre muestra el mismo logo */
+/* Botón muestra logo solo cuando el chat está cerrado */
 .chatbot-floating-button {
   background-image: url('../../assets/images/chatbot_logo.png') !important;
+}
+
+/* Botón cuando el chat está abierto - completamente invisible */
+.chatbot-floating-button.chat-open {
+  background-image: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .chatbot-window {
@@ -343,7 +352,7 @@
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .chatbot-container {
-    bottom: 1rem !important;
+    bottom: 0.25rem !important;
     right: 1rem !important;
   }
   
