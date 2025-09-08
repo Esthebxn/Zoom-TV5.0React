@@ -321,4 +321,136 @@ export const companyApi = {
   }
 };
 
+// API para transmisiones
+export const transmisionesApi = {
+  // Obtener todas las transmisiones
+  getAll: async () => {
+    try {
+      const response = await apiClient.get('/transmisiones');
+      return response.data;
+    } catch (error) {
+      console.error('Error obteniendo transmisiones:', error);
+      throw error;
+    }
+  },
+
+  // Obtener transmisiones activas
+  getActive: async () => {
+    try {
+      const response = await apiClient.get('/transmisiones/active');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching active transmisiones:', error);
+      throw error;
+    }
+  },
+
+  // Obtener transmisiones en vivo
+  getLive: async () => {
+    try {
+      const response = await apiClient.get('/transmisiones/live');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching live transmisiones:', error);
+      throw error;
+    }
+  },
+
+  // Obtener transmisiones por categoría
+  getByCategory: async (category) => {
+    try {
+      const response = await apiClient.get(`/transmisiones/category/${category}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching transmisiones by category:', error);
+      throw error;
+    }
+  },
+
+  // Obtener transmisión por ID
+  getById: async (id) => {
+    try {
+      const response = await apiClient.get(`/transmisiones/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching transmision by ID:', error);
+      throw error;
+    }
+  },
+
+  // Crear nueva transmisión
+  create: async (transmisionData, token) => {
+    try {
+      const response = await apiClient.post('/transmisiones', transmisionData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating transmision:', error);
+      throw error;
+    }
+  },
+
+  // Actualizar transmisión
+  update: async (id, transmisionData, token) => {
+    try {
+      const response = await apiClient.put(`/transmisiones/${id}`, transmisionData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating transmision:', error);
+      throw error;
+    }
+  },
+
+  // Actualizar estado en vivo
+  updateLiveStatus: async (id, isLive, token) => {
+    try {
+      const response = await apiClient.patch(`/transmisiones/${id}/live-status`, 
+        { isLive }, 
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error updating live status:', error);
+      throw error;
+    }
+  },
+
+  // Incrementar vistas
+  incrementViews: async (id) => {
+    try {
+      const response = await apiClient.patch(`/transmisiones/${id}/view`);
+      return response.data;
+    } catch (error) {
+      console.error('Error incrementing views:', error);
+      throw error;
+    }
+  },
+
+  // Eliminar transmisión
+  delete: async (id, token) => {
+    try {
+      const response = await apiClient.delete(`/transmisiones/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting transmision:', error);
+      throw error;
+    }
+  }
+};
+
 export default apiClient;

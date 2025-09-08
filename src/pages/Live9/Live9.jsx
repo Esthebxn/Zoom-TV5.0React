@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaExpand, FaRedo } from 'react-icons/fa';
 import Hls from 'hls.js';
+import { transmisionesApi } from '../../services/api';
 import './Live9.css';
 
 const Live9 = () => {
-  // Configuración del stream
-  const PLAYBACK_URL = "https://sae12.playlist.live-video.net/v1/playlist/CqIGJyM_GIMjlc_nAqzEZuokbV9EZ6USN3gpD1oYFGotbcDdicD6RkzIbXMYsSXvRvCbuU43KDdi-x19E1LHKeIzzB14NHSPySGcFLVeR4uMi_uRGo1xkpq7F3ap3F3OuxG7-L0qMuHRx6_J3Phb59747AOjHsT14ZmBF7hWi1UGmDnV4Ndi_LmNJbv2rycGG72G49CxDZ6bCPEaKy7PGIdbbcvxzQP0l_xKIsRCVnSD-Y5_QUIAMIULT5nzP_xixu0Z6FhC44FTSCb-zlfXfV-nQHyItxH79Iw3LPANDOzhedQe4ftsvRmJZr2jzDU4uIesM2MX5VEeP2wo3STZGThJkTk5cPpg4SBik0xsdOFKv70X6mzUM1d6Fl0tAdxtsrepE3bViNUPjq_BZrHK4H1F0EivFq3hD8YP8AMgth5L2RlgmL3XFMWm88dfcVgqanPmMdJ7uUjG3N6O2CI7-mGtcVO7yCH6eDcyiWKEWNGUWo3FMW9h1v8o4ODJjGfzPkFIQW0YuXCvtvfTqVYzz6Mr7_TwFrFn0ZLGHuTzfV0WbkuN-uM3UL1sa1Jfh_3qR0YSY-wjGcTJibklUFbq44iEVoEsUfOaUNLAkVykqluo-GLZYRjbj1Y8XrGRlYk8vTbv2GWm9G1Avti9lAmelHokMP__ibPHxuIGW_lRn-meNdvNGbTpePkFrO8sWLy1zvFhxgD-qVREP6mwcZGAYjgbR9Eec_MDz_UQnxjzJPFpOXg_p8Amo3SjfG3zbHDqH7gqZoxUXenDcjQKnlQsso8ttYth0aJju7LE7n2Yk4OpVjuRMLVZ3ZbXjhGPnGBnX-ouuZRHEAXSs3tDWdbUJHsHIUqKnet6Ep0ccWEIuxOtPxAgD01ftgttP-9Q7UBd2_tpuOMni_2JbBVXDNI4L36z9cR-9yONRopsx2YTpqA8PLuSJ2kTzcCBg7GqT7dc9uK_oveBynbwrFdwAmICI5-xJuz7WXSAHLNbmi0APf8fojWzaZM3KqLhfqf2okqgn4VuF-MAuSFycIJ3VWwTnhcFF0TcdyD2585g49HN6_b73ViHVxoM3EuL6D2wSmlS2D4rIAEqCXVzLWVhc3QtMjCWDQ.m3u8";
-
   // Estados del reproductor
   const [playerState, setPlayerState] = useState({
     isPlaying: false,
@@ -20,13 +18,70 @@ const Live9 = () => {
     retryCount: 0
   });
 
+  // Estados para la transmisión
+  const [transmision, setTransmision] = useState(null);
+  const [streamUrl, setStreamUrl] = useState(null);
+
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const hlsRef = useRef(null);
   const retryTimerRef = useRef(null);
 
+  // Cargar transmisión en vivo desde la API
+  const loadLiveTransmission = async () => {
+    try {
+      console.log('🔄 Cargando transmisión en vivo...');
+      const response = await transmisionesApi.getLive();
+      
+      if (response.success && response.data) {
+        console.log('📺 Transmisión en vivo encontrada:', response.data);
+        
+        // Solo actualizar si es una transmisión diferente
+        if (!transmision || transmision.id !== response.data.id) {
+          console.log('🔄 Nueva transmisión detectada, actualizando...');
+          setTransmision(response.data);
+          setStreamUrl(response.data.url);
+          setPlayerState(prev => ({ ...prev, error: null }));
+        } else {
+          console.log('ℹ️ Misma transmisión, no se actualiza');
+        }
+      } else {
+        console.log('ℹ️ No hay transmisión en vivo activa');
+        
+        // Solo actualizar si había una transmisión antes
+        if (transmision) {
+          console.log('🔄 Transmisión detenida, limpiando...');
+          setTransmision(null);
+          setStreamUrl(null);
+          setPlayerState(prev => ({ 
+            ...prev, 
+            error: 'No hay transmisión en vivo disponible',
+            loading: false 
+          }));
+        }
+      }
+    } catch (error) {
+      console.error('❌ Error cargando transmisión:', error);
+      setPlayerState(prev => ({ 
+        ...prev, 
+        error: 'Error al cargar la transmisión',
+        loading: false 
+      }));
+    }
+  };
+
   // Inicializar el reproductor HLS
   const initPlayer = () => {
+    if (!streamUrl) {
+      console.log('⚠️ No hay URL de transmisión disponible');
+      setPlayerState(prev => ({ 
+        ...prev, 
+        loading: false, 
+        error: 'No hay transmisión disponible' 
+      }));
+      return;
+    }
+
     setPlayerState(prev => ({ ...prev, loading: true, error: null }));
 
     if (hlsRef.current) {
@@ -43,7 +98,8 @@ const Live9 = () => {
       });
       hlsRef.current = hls;
 
-      hls.loadSource(PLAYBACK_URL);
+      console.log('🎬 Cargando stream:', streamUrl);
+      hls.loadSource(streamUrl);
       hls.attachMedia(videoRef.current);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -183,6 +239,26 @@ const Live9 = () => {
 
   // Efectos iniciales
   useEffect(() => {
+    loadLiveTransmission();
+    
+    // Polling para verificar transmisiones en vivo cada 5 segundos
+    const pollingInterval = setInterval(() => {
+      console.log('🔄 Verificando transmisión en vivo...');
+      loadLiveTransmission();
+    }, 5000);
+    
+    return () => {
+      clearInterval(pollingInterval);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (streamUrl) {
+      initPlayer();
+    }
+  }, [streamUrl]);
+
+  useEffect(() => {
     const handleFullscreenChange = () => {
       setPlayerState(prev => ({ 
         ...prev, 
@@ -195,8 +271,6 @@ const Live9 = () => {
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
     document.addEventListener('msfullscreenchange', handleFullscreenChange);
-
-    initPlayer();
 
     return () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
@@ -246,6 +320,25 @@ const Live9 = () => {
             <div className="channel-brand">
               <span className="live-badge">EN VIVO</span>
             </div>
+
+            {/* Información de la transmisión */}
+            {transmision && (
+              <div className="transmission-info">
+                <h2>{transmision.nombre}</h2>
+                <div className="live-indicator">
+                  <span className="live-dot"></span>
+                  <span>EN VIVO</span>
+                </div>
+              </div>
+            )}
+
+            {/* Indicador de verificación */}
+            {playerState.loading && !transmision && (
+              <div className="loading-indicator">
+                <div className="spinner"></div>
+                <span>Verificando transmisión...</span>
+              </div>
+            )}
 
             {/* Contenedor del video */}
             <div className="video-wrapper">
