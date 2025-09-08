@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaExpand, FaRedo } from 'react-icons/fa';
 import Hls from 'hls.js';
-import './live9.css';
+import './Live9.css';
 
 const Live9 = () => {
   // Configuración del stream
