@@ -49,10 +49,6 @@ const Anunciantes = () => {
     cargarAnunciantes();
   }, []);
   
-  const toggleExpandCard = (id) => {
-    setExpandedCard(expandedCard === id ? null : id);
-  };
-
   const openImageModal = (imageUrl) => {
     setSelectedImage(imageUrl);
   };

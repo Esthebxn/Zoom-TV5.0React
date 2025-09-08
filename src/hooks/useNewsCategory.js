@@ -66,7 +66,7 @@ export const useNewsCategory = (category) => {
         month: 'long',
         day: 'numeric'
       });
-    } catch (error) {
+    } catch {
       return fechaString;
     }
   };
@@ -74,7 +74,7 @@ export const useNewsCategory = (category) => {
   // Cargar noticias al montar el componente
   useEffect(() => {
     cargarNoticias();
-  }, [category]);
+  }, [category, cargarNoticias]);
 
   // Manejar cambio de página
   const cambiarPagina = (nuevaPagina) => {

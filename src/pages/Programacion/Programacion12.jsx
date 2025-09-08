@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Programacion12.css';
 import { programmingApi } from '../../services/api';
 
@@ -10,11 +10,7 @@ const Programacion12 = () => {
 
   const days = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
 
-  useEffect(() => {
-    loadProgramming();
-  }, []);
-
-  const loadProgramming = async () => {
+  const loadProgramming = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -44,7 +40,11 @@ const Programacion12 = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [days]);
+
+  useEffect(() => {
+    loadProgramming();
+  }, [loadProgramming]);
 
   const formatTime = (startTime, endTime) => {
     return `${startTime} - ${endTime}`;

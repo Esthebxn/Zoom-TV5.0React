@@ -8,5 +8,19 @@ export default defineConfig({
     alias: {
       // Puedes agregar aliases si es necesario
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['react-icons'],
+          ai: ['@google/generative-ai'],
+          utils: ['axios', 'hls.js']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   }
 }) 

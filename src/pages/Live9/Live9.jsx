@@ -209,7 +209,7 @@ const Live9 = () => {
         hlsRef.current.destroy();
       }
     };
-  }, []);
+  }, [initPlayer]);
 
   return (
     <div className="retro-tv-container">
