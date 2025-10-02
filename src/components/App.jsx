@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Header from "./Header/Header";
 import Chatbot from "./Chatbot/Chatbot";
 import Loading from "../components/Loading/Loading";
-import TVFloatingScreens from "../components/TVFloatingScreens/TVFloatingScreens"; // ✅ Importación correcta
 
 // Páginas principales
 import Inicio from "../pages/Inicio/Inicio";
@@ -22,14 +21,11 @@ import ZoomApp from "../pages/ZoomApp/ZoomApp";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [showFloatingScreens, setShowFloatingScreens] = useState(false);
 
   // Simula carga inicial
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Mostrar pantallas flotantes después de que termine la carga
-      setTimeout(() => setShowFloatingScreens(true), 500);
     }, 3000); // ⏳ 3 segundos de loading
     
     return () => clearTimeout(timer);
@@ -42,7 +38,6 @@ function App() {
   return (
     <Router>
       <div className="app">
-        {showFloatingScreens && <TVFloatingScreens />} {/* ✅ Pantallas de TV flotantes */}
         <Header /> {/* ✅ HamburguesaMenu ya está dentro del Header */}
         <Routes>
           <Route index element={<Inicio />} />
@@ -69,4 +64,5 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
+ 
