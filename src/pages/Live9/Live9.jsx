@@ -10,7 +10,7 @@ const Live9 = () => {
 
         {/* Iframe directo del canal */}
         <iframe
-          src="https://player.kick.com/elmacarius"
+          src="https://kick.com/alfondohaysitio"
           className="live9-video-alt"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
