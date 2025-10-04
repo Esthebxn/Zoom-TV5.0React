@@ -10,7 +10,7 @@ const Live9 = () => {
 
         {/* Iframe directo del canal */}
         <iframe
-          src="https://kick.com/alfondohaysitio"
+          src="https://kick.com/cry"
           className="live9-video-alt"
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
