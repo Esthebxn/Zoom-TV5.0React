@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import './Programacion12.css';
-import { programmingApi } from '../../services/api';
+import { horarioApi } from '../../services/api';
 
 const Programacion12 = () => {
   const [activeDay, setActiveDay] = useState('LUNES');
@@ -8,35 +8,93 @@ const Programacion12 = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const days = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'];
+  const days = useMemo(() => ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO'], []);
 
   const loadProgramming = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       
-      const programmingData = {};
+      console.log('Cargando programación...');
       
-      // Cargar programación para cada día
-      for (const day of days) {
-        try {
-          const response = await programmingApi.getByDay(day);
-          if (response.success) {
-            programmingData[day] = response.data || [];
-          } else {
-            console.error(`Error loading programming for ${day}:`, response.message);
-            programmingData[day] = [];
-          }
-        } catch (error) {
-          console.error(`Error loading programming for ${day}:`, error);
+      // Obtener toda la programación de una vez
+      const response = await horarioApi.getAll();
+      
+      console.log('Respuesta de la API:', response);
+      
+      if (response.success && response.data) {
+        console.log('Datos recibidos:', response.data);
+        
+        // Agrupar programas por día
+        const programmingData = {};
+        
+        // Inicializar arrays vacíos para cada día
+        days.forEach(day => {
           programmingData[day] = [];
-        }
+        });
+        
+        // Agrupar programas por día y filtrar solo los activos
+        response.data.forEach(program => {
+          console.log('Procesando programa:', program);
+          if (program.isActive && programmingData[program.day]) {
+            programmingData[program.day].push(program);
+          }
+        });
+        
+        // Ordenar programas por hora de inicio dentro de cada día
+        days.forEach(day => {
+          programmingData[day].sort((a, b) => {
+            return a.startTime.localeCompare(b.startTime);
+          });
+        });
+        
+        console.log('Datos agrupados:', programmingData);
+        setProgramacion(programmingData);
+      } else {
+        console.error('Error loading programming:', response);
+        
+        // Datos de ejemplo como fallback
+        console.log('Usando datos de ejemplo...');
+        const programmingData = {
+          'LUNES': [
+            {
+              _id: 'ejemplo-1',
+              title: 'Noticias Matutinas',
+              description: 'Resumen de las noticias más importantes del día',
+              startTime: '08:00',
+              endTime: '09:00',
+              category: 'Noticias',
+              type: 'Programa en vivo',
+              isActive: true,
+              color: '#3B82F6'
+            }
+          ],
+          'MARTES': [
+            {
+              _id: 'ejemplo-2',
+              title: 'Música del Recuerdo',
+              description: 'Los mejores éxitos de décadas pasadas',
+              startTime: '10:00',
+              endTime: '11:00',
+              category: 'Música',
+              type: 'Música',
+              isActive: true,
+              color: '#3B82F6'
+            }
+          ],
+          'MIÉRCOLES': [],
+          'JUEVES': [],
+          'VIERNES': [],
+          'SÁBADO': [],
+          'DOMINGO': []
+        };
+        
+        setProgramacion(programmingData);
+        setError('Usando datos de ejemplo - Error al cargar desde la API');
       }
-      
-      setProgramacion(programmingData);
     } catch (error) {
       console.error('Error loading programming:', error);
-      setError('Error al cargar la programación');
+      setError('Error al cargar la programación: ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -118,11 +176,26 @@ const Programacion12 = () => {
                     <td className="program-time">
                       {formatTime(program.startTime, program.endTime)}
                     </td>
-                  <td className="program-info">
-                    <h3>{program.title}</h3>
-                    {program.description && <p>{program.description}</p>}
-                      {program.category && (
-                        <span className="program-category">{program.category}</span>
+                    <td className="program-info">
+                      <div className="program-header">
+                        <h3>{program.title}</h3>
+                        <div className="program-badges">
+                          <span 
+                            className="program-category" 
+                            style={{ backgroundColor: program.color || '#3B82F6' }}
+                          >
+                            {program.category}
+                          </span>
+                          <span className="program-type">{program.type}</span>
+                        </div>
+                      </div>
+                      {program.description && (
+                        <p className="program-description">{program.description}</p>
+                      )}
+                      {program.notes && (
+                        <p className="program-notes">
+                          <small>Notas: {program.notes}</small>
+                        </p>
                       )}
                     </td>
                   </tr>

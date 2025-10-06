@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 // Configuración de la API
-const API_BASE_URL = 'https://apizoomtv-production.up.railway.app/api';
+const API_BASE_URL = 'https://api-zoomtv.onrender.com/api';
 
 // Crear instancia de axios con configuración base
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -19,7 +18,6 @@ export const newsApi = {
     try {
       const params = new URLSearchParams();
       if (filters.page) params.append('page', filters.page);
-      if (filters.limit) params.append('limit', filters.limit);
       if (filters.category) params.append('category', filters.category);
       if (filters.status) params.append('status', filters.status);
       if (filters.search) params.append('search', filters.search);
@@ -49,7 +47,6 @@ export const newsApi = {
       const params = new URLSearchParams();
       params.append('category', category);
       if (filters.page) params.append('page', filters.page);
-      if (filters.limit) params.append('limit', filters.limit);
       if (filters.search) params.append('search', filters.search);
 
       const response = await apiClient.get(`/noticias?${params.toString()}`);
@@ -61,10 +58,9 @@ export const newsApi = {
   },
 
   // Obtener noticias destacadas
-  getFeatured: async (limit = 5) => {
+  getFeatured: async () => {
     try {
       const params = new URLSearchParams();
-      params.append('limit', limit);
       params.append('featured', 'true');
 
       const response = await apiClient.get(`/noticias?${params.toString()}`);
@@ -76,9 +72,9 @@ export const newsApi = {
   }
 };
 
-// API para programación
-export const programmingApi = {
-  // Obtener toda la programación
+// API para horario
+export const horarioApi = {
+  // Obtener todo el horario
   getAll: async (filters = {}) => {
     try {
       const params = new URLSearchParams();
@@ -88,21 +84,32 @@ export const programmingApi = {
       if (filters.isActive !== undefined) params.append('isActive', filters.isActive.toString());
       if (filters.search) params.append('search', filters.search);
 
-      const response = await apiClient.get(`/programacion?${params.toString()}`);
+      const response = await apiClient.get(`/horario?${params.toString()}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching programming:', error);
+      console.error('Error fetching horario:', error);
       throw error;
     }
   },
 
-  // Obtener programación semanal
+  // Obtener horario semanal
   getWeekly: async () => {
     try {
-      const response = await apiClient.get('/programacion/weekly');
+      const response = await apiClient.get('/horario/weekly');
       return response.data;
     } catch (error) {
-      console.error('Error fetching weekly programming:', error);
+      console.error('Error fetching weekly horario:', error);
+      throw error;
+    }
+  },
+
+  // Obtener programa por ID
+  getById: async (id) => {
+    try {
+      const response = await apiClient.get(`/horario/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching programa by ID:', error);
       throw error;
     }
   },
@@ -110,10 +117,10 @@ export const programmingApi = {
   // Obtener programas por día
   getByDay: async (day) => {
     try {
-      const response = await apiClient.get(`/programacion/day/${day}`);
+      const response = await apiClient.get(`/horario/day/${day}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching programming by day:', error);
+      console.error('Error fetching horario by day:', error);
       throw error;
     }
   }
@@ -127,7 +134,6 @@ export const anunciantesApi = {
       const params = new URLSearchParams();
       if (filters.status) params.append('status', filters.status);
       if (filters.category) params.append('category', filters.category);
-      if (filters.limit) params.append('limit', filters.limit);
 
       const response = await apiClient.get(`/anunciantes?${params.toString()}`);
       return response.data;
@@ -321,133 +327,92 @@ export const companyApi = {
   }
 };
 
-// API para transmisiones
-export const transmisionesApi = {
-  // Obtener todas las transmisiones
+// API para URL Live
+export const urlLiveApi = {
+  // Obtener todas las URLs live
   getAll: async () => {
     try {
-      const response = await apiClient.get('/transmisiones');
+      const response = await apiClient.get('/urlLive');
       return response.data;
     } catch (error) {
-      console.error('Error obteniendo transmisiones:', error);
+      console.error('Error obteniendo URLs live:', error);
       throw error;
     }
   },
 
-  // Obtener transmisiones activas
-  getActive: async () => {
-    try {
-      const response = await apiClient.get('/transmisiones/active');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching active transmisiones:', error);
-      throw error;
-    }
-  },
-
-  // Obtener transmisiones en vivo
+  // Obtener URL live activa
   getLive: async () => {
     try {
-      const response = await apiClient.get('/transmisiones/live');
+      const response = await apiClient.get('/urlLive/live');
       return response.data;
     } catch (error) {
-      console.error('Error fetching live transmisiones:', error);
+      console.error('Error fetching live URL:', error);
       throw error;
     }
   },
 
-  // Obtener transmisiones por categoría
-  getByCategory: async (category) => {
-    try {
-      const response = await apiClient.get(`/transmisiones/category/${category}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching transmisiones by category:', error);
-      throw error;
-    }
-  },
-
-  // Obtener transmisión por ID
+  // Obtener URL live por ID
   getById: async (id) => {
     try {
-      const response = await apiClient.get(`/transmisiones/${id}`);
+      const response = await apiClient.get(`/urlLive/${id}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching transmision by ID:', error);
+      console.error('Error fetching URL live by ID:', error);
       throw error;
     }
   },
 
-  // Crear nueva transmisión
-  create: async (transmisionData, token) => {
+  // Crear nueva URL live
+  create: async (urlLiveData) => {
     try {
-      const response = await apiClient.post('/transmisiones', transmisionData, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await apiClient.post('/urlLive', urlLiveData);
       return response.data;
     } catch (error) {
-      console.error('Error creating transmision:', error);
+      console.error('Error creating URL live:', error);
       throw error;
     }
   },
 
-  // Actualizar transmisión
-  update: async (id, transmisionData, token) => {
+  // Actualizar URL live
+  update: async (id, urlLiveData) => {
     try {
-      const response = await apiClient.put(`/transmisiones/${id}`, transmisionData, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await apiClient.put(`/urlLive/${id}`, urlLiveData);
       return response.data;
     } catch (error) {
-      console.error('Error updating transmision:', error);
+      console.error('Error updating URL live:', error);
       throw error;
     }
   },
 
-  // Actualizar estado en vivo
-  updateLiveStatus: async (id, isLive, token) => {
+  // Activar URL live
+  activate: async (id) => {
     try {
-      const response = await apiClient.patch(`/transmisiones/${id}/live-status`, 
-        { isLive }, 
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        }
-      );
+      const response = await apiClient.put(`/urlLive/${id}/live`);
       return response.data;
     } catch (error) {
-      console.error('Error updating live status:', error);
+      console.error('Error activating URL live:', error);
       throw error;
     }
   },
 
-  // Incrementar vistas
-  incrementViews: async (id) => {
+  // Detener URL live
+  stop: async (id) => {
     try {
-      const response = await apiClient.patch(`/transmisiones/${id}/view`);
+      const response = await apiClient.put(`/urlLive/${id}/stop`);
       return response.data;
     } catch (error) {
-      console.error('Error incrementing views:', error);
+      console.error('Error stopping URL live:', error);
       throw error;
     }
   },
 
-  // Eliminar transmisión
-  delete: async (id, token) => {
+  // Eliminar URL live
+  delete: async (id) => {
     try {
-      const response = await apiClient.delete(`/transmisiones/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await apiClient.delete(`/urlLive/${id}`);
       return response.data;
     } catch (error) {
-      console.error('Error deleting transmision:', error);
+      console.error('Error deleting URL live:', error);
       throw error;
     }
   }

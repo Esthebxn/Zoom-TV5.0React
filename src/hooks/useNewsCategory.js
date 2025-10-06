@@ -27,8 +27,14 @@ export const useNewsCategory = (category) => {
       });
 
       if (response.success) {
-        setNoticias(response.data);
-        setPagination(response.pagination);
+        setNoticias(response.data || []);
+        // La API no devuelve paginación, así que manejamos solo los datos
+        setPagination({
+          page: 1,
+          limit: 10,
+          total: response.data ? response.data.length : 0,
+          pages: 1
+        });
       } else {
         setError('Error al cargar las noticias');
       }
@@ -78,7 +84,7 @@ export const useNewsCategory = (category) => {
 
   // Manejar cambio de página
   const cambiarPagina = (nuevaPagina) => {
-    if (nuevaPagina >= 1 && nuevaPagina <= pagination.pages) {
+    if (pagination && nuevaPagina >= 1 && nuevaPagina <= pagination.pages) {
       cargarNoticias(nuevaPagina);
     }
   };

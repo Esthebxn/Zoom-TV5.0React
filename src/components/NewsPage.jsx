@@ -109,24 +109,24 @@ const NewsPage = ({
         </div>
 
         {/* Paginación */}
-        {pagination.pages > 1 && (
+        {pagination && pagination.pages > 1 && (
           <div className="paginacion">
             <button 
               className="pagina-btn"
-              disabled={pagination.page <= 1}
-              onClick={() => cambiarPagina(pagination.page - 1)}
+              disabled={!pagination || pagination.page <= 1}
+              onClick={() => pagination && cambiarPagina(pagination.page - 1)}
             >
               Anterior
             </button>
             
             <span className="pagina-info">
-              Página {pagination.page} de {pagination.pages}
+              Página {pagination?.page || 1} de {pagination?.pages || 1}
             </span>
             
             <button 
               className="pagina-btn"
-              disabled={pagination.page >= pagination.pages}
-              onClick={() => cambiarPagina(pagination.page + 1)}
+              disabled={!pagination || pagination.page >= pagination.pages}
+              onClick={() => pagination && cambiarPagina(pagination.page + 1)}
             >
               Siguiente
             </button>
